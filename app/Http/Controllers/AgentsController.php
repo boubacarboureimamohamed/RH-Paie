@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agents;
-use App\Models\Contrats;
-use App\Models\Postes;
-use App\Models\Recrutements;
+use App\Models\Agent;
+use App\Models\Contrat;
+use App\Models\Poste;
+use App\Models\Recrutement;
 use Illuminate\Http\Request;
 
 class AgentsController extends Controller
@@ -17,7 +17,7 @@ class AgentsController extends Controller
      */
     public function index()
     {
-        $agents = Agents::all();
+        $agents = Agent::all();
         return view('agents.index', compact('agents'));
     }
 
@@ -28,9 +28,9 @@ class AgentsController extends Controller
      */
     public function create()
     {
-        $postes = Postes::all();
-        $contrats = Contrats::all();
-        $recrutements = Recrutements::all();
+        $postes = Poste::all();
+        $contrats = Contrat::all();
+        $recrutements = Recrutement::all();
         return view('agents.create', compact('recrutements', 'postes', 'contrats'));
     }
 
@@ -42,7 +42,7 @@ class AgentsController extends Controller
      */
     public function store(Request $request)
     {
-        Agents::create([
+        Agent::create([
             'matricule'=>$request->matricule,
             'agents_recrutements_id'=>$request->agents_recrutements_id,
             'nom'=>$request->nom,

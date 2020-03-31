@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Formations extends Model
+class Formation extends Model
 {
     protected $fillable = [
 
@@ -20,11 +20,11 @@ class Formations extends Model
 
     public function agents()
     {
-        return $this->belongsToMany('App\Models\Agents', 'agents_formations');
+        return $this->belongsToMany('App\Models\Agent', 'agents_formations');
     }
 
     public function typeformation()
     {
-        return $this->belongsTo('App\Models\TypeFormations');
+        return $this->belongsTo('App\Models\TypeFormation');
     }
 }

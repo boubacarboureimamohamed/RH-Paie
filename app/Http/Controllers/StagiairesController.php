@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Recrutements;
-use App\Models\Services;
-use App\Models\Stagiaires;
-use App\Models\Themes;
+use App\Models\Recrutement;
+use App\Models\Service;
+use App\Models\Stagiaire;
+use App\Models\Theme;
 use Illuminate\Http\Request;
 
 class StagiairesController extends Controller
@@ -17,7 +17,7 @@ class StagiairesController extends Controller
      */
     public function index()
     {
-        $stagiaires = Stagiaires::all();
+        $stagiaires = Stagiaire::all();
         return view('stagiaires.index', compact('stagiaires'));
     }
 
@@ -28,9 +28,9 @@ class StagiairesController extends Controller
      */
     public function create()
     {
-        $themes = Themes::all();
-        $services = Services::all();
-        $recrutements = Recrutements::all();
+        $themes = Theme::all();
+        $services = Service::all();
+        $recrutements = Recrutement::all();
         return view('stagiaires.create', compact('themes', 'recrutements', 'services'));
     }
 
@@ -42,7 +42,7 @@ class StagiairesController extends Controller
      */
     public function store(Request $request)
     {
-        Stagiaires::create([
+        Stagiaire::create([
 
             'stagiaires_themes_id'=>$request->stagiaires_themes_id,
             'stagiaires_services_id'=>$request->stagiaires_services_id,
@@ -83,10 +83,10 @@ class StagiairesController extends Controller
      */
     public function edit($id)
     {
-        $recrutements = Recrutements::all();
-        $services = Services::all();
-        $themes = Themes::all();
-        $stagiaire = Stagiaires::find($id);
+        $recrutements = Recrutement::all();
+        $services = Service::all();
+        $themes = Theme::all();
+        $stagiaire = Stagiaire::find($id);
         return view('stagiaires.edit', compact('recrutements', 'services', 'themes', 'stagiaire'));
     }
 
@@ -97,7 +97,7 @@ class StagiairesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Stagiaires $stagiaire)
+    public function update(Request $request, Stagiaire $stagiaire)
     {
         $stagiaire->update([
 
@@ -129,7 +129,7 @@ class StagiairesController extends Controller
      */
     public function destroy($id)
     {
-        Stagiaires::destroy($id);
+        Stagiaire::destroy($id);
         return redirect(route('stagiaires.index'));
     }
 }

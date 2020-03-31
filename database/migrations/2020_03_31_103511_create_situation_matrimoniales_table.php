@@ -20,12 +20,12 @@ class CreateSituationMatrimonialesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('agents_situation_matrimoniale', function (Blueprint $table) {
+        Schema::create('agents_situation_matrimoniales', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('situation_matrimoniale_id')->unsigned()->index();
             $table->foreign('situation_matrimoniale_id')->references('id')->on('situation_matrimoniales');
-            $table->bigInteger('agents_id')->unsigned()->index();
-            $table->foreign('agents_id')->references('id')->on('agents');
+            $table->bigInteger('agent_id')->unsigned()->index();
+            $table->foreign('agent_id')->references('id')->on('agents');
             $table->timestamps();
         });
     }

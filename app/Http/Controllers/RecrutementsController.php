@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Recrutements;
+use App\Models\Recrutement;
 
 class RecrutementsController extends Controller
 {
@@ -14,7 +14,7 @@ class RecrutementsController extends Controller
      */
     public function index()
     {
-        $recrutements = Recrutements::all();
+        $recrutements = Recrutement::all();
         return view('recrutements.index', compact('recrutements'));
     }
 
@@ -36,7 +36,7 @@ class RecrutementsController extends Controller
      */
     public function store(Request $request)
     {
-         Recrutements::create([
+         Recrutement::create([
 
             'ref_recrutement'=>$request->ref_recrutement,
             'description'=>$request->description,
@@ -65,7 +65,7 @@ class RecrutementsController extends Controller
      */
     public function edit($id)
     {
-        $recrutement = Recrutements::find($id);
+        $recrutement = Recrutement::find($id);
         return view('recrutements.edit', compact('recrutement'));
     }
 
@@ -76,7 +76,7 @@ class RecrutementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recrutements $recrutement)
+    public function update(Request $request, Recrutement $recrutement)
     {
         $recrutement->update([
 
@@ -96,7 +96,7 @@ class RecrutementsController extends Controller
      */
     public function destroy($id)
     {
-        Recrutements::destroy($id);
+        Recrutement::destroy($id);
         return redirect(route('recrutements.index'));
     }
 }

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Services extends Model
+class Service extends Model
 {
     protected $fillable = [
 
@@ -15,6 +15,6 @@ class Services extends Model
 
     public function direction()
     {
-        return $this->belongsTo('App\Models\Directions');
+        return $this->belongsTo('App\Models\Direction');
     }
 }

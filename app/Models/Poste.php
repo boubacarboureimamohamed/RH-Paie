@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Postes extends Model
+class Poste extends Model
 {
     protected $fillable =[
         'intitule'

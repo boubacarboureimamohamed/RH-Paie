@@ -15,7 +15,7 @@ class MissionsController extends Controller
      */
     public function index()
     {
-        $missions = Missio
+        $missions = Mission::all();
         return view('missions.index', compact('missions'));
     }
 

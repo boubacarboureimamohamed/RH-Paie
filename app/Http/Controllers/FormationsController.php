@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agents;
-use App\Models\Formations;
-use App\Models\TypeFormations;
+use App\Models\Agent;
+use App\Models\Formation;
+use App\Models\TypeFormation;
 use Illuminate\Http\Request;
 
 class FormationsController extends Controller
@@ -16,7 +16,7 @@ class FormationsController extends Controller
      */
     public function index()
     {
-        $formations = Formations::all();
+        $formations = Formation::all();
         return view('formations.index', compact('formations'));
     }
 
@@ -27,8 +27,8 @@ class FormationsController extends Controller
      */
     public function create()
     {
-        $agents = Agents::all();
-        $typeformations = TypeFormations::all();
+        $agents = Agent::all();
+        $typeformations = TypeFormation::all();
         return view('formations.create', compact('agents', 'typeformations'));
     }
 
@@ -40,7 +40,7 @@ class FormationsController extends Controller
      */
     public function store(Request $request)
     {
-        $formation = Formations::create([
+        $formation = Formation::create([
 
             'type_formations_id'=>$request->type_formations_id,
             'lieu'=>$request->lieu,
@@ -75,9 +75,9 @@ class FormationsController extends Controller
      */
     public function edit($id)
     {
-        $agents = Agents::all();
-        $typeformations = TypeFormations::all();
-        $formation = Formations::find($id);
+        $agents = Agent::all();
+        $typeformations = TypeFormation::all();
+        $formation = Formation::find($id);
         return view('formations.edit', compact('agents', 'formation', 'typeformations'));
     }
 
@@ -88,7 +88,7 @@ class FormationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Formations $formation)
+    public function update(Request $request, Formation $formation)
     {
         $formation->update([
 
@@ -114,7 +114,7 @@ class FormationsController extends Controller
      */
     public function destroy($id)
     {
-        Formations::destroy($id);
+        Formation::destroy($id);
         return redirect(route('formations.index'));
     }
 }

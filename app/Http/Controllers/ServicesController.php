@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Directions;
-use App\Models\Services;
+use App\Models\Direction;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ServicesController extends Controller
@@ -15,7 +15,7 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        $services = Services::with('direction')->get();
+        $services = Service::with('direction')->get();
         return view('services.index', compact('services'));
     }
 
@@ -26,7 +26,7 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        $directions = Directions::all();
+        $directions = Direction::all();
         return view('services.create', compact('directions'));
     }
 
@@ -38,7 +38,7 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        Services::create([
+        Service::create([
 
             'libelle'=>$request->libelle,
             'directions_id'=>$request->directions_id
@@ -67,8 +67,8 @@ class ServicesController extends Controller
      */
     public function edit($id)
     {
-        $directions = Directions::all();
-        $service = Services::find($id);
+        $directions = Direction::all();
+        $service = Service::find($id);
         return view('services.edit', compact('service','directions'));
     }
 
@@ -79,7 +79,7 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Services $service)
+    public function update(Request $request, Service $service)
     {
         $service->update([
 
@@ -100,7 +100,7 @@ class ServicesController extends Controller
      */
     public function destroy($id)
     {
-        Services::destroy($id);
+        Service::destroy($id);
         return redirect(route('services.index'));
     }
 }

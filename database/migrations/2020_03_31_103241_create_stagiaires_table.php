@@ -34,7 +34,6 @@ class CreateStagiairesTable extends Migration
             $table->foreign('stagiaires_recrutements_id')->references('id')->on('recrutements');
             $table->timestamps();
         });
-
     }
 
     /**

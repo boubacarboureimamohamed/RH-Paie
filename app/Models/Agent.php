@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Agents extends Model
+class Agent extends Model
 {
     protected $fillable = [
         'matricule',
@@ -23,16 +23,16 @@ class Agents extends Model
 
     public function recrutement()
     {
-        return $this->belongsTo('App\Models\Recrutements');
+        return $this->belongsTo('App\Models\Recrutement');
     }
 
     public function missions()
     {
-        return $this->belongsToMany('App\Models\Missions');
+        return $this->belongsToMany('App\Models\Mission');
     }
 
     public function formations()
     {
-        return $this->belongsToMany('App\Models\Formations');
+        return $this->belongsToMany('App\Models\Formation');
     }
 }

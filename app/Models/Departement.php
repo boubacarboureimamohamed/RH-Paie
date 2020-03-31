@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Departements extends Model
+class Departement extends Model
 {
     protected $fillable = [
 
@@ -14,7 +14,6 @@ class Departements extends Model
 
     public function directions()
     {
-        return $this->belongsToMany('App\Models\Directions');
+        return $this->belongsToMany('App\Models\Direction');
     }
-
 }

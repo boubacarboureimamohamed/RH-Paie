@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Directions extends Model
+class Direction extends Model
 {
-
     protected $fillable = [
 
         'libelle',
@@ -16,11 +15,11 @@ class Directions extends Model
 
     public function departement()
     {
-        return $this->belongsTo('App\Models\Departements');
+        return $this->belongsTo('App\Models\Departement');
     }
 
     public function services()
     {
-        return $this->belongsToMany('App\Models\Services');
+        return $this->belongsToMany('App\Models\Service');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Themes;
+use App\Models\Theme;
 use Illuminate\Http\Request;
 
 class ThemesController extends Controller
@@ -14,7 +14,7 @@ class ThemesController extends Controller
      */
     public function index()
     {
-        $themes = Themes::all();
+        $themes = Theme::all();
         return view('themes.index', compact('themes'));
     }
 
@@ -36,7 +36,7 @@ class ThemesController extends Controller
      */
     public function store(Request $request)
     {
-        Themes::create([
+        Theme::create([
 
             'intitule'=>$request->intitule
 
@@ -64,7 +64,7 @@ class ThemesController extends Controller
      */
     public function edit($id)
     {
-        $theme = Themes::find($id);
+        $theme = Theme::find($id);
         return view('themes.edit', compact('theme'));
     }
 
@@ -75,7 +75,7 @@ class ThemesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Themes $theme)
+    public function update(Request $request, Theme $theme)
     {
         $theme->update([
 
@@ -94,7 +94,7 @@ class ThemesController extends Controller
      */
     public function destroy($id)
     {
-        Themes::destroy($id);
+        Theme::destroy($id);
         return redirect(route('themes.index'));
     }
 }

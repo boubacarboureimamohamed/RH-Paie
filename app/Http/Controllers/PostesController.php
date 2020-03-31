@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Postes;
+use App\Models\Poste;
 use Illuminate\Http\Request;
 
 class PostesController extends Controller
@@ -14,7 +14,7 @@ class PostesController extends Controller
      */
     public function index()
     {
-        $postes = Postes::all();
+        $postes = Poste::all();
         return view('postes.index', compact('postes'));
     }
 
@@ -36,7 +36,7 @@ class PostesController extends Controller
      */
     public function store(Request $request)
     {
-        Postes::create([
+        Poste::create([
 
             'intitule'=>$request->intitule
 
@@ -65,7 +65,7 @@ class PostesController extends Controller
      */
     public function edit($id)
     {
-        $poste = Postes::find($id);
+        $poste = Poste::find($id);
         return view('postes.edit', compact('poste'));
     }
 
@@ -76,7 +76,7 @@ class PostesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Postes $poste)
+    public function update(Request $request, Poste $poste)
     {
         $poste->update([
 
@@ -95,7 +95,7 @@ class PostesController extends Controller
      */
     public function destroy($id)
     {
-        Postes::destroy($id);
+        Poste::destroy($id);
         return redirect(route('postes.index'));
     }
 }

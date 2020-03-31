@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Missions extends Model
+class Mission extends Model
 {
     protected $fillable = [
 
@@ -22,6 +22,6 @@ class Missions extends Model
 
     public function agents()
     {
-        return $this->belongsToMany('App\Models\Agents', 'agents_missions');
+        return $this->belongsToMany('App\Models\Agent', 'agents_missions');
     }
 }

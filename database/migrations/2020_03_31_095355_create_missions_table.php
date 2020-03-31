@@ -25,7 +25,6 @@ class CreateMissionsTable extends Migration
             $table->date('date');
             $table->timestamps();
         });
-
     }
 
     /**

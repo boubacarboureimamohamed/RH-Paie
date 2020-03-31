@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Stagiaires extends Model
+class Stagiaire extends Model
 {
     protected $fillable = [
 
@@ -27,11 +27,11 @@ class Stagiaires extends Model
 
     public function theme()
     {
-        return $this->belongsTo('App\Models\Themes');
+        return $this->belongsTo('App\Models\Theme');
     }
 
     public function recrutement()
     {
-        return $this->belongsTo('App\Models\Recrutements');
+        return $this->belongsTo('App\Models\Recrutement');
     }
 }

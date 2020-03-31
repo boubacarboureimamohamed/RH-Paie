@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Themes extends Model
+class Theme extends Model
 {
     protected $fillable = [
 
@@ -14,6 +14,6 @@ class Themes extends Model
 
     public function stagiaires()
     {
-        return $this->belongsToMany('App\Models\Stagiaires');
+        return $this->belongsToMany('App\Models\Stagiaire');
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agents;
-use App\Models\Contrats;
+use App\Models\Agent;
+use App\Models\Contrat;
 use Illuminate\Http\Request;
 
 class ContratsController extends Controller
@@ -15,8 +15,8 @@ class ContratsController extends Controller
      */
     public function index()
     {
-        $agents = Agents::all();
-        $contrats = Contrats::all();
+        $agents = Agent::all();
+        $contrats = Contrat::all();
         return view('contrats.index', compact('contrats', 'agents'));
     }
 
@@ -27,7 +27,7 @@ class ContratsController extends Controller
      */
     public function create()
     {
-        $agents = Agents::all();
+        $agents = Agent::all();
         return view('contrats.create', compact('agents'));
     }
 
@@ -39,7 +39,7 @@ class ContratsController extends Controller
      */
     public function store(Request $request)
     {
-        Contrats::create([
+        Contrat::create([
 
             'ref_contrat'=>$request->ref_contrat,
             'description'=>$request->description,
@@ -72,8 +72,8 @@ class ContratsController extends Controller
      */
     public function edit($id)
     {
-        $agents = Agents::all();
-        $contrat = Contrats::find($id);
+        $agents = Agent::all();
+        $contrat = Contrat::find($id);
         return view('contrats.edit', compact('contrat', 'agents'));
     }
 
@@ -84,7 +84,7 @@ class ContratsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contrats $contrat)
+    public function update(Request $request, Contrat $contrat)
     {
         $contrat->update([
 
@@ -108,7 +108,7 @@ class ContratsController extends Controller
      */
     public function destroy($id)
     {
-        Contrats::destroy($id);
+        Contrat::destroy($id);
         return redirect(route('contrats.index'));
     }
 }

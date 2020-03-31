@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Departements;
-use App\Models\Directions;
+use App\Models\Departement;
+use App\Models\Direction;
 use Illuminate\Http\Request;
 
 class DirectionsController extends Controller
@@ -15,7 +15,7 @@ class DirectionsController extends Controller
      */
     public function index()
     {
-        $directions = Directions::all();
+        $directions = Direction::all();
         return view('directions.index', compact('directions'));
     }
 
@@ -26,7 +26,7 @@ class DirectionsController extends Controller
      */
     public function create()
     {
-        $departements = Departements::all();
+        $departements = Departement::all();
         return view('directions.create', compact('departements'));
     }
 
@@ -38,7 +38,7 @@ class DirectionsController extends Controller
      */
     public function store(Request $request)
     {
-        Directions::create([
+        Direction::create([
 
             'libelle'=>$request->libelle,
             'departements_id'=>$request->departements_id
@@ -67,8 +67,8 @@ class DirectionsController extends Controller
      */
     public function edit($id)
     {
-        $departements = Departements::all();
-        $direction = Directions::find($id);
+        $departements = Departement::all();
+        $direction = Direction::find($id);
         return view('directions.edit', compact('direction', 'departements'));
     }
 
@@ -79,7 +79,7 @@ class DirectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Directions $direction)
+    public function update(Request $request, Direction $direction)
     {
         $direction->update([
 
@@ -99,7 +99,7 @@ class DirectionsController extends Controller
      */
     public function destroy($id)
     {
-        Directions::destroy($id);
+        Direction::destroy($id);
         return redirect(route('directions.index'));
     }
 }

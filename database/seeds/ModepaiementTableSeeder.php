@@ -12,13 +12,13 @@ class ModepaiementTableSeeder extends Seeder
     public function run()
     {
         \Illuminate\Support\Facades\DB::table('mode_paiements')->insert([
-            'modepaiement' => "Virement"
+            'mode_paiement' => "Virement"
         ]);
         \Illuminate\Support\Facades\DB::table('mode_paiements')->insert([
-            'modepaiement' => "Chèque"
+            'mode_paiement' => "Chèque"
         ]);
         \Illuminate\Support\Facades\DB::table('mode_paiements')->insert([
-            'modepaiement' => "Espèce"
+            'mode_paiement' => "Espèce"
         ]);
     }
 }

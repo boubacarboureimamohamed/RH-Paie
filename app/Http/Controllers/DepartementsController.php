@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Departements;
+use App\Models\Departement;
 use Illuminate\Http\Request;
 
 class DepartementsController extends Controller
@@ -14,7 +14,7 @@ class DepartementsController extends Controller
      */
     public function index()
     {
-        $departements = Departements::all();
+        $departements = Departement::all();
         return view('departements.index', compact('departements'));
     }
 
@@ -36,7 +36,7 @@ class DepartementsController extends Controller
      */
     public function store(Request $request)
     {
-        Departements::create([
+        Departement::create([
 
             'libelle'=>$request->libelle
 
@@ -64,7 +64,7 @@ class DepartementsController extends Controller
      */
     public function edit($id)
     {
-        $departement = Departements::find($id);
+        $departement = Departement::find($id);
         return view('departements.edit', compact('departement'));
     }
 
@@ -75,7 +75,7 @@ class DepartementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Departements $departement)
+    public function update(Request $request, Departement $departement)
     {
         $departement->update([
 
@@ -94,7 +94,7 @@ class DepartementsController extends Controller
      */
     public function destroy($id)
     {
-        Departements::destroy($id);
+        Departement::destroy($id);
         return redirect(route('departements.index'));
     }
 }

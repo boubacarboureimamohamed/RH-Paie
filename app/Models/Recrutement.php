@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Recrutements extends Model
+class Recrutement extends Model
 {
-   protected $fillable = [
+    protected $fillable = [
         'ref_recrutement',
          'description',
           'date_offre'
@@ -14,11 +14,11 @@ class Recrutements extends Model
 
     public function agents()
     {
-        return $this->belongsToMany('App\Models\Agents');
+        return $this->belongsToMany('App\Models\Agent');
     }
 
     public function stagiaires()
     {
-        return $this->belongsToMany('App\Models\Stagiaires');
+        return $this->belongsToMany('App\Models\Stagiaire');
     }
 }
