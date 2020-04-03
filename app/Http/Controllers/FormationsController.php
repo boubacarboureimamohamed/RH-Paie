@@ -42,7 +42,7 @@ class FormationsController extends Controller
     {
         $formation = Formation::create([
 
-            'type_formations_id'=>$request->type_formations_id,
+            'type_formation_id'=>$request->type_formation_id,
             'lieu'=>$request->lieu,
             'date_debut_formation'=>$request->date_debut_formation,
             'date_fin_formation'=>$request->date_fin_formation,
@@ -51,7 +51,14 @@ class FormationsController extends Controller
 
         ]);
 
-        $formation->agents()->attach($request->agents_id);
+        for($var=0; $var < count($request->agent_id); $var++)
+         {
+
+            $formation->agents()->attach([
+                'agent_id' => $request->agent_id[$var]
+            ]);
+
+         }
 
         return redirect(route('formations.index'));
     }
@@ -92,7 +99,7 @@ class FormationsController extends Controller
     {
         $formation->update([
 
-            'type_formations_id'=>$request->type_formations_id,
+            'type_formation_id'=>$request->type_formation_id,
             'lieu'=>$request->lieu,
             'date_debut_formation'=>$request->date_debut_formation,
             'date_fin_formation'=>$request->date_fin_formation,
@@ -101,7 +108,14 @@ class FormationsController extends Controller
 
         ]);
 
-        $formation->agents()->attach($request->agents_id);
+        for($var=0; $var < count($request->agent_id); $var++)
+         {
+
+            $formation->agents()->attach([
+                'agent_id' => $request->agent_id[$var]
+            ]);
+
+         }
 
         return redirect(route('formations.index'));
     }

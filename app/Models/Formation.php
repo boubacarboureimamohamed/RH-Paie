@@ -14,7 +14,7 @@ class Formation extends Model
         'bilan_formation',
         'date',
         'agents_id',
-        'type_formations_id'
+        'type_formation_id'
 
     ];
 

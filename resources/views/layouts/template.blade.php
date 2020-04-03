@@ -87,7 +87,7 @@
             <a class="collapse-item" href="cards.html">Les dossiers</a>
             <a class="collapse-item" href="{{ route('missions.index') }}">Les missions</a>
           <a class="collapse-item" href="{{ route('formations.index') }}">Les formations</a>
-          <a class="collapse-item" href="#">Les affectations</a>
+          <a class="collapse-item" href="{{ route('affectations.index') }}">Les affectations</a>
           </div>
         </div>
       </li>

@@ -33,6 +33,8 @@ Route::resource('postes', 'PostesController');
 
 Route::resource('contrats', 'ContratsController');
 
+Route::resource('affectations', 'AffectationsController');
+
 Route::resource('departements', 'DepartementsController');
 
 Route::resource('directions', 'DirectionsController');

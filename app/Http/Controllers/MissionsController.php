@@ -53,12 +53,12 @@ class MissionsController extends Controller
 
         for($var=0; $var < count($request->agent_id); $var++)
          {
-            $mission = Mission::create([
+
+            $mission->agents()->attach([
                 'agent_id' => $request->agent_id[$var]
             ]);
-         }
 
-        $mission->agents()->attach($request->agent_id[$var]);
+         }
 
         return redirect(route('missions.index'));
 
@@ -109,6 +109,15 @@ class MissionsController extends Controller
             'date'=>$request->date
 
         ]);
+
+        for($var=0; $var < count($request->agent_id); $var++)
+         {
+
+            $mission->agents()->attach([
+                'agent_id' => $request->agent_id[$var]
+            ]);
+
+         }
 
         return redirect(route('missions.index'));
     }

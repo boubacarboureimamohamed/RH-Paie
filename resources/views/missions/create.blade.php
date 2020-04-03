@@ -73,10 +73,10 @@
                                 <div class="col-sm-10">
                                     <div class="form-group form-primary">
                                         <div class="input-group">
-                                            <select name="agent_id[]" title="sélectionner le matricule" value="" data-toggle="tooltip" id="agent_id[]" class="form-control">
+                                            <select  name="agent_id[]" onchange="change(1)" id="select1" title="sélectionner le matricule" value="" data-toggle="tooltip" class="form-control">
                                                     <option value="">********Matricule********</option>
                                                 @foreach($agents as $agent)
-                                                    <option value="{{ $agent->id }}">
+                                                    <option data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{  $agent->id   }}">
                                                         {{ $agent->matricule }}
                                                     </option>
                                                 @endforeach
@@ -89,7 +89,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group form-primary">
                                     <div class="input-group">
-                                        <input type="text" name="" title="" disabled data-toggle="tooltip" value="" id="" class="form-control" placeholder=" ">
+                                        <input type="text" name="" title="" disabled data-toggle="tooltip" value="" id="agent1" class="form-control" placeholder=" ">
                                     </div>
                                 </div>
                             </div>
@@ -137,20 +137,23 @@
 @section('js')
 <script>
 
+    var count = 1;
+
     $('#addLigne').on('click', function (f) {
       f.preventDefault()
         addLigne();
     });
     function addLigne() {
+        count++;
         var tr = '<tr>'+
             '<td>'+
                 '<div class="col-sm-10">'+
                     '<div class="form-group form-primary">'+
                         '<div class="input-group">'+
-                            '<select name="agent_id[]" id="agent_id[]" class="form-control">'+
+                            '<select id="select'+count+'" onchange="change('+count+')" name="agent_id[]" class="form-control">'+
                                     '<option value="">********Matricule********</option>'+
                                 '@foreach($agents as $agent)'+
-                                    '<option value="{{ $agent->matricule }}">'+
+                                    '<option  data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{ $agent->id }}">'+
                                     '   {{ $agent->matricule }}'+
                                     '</option>'+
                                 '@endforeach'+
@@ -163,7 +166,7 @@
                 '<div class="col-sm-12">'+
                     '<div class="form-group form-primary">'+
                         '<div class="input-group">'+
-                            '<input type="text" name="" id="" disabled class="form-control" placeholder=""value="">'+
+                            '<input type="text" name="" id="agent'+count+'" disabled class="form-control" placeholder=""value="">'+
                         '</div>' +
                     '</div>' +
                 '</div>' +
@@ -175,6 +178,11 @@
     $('#ligne').on('click', '.remove', function () {
         $(this).parent().parent().remove();
     })
-    </script>
+
+    function change(ligne_id) {
+       let agent = $('#select'+ligne_id+' option:selected').attr('data-agent')
+       $('#agent'+ligne_id).val(agent)
+    }
+</script>
 
 @endsection

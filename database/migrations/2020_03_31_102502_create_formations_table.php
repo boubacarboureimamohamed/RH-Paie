@@ -20,17 +20,17 @@ class CreateFormationsTable extends Migration
             $table->date('date_debut_formation');
             $table->date('date_fin_formation');
             $table->string('bilan_formation');
-            $table->bigInteger('type_formations_id')->unsigned()->index();
-            $table->foreign('type_formations_id')->references('id')->on('type_formations');
+            $table->bigInteger('type_formation_id')->unsigned()->index();
+            $table->foreign('type_formation_id')->references('id')->on('type_formations');
             $table->timestamps();
         });
 
         Schema::create('agents_formations', function (Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('agents_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('agents_id')->references('id')->on('agents');
-            $table->bigInteger('formations_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('formations_id')->references('id')->on('formations');
+            $table->bigInteger('agent_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('agent_id')->references('id')->on('agents');
+            $table->bigInteger('formation_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('formation_id')->references('id')->on('formations');
             $table->timestamps();
         });
     }
