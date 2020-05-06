@@ -20,8 +20,8 @@ class CreateFormationsTable extends Migration
             $table->date('date_debut_formation');
             $table->date('date_fin_formation');
             $table->string('bilan_formation');
-            $table->bigInteger('type_formation_id')->unsigned()->index();
-            $table->foreign('type_formation_id')->references('id')->on('type_formations');
+            $table->bigInteger('type_id')->unsigned()->index();
+            $table->foreign('type_id')->references('id')->on('type_formations');
             $table->timestamps();
         });
 

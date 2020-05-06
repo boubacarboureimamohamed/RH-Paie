@@ -33,6 +33,16 @@ class Agent extends Model
 
     public function formations()
     {
-        return $this->belongsToMany('App\Models\Formation');
+        return $this->belongsToMany('App\Models\Formation', 'agents_formations');
+    }
+
+    public function absences()
+    {
+        return $this->hasMany('App\Models\Absence');
+    }
+
+    public function contrats()
+    {
+        return $this->hasMany('App\Models\Contrat');
     }
 }

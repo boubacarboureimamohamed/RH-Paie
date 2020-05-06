@@ -42,7 +42,7 @@ class ThemesController extends Controller
 
         ]);
 
-        return redirect(route('themes.index'));
+        return redirect(route('themes.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
     }
 
     /**
@@ -83,7 +83,7 @@ class ThemesController extends Controller
 
         ]);
 
-        return redirect(route('themes.index'));
+        return redirect(route('themes.index'))->with('success', 'La modification a été effetué avec succés');
     }
 
     /**
@@ -95,6 +95,6 @@ class ThemesController extends Controller
     public function destroy($id)
     {
         Theme::destroy($id);
-        return redirect(route('themes.index'));
+        return redirect(route('themes.index'))->with('success', 'La suppression a été effetué avec succés!');
     }
 }

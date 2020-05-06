@@ -19,9 +19,9 @@ class Stagiaire extends Model
         'email',
         'date_debut_stage',
         'date_fin_stage',
-        'stagiaires_themes_id',
-        'stagiaires_recrutements_id',
-        'stagiaires_services_id'
+        'theme_id',
+        'recrutement_id',
+        'service_id'
 
     ];
 
@@ -33,5 +33,10 @@ class Stagiaire extends Model
     public function recrutement()
     {
         return $this->belongsTo('App\Models\Recrutement');
+    }
+
+    public function service()
+    {
+        return $this->belongsTo('App\Models\Service');
     }
 }

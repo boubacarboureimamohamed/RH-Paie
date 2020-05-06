@@ -14,6 +14,6 @@ class Theme extends Model
 
     public function stagiaires()
     {
-        return $this->belongsToMany('App\Models\Stagiaire');
+        return $this->hasMany('App\Models\Stagiaire');
     }
 }

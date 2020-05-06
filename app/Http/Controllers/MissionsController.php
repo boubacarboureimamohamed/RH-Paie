@@ -60,7 +60,7 @@ class MissionsController extends Controller
 
          }
 
-        return redirect(route('missions.index'));
+        return redirect(route('missions.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
 
     }
 
@@ -119,7 +119,7 @@ class MissionsController extends Controller
 
          }
 
-        return redirect(route('missions.index'));
+        return redirect(route('missions.index'))->with('success', 'La modification a été effetué avec succés');
     }
 
     /**
@@ -131,6 +131,6 @@ class MissionsController extends Controller
     public function destroy($id)
     {
         Mission::destroy($id);
-        return redirect(route('missions.index'));
+        return redirect(route('missions.index'))->with('success', 'La suppression a été effetué avec succés');
     }
 }

@@ -33,10 +33,10 @@
                            <input id="name" type="text" class="form-control form-control-user" name="ref_contrat" value="{{ $contrat->ref_contrat }}" required autocomplete="name" placeholder="Veillez renseigner la référence du contrat">
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <select class="form-control form-control-user" value="{{ $contrat->agents_id }}" placeholder="Veillez entrer la référence du recrutement" name="agents_id" id="">
+                            <select class="form-control form-control-user" value="{{ $contrat->agent_id }}" placeholder="Veillez entrer la référence du recrutement" name="agent_id" id="">
                                    <option value="">******Selectionner********</option>
                                 @foreach ($agents as $agent)
-                                   <option @if ($agent->id == $contrat->agents_id)
+                                   <option @if ($agent->id == $contrat->agent_id)
                                         {{ 'selected' }}
                                    @endif value="{{$agent->id}}">{{$agent->nom.' '.$agent->prenom}}</option>
                                 @endforeach

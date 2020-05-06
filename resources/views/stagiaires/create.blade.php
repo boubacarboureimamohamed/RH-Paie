@@ -28,13 +28,13 @@
                     @csrf
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <select class="form-control form-control-user" value="" placeholder="Veillez entrer la référence du recrutement" name="stagiaires_themes_id" id="">
+                        <select class="form-control form-control-user" value="" placeholder="Veillez entrer la référence du recrutement" name="theme_id" id="">
                             @foreach ($themes as $theme)
                                <option value="{{$theme->id}}">{{$theme->intitule}}</option>
                             @endforeach
                        </select>                    </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <select class="form-control form-control-user" value="" placeholder="Veillez entrer la référence du recrutement" name="stagiaires_recrutements_id" id="">
+                        <select class="form-control form-control-user" value="" placeholder="Veillez entrer la référence du recrutement" name="recrutement_id" id="">
                                 <option value="">******Selectionner********</option>
                             @foreach ($recrutements as $recrutement)
                                 <option value="{{$recrutement->id}}">{{$recrutement->description}}</option>
@@ -79,7 +79,7 @@
                         <input id="" type="text" class="form-control form-control-user" name="adresse" value="" autofocus placeholder="Veillez entrer l'adresse du stagiaire">
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <select class="form-control form-control-user" value="" placeholder="Veillez choisir le service" name="stagiaires_services_id" id="">
+                        <select class="form-control form-control-user" value="" placeholder="Veillez choisir le service" name="service_id" id="">
                                 <option value="">******Selectionner********</option>
                             @foreach ($services as $service)
                                 <option value="{{$service->id}}">{{$service->libelle}}</option>

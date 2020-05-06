@@ -9,12 +9,17 @@ class Service extends Model
     protected $fillable = [
 
         'libelle',
-        'directions_id'
+        'direction_id'
 
     ];
 
     public function direction()
     {
         return $this->belongsTo('App\Models\Direction');
+    }
+
+    public function stagiaires()
+    {
+        return $this->hasMany('App\Models\Stagiaires');
     }
 }

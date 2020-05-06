@@ -41,7 +41,7 @@ class RolesController extends Controller
         $role = Role::create(['name'=> $request->name]);
         $role->syncPermissions($request->permissions);
 
-        return redirect(route('roles.index'));
+        return redirect(route('roles.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
 
     }
 
@@ -81,7 +81,7 @@ class RolesController extends Controller
             'name'=>$request->name,
         ]);
         $role->syncPermissions($request->permissions);
-        return redirect(route('roles.index'));
+        return redirect(route('roles.index'))->with('success', 'La modification a été effetué avec succés');
     }
 
     /**
@@ -93,6 +93,6 @@ class RolesController extends Controller
     public function destroy($id)
     {
         Role::destroy($id);
-        return redirect(route('roles.index'));
+        return redirect(route('roles.index'))->with('success', 'La suppression a été effetué avec succés!');
     }
 }

@@ -15,7 +15,7 @@ class Mission extends Model
         'date_fin_mission',
         'motif_mission',
         'bilan_mission',
-        'date', 
+        'date',
         'agent_id'
 
     ];

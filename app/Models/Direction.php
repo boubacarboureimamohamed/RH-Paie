@@ -9,7 +9,7 @@ class Direction extends Model
     protected $fillable = [
 
         'libelle',
-        'departements_id'
+        'departement_id'
 
     ];
 
@@ -20,6 +20,6 @@ class Direction extends Model
 
     public function services()
     {
-        return $this->belongsToMany('App\Models\Service');
+        return $this->hasMany('App\Models\Service');
     }
 }

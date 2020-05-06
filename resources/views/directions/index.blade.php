@@ -26,7 +26,7 @@
                </a>
         </div>
         <div class="dt-responsive table-responsive">
-            <table id="dataTable" class="table table-striped table-bordered nowrap">
+            <table id="table" class="table table-striped table-bordered nowrap">
             <thead>
                 <tr>
                     <th>Numéro</th>
@@ -41,19 +41,19 @@
                  <tr>
                     <td><span> {{ $direction->id }} </span></td>
                     <td><span> {{ $direction->libelle }} </span></td>
-                    <td><span> {{ $direction->departements_id }} </span></td>
+                    <td><span> {{ $direction->departement->libelle }} </span></td>
                     <td>
                         <a href="{{ route('directions.edit', $direction) }}" class="btn btn-warning">
                             <span class="fas fa-fw fa-edit"></span>
                         </a>
                    </td>
                     <td>
-                        <form method="POST" action="{{ route('directions.destroy', $direction) }}" id="" onsubmit="return confirm('Voulez-vous supprimer cet enregistrement?');">
+                        <form method="POST" action="{{ route('directions.destroy', $direction) }}" id="form{{ $direction->id }}">
 
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
 
-                            <button type="submit" class="btn btn-danger" >
+                            <button type="button" onclick="confirmation('#form{{ $direction->id }}')" class="btn btn-danger" >
                                 <span class="fas fa-fw fa-trash"></span>
                             </button>
                         </form>
@@ -78,4 +78,43 @@
  <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
   <!-- Page level custom scripts -->
   <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+
+  <script>
+
+
+    $(document).ready(function () {
+
+    $('#table').DataTable({
+
+    language: {
+
+        url: "{{ asset('vendor/datatables/French.json') }}"
+
+    }
+
+    });
+
+    });
+
+    </script>
+
+    <script>
+
+         function confirmation(target)
+            {
+                swal({
+                    title: "Êtes-vous sûr ???",
+                    text: "Une fois supprimé, vous ne pourrez plus récupérer cet enregistrement! ",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonText:'Oui',
+                    cancelButtonText:'Non'
+
+                }).then(function() {
+                    $(target).submit();
+                });
+            }
+
+        </script>
+
 @endsection

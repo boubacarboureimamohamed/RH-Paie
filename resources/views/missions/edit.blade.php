@@ -155,7 +155,7 @@
                             '<select id="select'+count+'" onchange="change('+count+')" name="agent_id[]" class="form-control">'+
                                     '<option value="">********Matricule********</option>'+
                                 '@foreach($agents as $agent)'+
-                                    '<option  data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{ $agent->id }}">'+
+                                    '<option data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{ $agent->id }}">'+
                                     '   {{ $agent->matricule }}'+
                                     '</option>'+
                                 '@endforeach'+

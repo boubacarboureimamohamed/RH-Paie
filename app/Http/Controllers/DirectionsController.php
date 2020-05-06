@@ -15,7 +15,7 @@ class DirectionsController extends Controller
      */
     public function index()
     {
-        $directions = Direction::all();
+        $directions = Direction::with('departement')->get();
         return view('directions.index', compact('directions'));
     }
 
@@ -41,11 +41,11 @@ class DirectionsController extends Controller
         Direction::create([
 
             'libelle'=>$request->libelle,
-            'departements_id'=>$request->departements_id
+            'departement_id'=>$request->departement_id
 
         ]);
 
-        return redirect(route('directions.index'));
+        return redirect(route('directions.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
     }
 
     /**
@@ -68,7 +68,7 @@ class DirectionsController extends Controller
     public function edit($id)
     {
         $departements = Departement::all();
-        $direction = Direction::find($id);
+        $direction = Direction::with('departement')->find($id);
         return view('directions.edit', compact('direction', 'departements'));
     }
 
@@ -84,11 +84,11 @@ class DirectionsController extends Controller
         $direction->update([
 
             'libelle'=>$request->libelle,
-            'departements_id'=>$request->departements_id
+            'departement_id'=>$request->departement_id
 
         ]);
 
-        return redirect(route('directions.index'));
+        return redirect(route('directions.index'))->with('success', 'La modification a été effetué avec succés');
     }
 
     /**
@@ -100,6 +100,6 @@ class DirectionsController extends Controller
     public function destroy($id)
     {
         Direction::destroy($id);
-        return redirect(route('directions.index'));
+        return redirect(route('directions.index'))->with('success', 'La suppression a été effetué avec succés!');
     }
 }

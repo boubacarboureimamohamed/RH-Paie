@@ -12,7 +12,7 @@
 </div>
 
 <!-- Content Row -->
-<div class="row">
+<div class="row"> 
 
   <!-- Border Left Utilities -->
   <div class="col-lg-12">
@@ -29,18 +29,18 @@
                     {{ method_field('PUT') }}
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <select class="form-control form-control-user" value="" placeholder="Veillez entrer la référence du recrutement" name="stagiaires_themes_id" id="">
+                        <select class="form-control form-control-user" value="" placeholder="Veillez entrer la référence du recrutement" name="theme_id" id="">
                             @foreach ($themes as $theme)
-                               <option @if($theme->id == $stagiaire->stagiaires_themes_id)
+                               <option @if($theme->id == $stagiaire->theme_id)
                                 {{ 'selected' }}
                                 @endif value="{{$theme->id}}">{{$theme->intitule}}</option>
                             @endforeach
                        </select>                    </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <select class="form-control form-control-user" value="" placeholder="Veillez entrer la référence du recrutement" name="stagiaires_recrutements_id" id="">
+                        <select class="form-control form-control-user" value="" placeholder="Veillez entrer la référence du recrutement" name="recrutement_id" id="">
                                 <option value="">******Selectionner********</option>
                             @foreach ($recrutements as $recrutement)
-                                <option @if($recrutement->id == $stagiaire->stagiaires_recrutements_id)
+                                <option @if($recrutement->id == $stagiaire->recrutement_id)
                                     {{ 'selected' }}
                                     @endif value="{{$recrutement->id}}">{{$recrutement->description}}</option>
                              @endforeach
@@ -84,10 +84,10 @@
                         <input id="" type="text" class="form-control form-control-user" name="adresse" value="{{ $stagiaire->adresse }}" autofocus placeholder="Veillez entrer l'adresse du stagiaire">
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <select class="form-control form-control-user" value="" placeholder="Veillez choisir le service" name="stagiaires_services_id" id="">
+                        <select class="form-control form-control-user" value="" placeholder="Veillez choisir le service" name="service_id" id="">
                                 <option value="">******Selectionner********</option>
                             @foreach ($services as $service)
-                                <option @if($service->id == $stagiaire->stagiaires_services_id)
+                                <option @if($service->id == $stagiaire->service_id)
                                     {{ 'selected' }}
                                     @endif value="{{$service->id}}">{{$service->libelle}}</option>
                             @endforeach

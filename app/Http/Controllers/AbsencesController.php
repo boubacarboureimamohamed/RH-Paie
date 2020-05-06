@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absence;
 use App\Models\Agent;
-use App\Models\Contrat;
+use App\Models\TypeAbsence;
 use Illuminate\Http\Request;
 
-class ContratsController extends Controller
+class AbsencesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,8 @@ class ContratsController extends Controller
      */
     public function index()
     {
-        $agents = Agent::all();
-        $contrats = Contrat::all();
-        return view('contrats.index', compact('contrats', 'agents'));
+        $absences = Absence::with('agent','typeabsence')->get();
+        return view('absences.index', compact('absences'));
     }
 
     /**
@@ -28,7 +28,8 @@ class ContratsController extends Controller
     public function create()
     {
         $agents = Agent::all();
-        return view('contrats.create', compact('agents'));
+        $typeabsences = TypeAbsence::all();
+        return view('absences.create', compact('agents', 'typeabsences'));
     }
 
     /**
@@ -39,18 +40,18 @@ class ContratsController extends Controller
      */
     public function store(Request $request)
     {
-        Contrat::create([
+        $absence  = Absence::create([
 
-            'ref_contrat'=>$request->ref_contrat,
-            'description'=>$request->description,
-            'date'=>$request->date,
+            'type_id'=>$request->type_id,
             'agent_id'=>$request->agent_id,
-            'date_debut_contrat'=>$request->date_debut_contrat,
-            'date_fin_contrat'=>$request->date_fin_contrat
+            'date_debut_absence'=>$request->date_debut_absence,
+            'date_fin_absence'=>$request->date_fin_absence,
+            'motif_absence'=>$request->motif_absence
 
         ]);
 
-        return redirect(route('contrats.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
+        return redirect(route('absences.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
+
     }
 
     /**
@@ -73,8 +74,9 @@ class ContratsController extends Controller
     public function edit($id)
     {
         $agents = Agent::all();
-        $contrat = Contrat::find($id);
-        return view('contrats.edit', compact('contrat', 'agents'));
+        $typeabsences = TypeAbsence::all();
+        $absence = Absence::with('agent','typeabsence')->find($id);
+        return view('absences.edit', compact('agents', 'absence', 'typeabsences'));
     }
 
     /**
@@ -84,20 +86,19 @@ class ContratsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contrat $contrat)
+    public function update(Request $request, Absence $absence)
     {
-        $contrat->update([
+        $absence->update([
 
-            'ref_contrat'=>$request->ref_contrat,
-            'description'=>$request->description,
-            'date'=>$request->date,
+            'type_id'=>$request->type_id,
             'agent_id'=>$request->agent_id,
-            'date_debut_contrat'=>$request->date_debut_contrat,
-            'date_fin_contrat'=>$request->date_fin_contrat
+            'date_debut_absence'=>$request->date_debut_absence,
+            'date_fin_absence'=>$request->date_fin_absence,
+            'motif_absence'=>$request->motif_absence
 
         ]);
 
-        return redirect(route('contrats.index'))->with('success', 'La modification a été effetué avec succés');
+        return redirect(route('absences.index'))->with('success', 'La modification a été effetué avec succés');
     }
 
     /**
@@ -108,7 +109,7 @@ class ContratsController extends Controller
      */
     public function destroy($id)
     {
-        Contrat::destroy($id);
-        return redirect(route('contrats.index'))->with('success', 'La suppression a été effetué avec succés!');
+        Absence::destroy($id);
+        return redirect(route('absences.index'))->with('success', 'La suppression a été effetué avec succés');
     }
 }

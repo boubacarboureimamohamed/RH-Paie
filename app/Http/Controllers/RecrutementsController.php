@@ -43,7 +43,7 @@ class RecrutementsController extends Controller
             'date_offre'=>$request->date_offre
 
             ]);
-        return redirect(route('recrutements.index'));
+        return redirect(route('recrutements.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
     }
 
     /**
@@ -85,7 +85,7 @@ class RecrutementsController extends Controller
             'date_offre'=> $request->date_offre
 
             ]);
-        return redirect(route('recrutements.index'));
+        return redirect(route('recrutements.index'))->with('success', 'La modification a été effetué avec succés');
     }
 
     /**
@@ -97,6 +97,6 @@ class RecrutementsController extends Controller
     public function destroy($id)
     {
         Recrutement::destroy($id);
-        return redirect(route('recrutements.index'));
+        return redirect(route('recrutements.index'))->with('success', 'La suppression a été effetué avec succés');
     }
 }

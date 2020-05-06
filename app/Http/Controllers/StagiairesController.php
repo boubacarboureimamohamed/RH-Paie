@@ -17,7 +17,7 @@ class StagiairesController extends Controller
      */
     public function index()
     {
-        $stagiaires = Stagiaire::all();
+        $stagiaires = Stagiaire::with('theme', 'service')->get();
         return view('stagiaires.index', compact('stagiaires'));
     }
 
@@ -44,9 +44,9 @@ class StagiairesController extends Controller
     {
         Stagiaire::create([
 
-            'stagiaires_themes_id'=>$request->stagiaires_themes_id,
-            'stagiaires_services_id'=>$request->stagiaires_services_id,
-            'stagiaires_recrutements_id'=>$request->stagiaires_recrutements_id,
+            'theme_id'=>$request->theme_id,
+            'service_id'=>$request->service_id,
+            'recrutement_id'=>$request->recrutement_id,
             'nom'=>$request->nom,
             'prenom'=>$request->prenom,
             'date_naiss'=>$request->date_naiss,
@@ -61,7 +61,7 @@ class StagiairesController extends Controller
 
         ]);
 
-        return redirect(route('stagiaires.index'));
+        return redirect(route('stagiaires.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
     }
 
     /**
@@ -101,9 +101,9 @@ class StagiairesController extends Controller
     {
         $stagiaire->update([
 
-            'stagiaires_themes_id'=>$request->stagiaires_themes_id,
-            'stagiaires_services_id'=>$request->stagiaires_services_id,
-            'stagiaires_recrutements_id'=>$request->stagiaires_recrutements_id,
+            'theme_id'=>$request->theme_id,
+            'service_id'=>$request->service_id,
+            'recrutement_id'=>$request->recrutement_id,
             'nom'=>$request->nom,
             'prenom'=>$request->prenom,
             'date_naiss'=>$request->date_naiss,
@@ -118,7 +118,7 @@ class StagiairesController extends Controller
 
         ]);
 
-        return redirect(route('stagiaires.index'));
+        return redirect(route('stagiaires.index'))->with('success', 'La modification a été effetué avec succés');
     }
 
     /**
@@ -130,6 +130,6 @@ class StagiairesController extends Controller
     public function destroy($id)
     {
         Stagiaire::destroy($id);
-        return redirect(route('stagiaires.index'));
+        return redirect(route('stagiaires.index'))->with('success', 'La suppression a été effetué avec succés!');
     }
 }

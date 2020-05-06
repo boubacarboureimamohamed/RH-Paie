@@ -14,6 +14,6 @@ class Departement extends Model
 
     public function directions()
     {
-        return $this->belongsToMany('App\Models\Direction');
+        return $this->hasMany('App\Models\Direction');
     }
 }

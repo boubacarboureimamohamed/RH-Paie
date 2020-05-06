@@ -42,7 +42,7 @@ class PostesController extends Controller
 
         ]);
 
-        return redirect(route('postes.index'));
+        return redirect(route('postes.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
 
     }
 
@@ -84,7 +84,7 @@ class PostesController extends Controller
 
         ]);
 
-        return redirect(route('postes.index'));
+        return redirect(route('postes.index'))->with('success', 'La modification a été effetué avec succés');
     }
 
     /**
@@ -96,6 +96,6 @@ class PostesController extends Controller
     public function destroy($id)
     {
         Poste::destroy($id);
-        return redirect(route('postes.index'));
+        return redirect(route('postes.index'))->with('success', 'La suppression a été effetué avec succés!');
     }
 }

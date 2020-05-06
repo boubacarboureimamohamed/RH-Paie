@@ -18,10 +18,10 @@ class CreateAbsencesTable extends Migration
             $table->date('date_debut_absence');
             $table->date('date_fin_absence');
             $table->string('motif_absence');
-            $table->bigInteger('type_absences_id')->unsigned()->index();
-            $table->foreign('type_absences_id')->references('id')->on('type_absences');
-            $table->bigInteger('agents_absences_id')->unsigned()->index();
-            $table->foreign('agents_absences_id')->references('id')->on('agents');
+            $table->bigInteger('type_id')->unsigned()->index();
+            $table->foreign('type_id')->references('id')->on('type_absences');
+            $table->bigInteger('agent_id')->unsigned()->index();
+            $table->foreign('agent_id')->references('id')->on('agents');
             $table->timestamps();
         });
     }

@@ -32,7 +32,7 @@
                         <input id="name" type="text" class="form-control form-control-user" name="libelle" value="{{ $direction->libelle }}" required autocomplete="name" placeholder="Veillez renseigner le nom de la direction">
                     </div>
                     <div class="form-group">
-                        <select name="departements_id" id="" class="form-control form-control-user">
+                        <select name="departement_id" id="" class="form-control form-control-user">
                             @foreach ($departements as $departement)
                             <option @if($direction->id == $departement->departements_id)
                                 {{ 'selected' }}

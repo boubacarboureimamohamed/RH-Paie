@@ -42,7 +42,7 @@ class DepartementsController extends Controller
 
         ]);
 
-        return redirect(route('departements.index'));
+        return redirect(route('departements.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
     }
 
     /**
@@ -83,7 +83,7 @@ class DepartementsController extends Controller
 
         ]);
 
-        return redirect(route('departements.index'));
+        return redirect(route('departements.index'))->with('success', 'La modification a été effetué avec succés');
     }
 
     /**
@@ -95,6 +95,6 @@ class DepartementsController extends Controller
     public function destroy($id)
     {
         Departement::destroy($id);
-        return redirect(route('departements.index'));
+        return redirect(route('departements.index'))->with('success', 'La suppression a été effetué avec succés!');
     }
 }

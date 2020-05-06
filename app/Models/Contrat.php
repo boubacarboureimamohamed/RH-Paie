@@ -13,7 +13,12 @@ class Contrat extends Model
         'date',
         'date_debut_contrat',
         'date_fin_contrat',
-        'agents_id'
+        'agent_id'
 
     ];
+
+    public function agent()
+    {
+        return $this->belongsTo('App\Models\Agent');
+    }
 }

@@ -95,7 +95,7 @@ class RegisterController extends Controller
         ]);
 
         $user->syncRoles($data['roles']);
-        return $user;
+        return redirect(route('users.index'))->with('success', 'L\'enregistrement a été effetué avec succés');;
 
     }
 }

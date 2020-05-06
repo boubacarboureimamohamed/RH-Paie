@@ -25,6 +25,8 @@ Route::resource('recrutements', 'RecrutementsController');
 
 Route::resource('agents', 'AgentsController');
 
+Route::resource('absences', 'AbsencesController');
+
 Route::resource('stagiaires', 'StagiairesController');
 
 Route::resource('themes', 'ThemesController');

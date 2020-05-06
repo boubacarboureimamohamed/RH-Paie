@@ -30,9 +30,9 @@
                     {{ method_field('PUT') }}
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <select name="type_formation_id" id="" class="form-control form-control-user">
+                        <select name="type_id" id="" class="form-control form-control-user">
                             @foreach ($typeformations as $typeformation)
-                                <option @if($typeformation->id == $formation->type_formation_id)
+                                <option @if($typeformation->id == $formation->type_id)
                                     {{ 'selected' }}
                                     @endif value="{{ $typeformation->id }}">{{ $typeformation->type_formation }}</option>
                             @endforeach

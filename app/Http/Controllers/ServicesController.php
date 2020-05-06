@@ -41,11 +41,11 @@ class ServicesController extends Controller
         Service::create([
 
             'libelle'=>$request->libelle,
-            'directions_id'=>$request->directions_id
+            'direction_id'=>$request->direction_id
 
         ]);
 
-        return redirect(route('services.index'));
+        return redirect(route('services.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
     }
 
     /**
@@ -68,7 +68,7 @@ class ServicesController extends Controller
     public function edit($id)
     {
         $directions = Direction::all();
-        $service = Service::find($id);
+        $service = Service::with('direction')->find($id);
         return view('services.edit', compact('service','directions'));
     }
 
@@ -84,11 +84,11 @@ class ServicesController extends Controller
         $service->update([
 
             'libelle'=>$request->libelle,
-            'directions_id'=>$request->directions_id
+            'direction_id'=>$request->direction_id
 
         ]);
 
-        return redirect(route('services.index'));
+        return redirect(route('services.index'))->with('success', 'La modification a été effetué avec succés');
 
     }
 
@@ -101,6 +101,6 @@ class ServicesController extends Controller
     public function destroy($id)
     {
         Service::destroy($id);
-        return redirect(route('services.index'));
+        return redirect(route('services.index'))->with('success', 'La suppression a été effetué avec succés!');
     }
 }

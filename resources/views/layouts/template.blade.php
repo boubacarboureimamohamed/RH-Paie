@@ -14,6 +14,10 @@
   <!-- Custom fonts for this template-->
   <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 
+  <!-- sweetalert2 -->
+  <link href="{{ asset('vendor/sweetalert/css/sweetalert2.min.css') }}" rel="stylesheet" type="text/css">
+
+
   <!-- Custom styles for this template-->
   <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
@@ -84,7 +88,6 @@
         </a>
         <div id="collapsePerso" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="cards.html">Les dossiers</a>
             <a class="collapse-item" href="{{ route('missions.index') }}">Les missions</a>
           <a class="collapse-item" href="{{ route('formations.index') }}">Les formations</a>
           <a class="collapse-item" href="{{ route('affectations.index') }}">Les affectations</a>
@@ -108,8 +111,8 @@
       </a>
       <div id="collapseAbsence" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="#">Les congés</a>
-          <a class="collapse-item" href="#">Les absences</a>
+          <a class="collapse-item" href="{{ route('absences.index') }}">Les congés</a>
+          <a class="collapse-item" href="{{ route('absences.index') }}">Les absences</a>
           </div>
       </div>
       </li>
@@ -280,8 +283,13 @@
   <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
+  @include('flash-message')
+
   <!-- Core plugin JavaScript-->
   <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+  <!-- sweetalert2 -->
+  <script src="{{ asset('vendor/sweetalert/js/sweetalert2.min.js') }}"></script>
 
   <!-- Custom scripts for all pages-->
   <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>

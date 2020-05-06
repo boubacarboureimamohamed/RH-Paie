@@ -16,8 +16,8 @@ class CreateServicesTable extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('libelle');
-            $table->bigInteger('directions_id')->unsigned()->index();
-            $table->foreign('directions_id')->references('id')->on('directions');
+            $table->bigInteger('direction_id')->unsigned()->index();
+            $table->foreign('direction_id')->references('id')->on('directions');
             $table->timestamps();
         });
     }

@@ -8,7 +8,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Ajout d\'un nouveau poste') }}</strong></h1>
+    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Ajout d\'un nouveau contrat') }}</strong></h1>
 </div>
 
 <!-- Content Row -->
@@ -32,7 +32,7 @@
                        <input id="name" type="text" class="form-control form-control-user" name="ref_contrat" value="" required autocomplete="name" placeholder="Veillez renseigner la référence du contrat">
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <select class="form-control form-control-user" value="" placeholder="Veillez entrer la référence du recrutement" name="agents_id" id="">
+                        <select class="form-control form-control-user" value="" placeholder="Veillez entrer la référence du recrutement" name="agent_id" id="">
                                <option value="">******Selectionner********</option>
                             @foreach ($agents as $agent)
                                <option value="{{$agent->id}}">{{$agent->nom.' '.$agent->prenom}}</option>

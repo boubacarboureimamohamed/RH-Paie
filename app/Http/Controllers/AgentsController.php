@@ -56,7 +56,7 @@ class AgentsController extends Controller
             'sexe'=>$request->sexe,
             'fonction'=>$request->fonction
         ]);
-        return redirect(route('agents.index'));
+        return redirect(route('agents.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
     }
 
     /**
@@ -78,7 +78,9 @@ class AgentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $recrutements = Recrutement::all();
+        $agent = Agent::find($id);
+        return view('agents.edit', compact('recrutements', 'agent'));
     }
 
     /**
@@ -88,9 +90,26 @@ class AgentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Agent $agent)
     {
-        //
+        $agent->update([
+
+            'matricule'=>$request->matricule,
+            'agents_recrutements_id'=>$request->agents_recrutements_id,
+            'nom'=>$request->nom,
+            'prenom'=>$request->prenom,
+            'date_naiss'=>$request->date_naiss,
+            'lieu_naiss'=>$request->lieu_naiss,
+            'telephone'=>$request->telephone,
+            'email'=>$request->email,
+            'nationalite'=>$request->nationalite,
+            'adresse'=>$request->adresse,
+            'sexe'=>$request->sexe,
+            'fonction'=>$request->fonction
+
+        ]);
+
+        return redirect(route('agents.index'))->with('success', 'La modification a été effetué avec succés');
     }
 
     /**
@@ -101,6 +120,7 @@ class AgentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Agent::destroy($id);
+        return redirect(route('agents.index'))->with('success', 'La suppression a été effetué avec succés!');
     }
 }

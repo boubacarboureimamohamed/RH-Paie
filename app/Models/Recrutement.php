@@ -14,11 +14,11 @@ class Recrutement extends Model
 
     public function agents()
     {
-        return $this->belongsToMany('App\Models\Agent');
+        return $this->hasMany('App\Models\Agent');
     }
 
     public function stagiaires()
     {
-        return $this->belongsToMany('App\Models\Stagiaire');
+        return $this->hasMany('App\Models\Stagiaire');
     }
 }

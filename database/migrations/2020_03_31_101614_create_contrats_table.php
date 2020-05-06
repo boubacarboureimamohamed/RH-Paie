@@ -20,8 +20,8 @@ class CreateContratsTable extends Migration
             $table->date('date');
             $table->date('date_debut_contrat');
             $table->date('date_fin_contrat');
-            $table->bigInteger('agents_id')->unsigned()->index();
-            $table->foreign('agents_id')->references('id')->on('agents');
+            $table->bigInteger('agent_id')->unsigned()->index();
+            $table->foreign('agent_id')->references('id')->on('agents');
             $table->timestamps();
         });
     }

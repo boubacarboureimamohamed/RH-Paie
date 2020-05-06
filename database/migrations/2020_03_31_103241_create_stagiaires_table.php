@@ -26,12 +26,12 @@ class CreateStagiairesTable extends Migration
             $table->string('email')->unique()->nullable();
             $table->date('date_debut_stage');
             $table->date('date_fin_stage');
-            $table->bigInteger('stagiaires_themes_id')->unsigned()->index();
-            $table->foreign('stagiaires_themes_id')->references('id')->on('themes');
-            $table->bigInteger('stagiaires_services_id')->unsigned()->index();
-            $table->foreign('stagiaires_services_id')->references('id')->on('services');
-            $table->bigInteger('stagiaires_recrutements_id')->unsigned()->index()->nullable();
-            $table->foreign('stagiaires_recrutements_id')->references('id')->on('recrutements');
+            $table->bigInteger('theme_id')->unsigned()->index();
+            $table->foreign('theme_id')->references('id')->on('themes');
+            $table->bigInteger('service_id')->unsigned()->index();
+            $table->foreign('service_id')->references('id')->on('services');
+            $table->bigInteger('recrutement_id')->unsigned()->index()->nullable();
+            $table->foreign('recrutement_id')->references('id')->on('recrutements');
             $table->timestamps();
         });
     }

@@ -16,8 +16,8 @@ class CreateDirectionsTable extends Migration
         Schema::create('directions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('libelle');
-            $table->bigInteger('departements_id')->unsigned()->index();
-            $table->foreign('departements_id')->references('id')->on('departements');
+            $table->bigInteger('departement_id')->unsigned()->index();
+            $table->foreign('departement_id')->references('id')->on('departements');
             $table->timestamps();
         });
     }
