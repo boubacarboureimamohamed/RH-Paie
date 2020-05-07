@@ -18,7 +18,7 @@ class Agent extends Model
         'fonction',
         'nationalite',
         'adresse',
-        'agents_recrutements_id'
+        'recrutement_id'
     ];
 
     public function recrutement()
@@ -44,5 +44,15 @@ class Agent extends Model
     public function contrats()
     {
         return $this->hasMany('App\Models\Contrat');
+    }
+
+    public function cursus()
+    {
+        return $this->hasMany('App\Models\Cursu');
+    }
+
+    public function charges()
+    {
+        return $this->hasMany('App\Models\Charge');
     }
 }

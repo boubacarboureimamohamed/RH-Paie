@@ -44,7 +44,7 @@ class AgentsController extends Controller
     {
         Agent::create([
             'matricule'=>$request->matricule,
-            'agents_recrutements_id'=>$request->agents_recrutements_id,
+            'recrutement_id'=>$request->recrutement_id,
             'nom'=>$request->nom,
             'prenom'=>$request->prenom,
             'date_naiss'=>$request->date_naiss,
@@ -95,7 +95,7 @@ class AgentsController extends Controller
         $agent->update([
 
             'matricule'=>$request->matricule,
-            'agents_recrutements_id'=>$request->agents_recrutements_id,
+            'recrutement_id'=>$request->recrutement_id,
             'nom'=>$request->nom,
             'prenom'=>$request->prenom,
             'date_naiss'=>$request->date_naiss,
