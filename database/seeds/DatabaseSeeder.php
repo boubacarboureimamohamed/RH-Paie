@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
     {
          $this->call(PermissionsTableSeeder::class);
          $this->call(UsersTableSeeder::class);
-         $this->call(TypeabsenceTableSeeder::class);
          $this->call(TypeformationTableSeeder::class);
+         $this->call(TypechargeTableSeeder::class);
          $this->call(ModepaiementTableSeeder::class);
     }
 }

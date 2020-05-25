@@ -9,7 +9,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Liste des Agents') }}</strong></h1>
+    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Liste des employés') }}</strong></h1>
 </div>
 
 <!-- Content Row -->
@@ -21,9 +21,9 @@
     <div class="card mb-4 py-3 border-left-primary">
       <div class="card-body">
         <div class="btn-group btn-group-sm">
-               <a href="{{ route('agents.create') }}" class="btn btn-success" style="float: none;margin: 5px;">
-                   <span class="fas fa-fw fa-plus"></span>
-               </a>
+            <a href="{{ route('agents.create') }}" class="btn btn-success" style="float: none;margin: 5px;">
+                <span class="fas fa-fw fa-plus"></span>
+            </a>
         </div>
         <div class="dt-responsive table-responsive">
             <table id="table" class="table table-striped table-bordered nowrap">
@@ -32,7 +32,7 @@
                     <th>Matricule</th>
                     <th>Nom</th>
                     <th>Prénom</th>
-                    <th>Fonction</th>
+                    <th>Occupation</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>

@@ -31,7 +31,7 @@ class CreateAgentsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('agents_missions', function (Blueprint $table) {
+        Schema::create('agent_mission', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('agent_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('agent_id')->references('id')->on('agents');
@@ -40,29 +40,11 @@ class CreateAgentsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('agents_services', function (Blueprint $table) {
-            $table->increments('id');
-            $table->bigInteger('agents_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('agents_id')->references('id')->on('agents');
-            $table->bigInteger('services_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('services_id')->references('id')->on('services');
-            $table->timestamps();
-        });
-
-        Schema::create('agents_postes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->bigInteger('agents_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('agents_id')->references('id')->on('agents');
-            $table->bigInteger('postes_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('postes_id')->references('id')->on('postes');
-            $table->timestamps();
-        });
-
-        Schema::create('bulletin_paie_agents', function (Blueprint $table) {
+        Schema::create('agent_bulletin_paie', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('date');
-            $table->bigInteger('agents_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('agents_id')->references('id')->on('agents');
+            $table->bigInteger('agent_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('agent_id')->references('id')->on('agents');
             $table->bigInteger('bulletin_paie_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('bulletin_paie_id')->references('id')->on('bulletin_paies');
             $table->timestamps();

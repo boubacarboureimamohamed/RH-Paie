@@ -20,6 +20,11 @@ class Service extends Model
 
     public function stagiaires()
     {
-        return $this->hasMany('App\Models\Stagiaires');
+        return $this->hasMany('App\Models\Stagiaire');
+    }
+
+    public function affectations()
+    {
+        return $this->hasMany('App\Models\Affectation');
     }
 }

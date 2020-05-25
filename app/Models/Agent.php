@@ -33,7 +33,7 @@ class Agent extends Model
 
     public function formations()
     {
-        return $this->belongsToMany('App\Models\Formation', 'agents_formations');
+        return $this->belongsToMany('App\Models\Formation', 'agent_formation');
     }
 
     public function absences()
@@ -53,6 +53,11 @@ class Agent extends Model
 
     public function charges()
     {
-        return $this->hasMany('App\Models\Charge');
+        return $this->belongsToMany('App\Models\Charge');
+    }
+
+    public function affectations()
+    {
+        return $this->hasMany('App\Models\Affectation');
     }
 }

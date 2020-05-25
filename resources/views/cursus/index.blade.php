@@ -9,7 +9,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Liste des absences') }}</strong></h1>
+    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Liste des cursus des employés ') }}</strong></h1>
 </div>
 
 <!-- Content Row -->
@@ -21,9 +21,9 @@
     <div class="card mb-4 py-3 border-left-primary">
       <div class="card-body">
         <div class="btn-group btn-group-sm">
-               <a href="{{ route('absences.create') }}" class="btn btn-success" style="float: none;margin: 5px;">
-                   <span class="fas fa-fw fa-plus"></span>
-               </a>
+            <a href="{{ route('cursus.create') }}" class="btn btn-success" style="float: none;margin: 5px;">
+                <span class="fas fa-fw fa-plus"></span>
+            </a>
         </div>
         <div class="dt-responsive table-responsive">
             <table id="table" class="table table-striped table-bordered nowrap">
@@ -31,37 +31,37 @@
                 <tr>
                     <th>Matricule</th>
                     <th>Nom et Prénom</th>
-                    <th>Nombre Jour</th>
-                    <th>Motif Absence</th>
+                    <th>Ecole / Institut</th>
+                    <th>Diplôme / Certificat</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($absences as $absence)
-                <tr>
-                   <td><span> {{ $absence->agent->matricule }} </span></td>
-                   <td><span> {{ $absence->agent->nom.' '.$absence->agent->prenom }} </span></td>
-                   <td><span> {{ $absence->nombre_jour }} </span></td>
-                   <td><span> {{ $absence->motif_absence }} </span></td>
+                 @foreach ($cursus as $cursu)
+                 <tr>
+                    <td><span> {{ $cursu->agent->matricule }} </span></td>
+                    <td><span> {{ $cursu->agent->nom.' '.$cursu->agent->prenom }} </span></td>
+                    <td><span> {{ $cursu->ecole }} </span></td>
+                    <td><span> {{ $cursu->diplome }} </span></td>
+                    <td>
+                        <a href="{{ route('cursus.edit', $cursu) }}" class="btn btn-warning">
+                            <span class="fas fa-fw fa-edit"></span>
+                        </a>
+                   </td>
                    <td>
-                       <a href="{{ route('absences.edit', $absence) }}" class="btn btn-warning">
-                           <span class="fas fa-fw fa-edit"></span>
-                       </a>
-                  </td>
-                   <td>
-                       <form method="POST" action="{{ route('absences.destroy', $absence) }}" id="form{{ $absence->id }}">
+                       <form method="POST" action="{{ route('cursus.destroy', $cursu) }}" id="form{{ $cursu->id }}">
 
                            {{ csrf_field() }}
                            {{ method_field('DELETE') }}
 
-                           <button type="button" onclick="confirmation('#form{{ $absence->id }}')" class="btn btn-danger" >
+                           <button type="button" onclick="confirmation('#form{{ $cursu->id }}')" class="btn btn-danger" >
                                <span class="fas fa-fw fa-trash"></span>
                            </button>
                        </form>
                   </td>
-               </tr>
-                @endforeach
+                </tr>
+                 @endforeach
             </tbody>
             </table>
             </div>

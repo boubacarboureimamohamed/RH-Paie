@@ -13,7 +13,7 @@ class Charge extends Model
         'lieu_naissc',
         'nationalitec',
         'sexec',
-        'type_id',
+        'type_charge_id',
         'agent_id'
     ];
 
@@ -22,7 +22,7 @@ class Charge extends Model
         return $this->belongsTo('App\Models\Agent');
     }
 
-    public function typecharge()
+    public function typeCharge()
     {
         return $this->belongsTo('App\Models\TypeCharge');
     }

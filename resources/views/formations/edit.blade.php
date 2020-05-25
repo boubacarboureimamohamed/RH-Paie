@@ -20,17 +20,16 @@
     <div class="card mb-4 py-3 border-left-primary">
       <div class="card-body">
         <div class="row">
-            <div class="col-lg-1">
-
-            </div>
-            <div class="col-lg-10">
+            <div class="col-lg-12">
               <div class="p-5">
                 <form class="user" method="POST" action="{{ route('formations.update', $formation) }}">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <select name="type_id" id="" class="form-control form-control-user">
+                        <label for="">Type Formation :</label>
+                        <select name="type_id" id="" class="form-control">
+                            <option value="">************Selectionner************</option>
                             @foreach ($typeformations as $typeformation)
                                 <option @if($typeformation->id == $formation->type_id)
                                     {{ 'selected' }}
@@ -39,23 +38,28 @@
                         </select>
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input id="" type="text" class="form-control form-control-user" name="lieu" value="{{ $formation->lieu }}" autofocus placeholder="Veillez entrer le lieu de la formation">
+                        <label for="">Lieu Formation :</label>
+                        <input id="" type="text" class="form-control" name="lieu" value="{{ $formation->lieu }}" autofocus placeholder="Veillez entrer le lieu de la formation">
                     </div>
                     </div>
                     <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input id="" type="date" class="form-control form-control-user" name="date_debut_formation" value="{{ $formation->date_debut_formation }}" autofocus placeholder="Veillez entrer la date début de la formation">
+                        <label for="">Date Début :</label>
+                        <input id="" type="date" class="form-control" name="date_debut_formation" value="{{ $formation->date_debut_formation }}" autofocus placeholder="Veillez entrer la date début de la formation">
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input id="" type="date" class="form-control form-control-user" name="date_fin_formation" value="{{ $formation->date_fin_formation }}" autofocus placeholder="Veillez entrer la date fin de la formation">
+                        <label for="">Date Fin :</label>
+                        <input id="" type="date" class="form-control" name="date_fin_formation" value="{{ $formation->date_fin_formation }}" autofocus placeholder="Veillez entrer la date fin de la formation">
                         </div>
                     </div>
                     <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input id="" type="text" class="form-control form-control-user" name="bilan_formation" value="{{ $formation->bilan_formation }}" autofocus placeholder="Veillez entrer le bilan de la formation">
+                        <label for="">Bilan :</label>
+                        <input id="" type="text" class="form-control" name="bilan_formation" value="{{ $formation->bilan_formation }}" autofocus placeholder="Veillez entrer le bilan de la formation">
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input id="" type="date" class="form-control form-control-user" name="date" value="{{ $formation->date }}" autofocus placeholder="Veillez entrer la date de la formation">
+                        <label for="">Date :</label>
+                        <input id="" type="date" class="form-control" name="date" value="{{ $formation->date }}" autofocus placeholder="Veillez entrer la date de la formation">
                     </div>
                     </div>
                     <table id="example-2" class="table table-striped table-bordered nowrap">
@@ -99,20 +103,20 @@
                     </table>
                     <hr>
                     <div class="row">
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
 
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                     <a href="{{ route('formations.index') }}" class="btn btn-default btn-user btn-block">
                             {{ ('Annuler') }}
                     </a>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <button type="submit" class="btn btn-primary btn-user btn-block">
                             {{ ('Enregistrer') }}
                         </button>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
 
                     </div>
                     </div>
@@ -120,9 +124,6 @@
                 </form>
               </div>
             </div>
-          </div>
-          <div class="col-lg-1">
-
           </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ class Formation extends Model
 
     public function agents()
     {
-        return $this->belongsToMany('App\Models\Agent', 'agents_formations');
+        return $this->belongsToMany('App\Models\Agent', 'agent_formation');
     }
 
     public function typeformation()

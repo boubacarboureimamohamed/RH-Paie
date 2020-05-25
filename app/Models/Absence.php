@@ -8,10 +8,8 @@ class Absence extends Model
 {
     protected $fillable = [
 
-        'type_id',
         'agent_id',
-        'date_debut_absence',
-        'date_fin_absence',
+        'nombre_jour',
         'motif_absence'
 
     ];
@@ -21,8 +19,4 @@ class Absence extends Model
         return $this->belongsTo('App\Models\Agent');
     }
 
-    public function typeabsence()
-    {
-        return $this->belongsTo('App\Models\TypeAbsence');
-    }
 }

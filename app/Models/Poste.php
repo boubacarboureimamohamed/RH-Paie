@@ -9,4 +9,11 @@ class Poste extends Model
     protected $fillable =[
         'intitule'
     ];
+
+    public function affectations()
+    {
+        return $this->hasMany('App\Models\Affectation');
+    }
+
+
 }

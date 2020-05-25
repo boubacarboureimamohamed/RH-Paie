@@ -55,7 +55,7 @@ class MissionsController extends Controller
          {
 
             $mission->agents()->attach([
-                'agent_id' => $request->agent_id[$var]
+                'agent_id'=>$request->agent_id[$var]
             ]);
 
          }

@@ -52,56 +52,41 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Gestion des récrutements
-      </div>
-
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo1" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-users"></i>
-          <span>Agents et Stagiaires</span>
+          <span>Information Employés</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ route('agents.index') }}">Les agents</a>
-            <a class="collapse-item" href="{{ route('stagiaires.index') }}">Les stagiaires</a>
-            <a class="collapse-item" href="{{ route('recrutements.index') }}">Les récrutements</a>
+            <a class="collapse-item" href="{{ route('agents.index') }}">Liste employés</a>
+            <a class="collapse-item" href="{{ route('charges.index') }}">Les charges</a>
+            <a class="collapse-item" href="{{ route('cursus.index') }}">Les cursus</a>
           </div>
         </div>
       </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Gestion du personnel
-      </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePerso" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Dossiers du personnel</span>
+          <span>Dossier du personnel</span>
         </a>
         <div id="collapsePerso" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ route('missions.index') }}">Les missions</a>
+            <a class="collapse-item" href="{{ route('affectations.index') }}">Les affectations</a>
           <a class="collapse-item" href="{{ route('formations.index') }}">Les formations</a>
-          <a class="collapse-item" href="{{ route('affectations.index') }}">Les affectations</a>
+          <a class="collapse-item" href="{{ route('missions.index') }}">Les missions</a>
           </div>
         </div>
       </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-      Gestion des absences
-      </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
@@ -111,19 +96,14 @@
       </a>
       <div id="collapseAbsence" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{ route('absences.index') }}">Les absences</a>
           <a class="collapse-item" href="{{ route('absences.index') }}">Les congés</a>
-          <a class="collapse-item" href="{{ route('absences.index') }}">Les absences</a>
           </div>
       </div>
       </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-        Gestion de la paie
-        </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
@@ -140,11 +120,6 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-        Configurations
-        </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">

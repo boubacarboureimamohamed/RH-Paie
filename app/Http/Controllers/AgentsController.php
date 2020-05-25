@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agent;
+use App\Models\Charge;
 use App\Models\Contrat;
+use App\Models\Cursu;
 use App\Models\Poste;
 use App\Models\Recrutement;
+use App\Models\TypeCharge;
 use Illuminate\Http\Request;
 
 class AgentsController extends Controller
@@ -31,7 +34,8 @@ class AgentsController extends Controller
         $postes = Poste::all();
         $contrats = Contrat::all();
         $recrutements = Recrutement::all();
-        return view('agents.create', compact('recrutements', 'postes', 'contrats'));
+        $typecharges = TypeCharge::all();
+        return view('agents.create', compact('recrutements', 'postes', 'contrats', 'typecharges'));
     }
 
     /**
@@ -42,7 +46,8 @@ class AgentsController extends Controller
      */
     public function store(Request $request)
     {
-        Agent::create([
+
+        $agent = Agent::create([
             'matricule'=>$request->matricule,
             'recrutement_id'=>$request->recrutement_id,
             'nom'=>$request->nom,
@@ -56,6 +61,41 @@ class AgentsController extends Controller
             'sexe'=>$request->sexe,
             'fonction'=>$request->fonction
         ]);
+
+        for($var=0; $var < count($request->ecole); $var++)
+         {
+
+            $cursu = Cursu::create([
+                'ecole'=>$request->ecole[$var],
+                'date_debut'=>$request->date_debut[$var],
+                'date_fin'=>$request->date_fin[$var],
+                'diplome'=>$request->diplome[$var],
+                'agent_id'=>$agent->id
+
+
+        ]);
+
+         }
+
+         for($varr=0; $varr < count($request->nomc); $varr++)
+          {
+
+            $charge = Charge::create([
+                'nomc'=>$request->nomc[$varr],
+                'prenomc'=>$request->prenomc[$varr],
+                'date_naissc'=>$request->date_naissc[$varr],
+                'lieu_naissc'=>$request->lieu_naissc[$varr],
+                'nationalitec'=>$request->nationalitec[$varr],
+                'sexec'=>$request->sexec[$varr],
+                'type_charge_id'=>$request->type_charge_id[$varr],
+                'agent_id'=>$agent->id
+
+
+        ]);
+
+
+    }
+
         return redirect(route('agents.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
     }
 

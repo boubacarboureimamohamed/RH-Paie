@@ -25,7 +25,7 @@ class CreateFormationsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('agents_formations', function (Blueprint $table) {
+        Schema::create('agent_formation', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('agent_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('agent_id')->references('id')->on('agents');

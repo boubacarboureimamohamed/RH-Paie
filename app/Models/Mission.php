@@ -22,6 +22,6 @@ class Mission extends Model
 
     public function agents()
     {
-        return $this->belongsToMany('App\Models\Agent', 'agents_missions');
+        return $this->belongsToMany('App\Models\Agent', 'agent_mission');
     }
 }

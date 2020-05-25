@@ -30,14 +30,17 @@
                     {{ method_field('PUT') }}
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input id="" type="text" class="form-control form-control-user" name="ref_recrutement" value="{{ $recrutement->ref_recrutement }}" required autocomplete="" autofocus placeholder="Veillez entrer le nom">
+                        <label for="inputEmail4">Ref_Recrutement : </label>
+                      <input id="" type="text" class="form-control" name="ref_recrutement" value="{{ $recrutement->ref_recrutement }}" required autocomplete="" autofocus placeholder="Veillez entrer le nom">
                     </div>
                     <div class="col-sm-6">
-                        <input id="" type="text" class="form-control form-control-user" name="description" value="{{ $recrutement->description }}" required autocomplete="" autofocus placeholder="Veillez entrer le prénom">
+                        <label for="inputEmail4">Date Offre : </label>
+                        <input id="" type="date" class="form-control" name="date_offre" value="{{ $recrutement->date_offre }}" required placeholder="Veillez enter l'adresse mail s'il vous plaît!">
                     </div>
                   </div>
                   <div class="form-group">
-                    <input id="" type="date" class="form-control form-control-user" name="date_offre" value="{{ $recrutement->date_offre }}" required autocomplete="" placeholder="Veillez enter l'adresse mail s'il vous plaît!">
+                    <label for="inputEmail4">Description : </label>
+                    <textarea class="form-control" type="text" name="description" id="" cols="5" rows="5" value="" placeholder="Veillez entrer la description du recrutement">{{ $recrutement->description }}</textarea>
                   </div>
                   <hr>
                   <div class="row">

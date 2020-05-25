@@ -15,11 +15,8 @@ class CreateAbsencesTable extends Migration
     {
         Schema::create('absences', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('date_debut_absence');
-            $table->date('date_fin_absence');
+            $table->integer('nombre_jour');
             $table->string('motif_absence');
-            $table->bigInteger('type_id')->unsigned()->index();
-            $table->foreign('type_id')->references('id')->on('type_absences');
             $table->bigInteger('agent_id')->unsigned()->index();
             $table->foreign('agent_id')->references('id')->on('agents');
             $table->timestamps();

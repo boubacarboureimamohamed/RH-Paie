@@ -30,34 +30,41 @@
             <thead>
                 <tr>
                     <th>Matricule</th>
-                    <th>Poste</th>
+                    <th>Nom et Prénom</th>
+                    <th>Fonction</th>
                     <th>Service</th>
+                    <th>Date Affectation</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
             </thead>
             <tbody>
-                 <tr>
-                    <td><span> </span></td>
-                    <td><span></span></td>
-                    <td><span>  </span></td>
-                    <td>
-                        <a href="" class="btn btn-warning">
-                            <span class="fas fa-fw fa-edit"></span>
-                        </a>
-                   </td>
-                    <td>
-                        <form method="POST" action="" id="" onsubmit="return confirm('Voulez-vous supprimer cet enregistrement?');">
+                @foreach ($affectations as $affectation)
 
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
+                    <tr>
+                        <td><span>{{ $affectation->agent->matricule }}</span></td>
+                        <td><span>{{ $affectation->agent->nom.' '.$affectation->agent->prenom }}</span></td>
+                        <td><span>{{ $affectation->poste->intitule }}</span></td>
+                        <td><span>{{ $affectation->service->libelle }}</span></td>
+                        <td><span>{{ $affectation->date_affectation }}</span></td>
+                        <td>
+                            <a href="{{ route('affectations.edit', $affectation) }}" class="btn btn-warning">
+                                <span class="fas fa-fw fa-edit"></span>
+                            </a>
+                       </td>
+                        <td>
+                            <form method="POST" action="{{ route('affectations.destroy', $affectation) }}" id="from{{ $affectation->id }}">
 
-                            <button type="submit" class="btn btn-danger" >
-                                <span class="fas fa-fw fa-trash"></span>
-                            </button>
-                        </form>
-                   </td>
-                </tr>
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+
+                                <button type="button" onclick="confirmation('#form{{ $affectation->id }}')" class="btn btn-danger" >
+                                    <span class="fas fa-fw fa-trash"></span>
+                                </button>
+                            </form>
+                       </td>
+                    </tr>
+                @endforeach
             </tbody>
             </table>
             </div>
@@ -76,4 +83,22 @@
  <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
   <!-- Page level custom scripts -->
   <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+  <script>
+
+       function confirmation(target)
+          {
+              swal({
+                  title: "Êtes-vous sûr ???",
+                  text: "Une fois supprimé, vous ne pourrez plus récupérer cet enregistrement! ",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonText:'Oui',
+                  cancelButtonText:'Non'
+
+              }).then(function() {
+                  $(target).submit();
+              });
+          }
+
+      </script>
 @endsection

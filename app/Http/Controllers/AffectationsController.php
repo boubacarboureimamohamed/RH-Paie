@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Affectation;
 use App\Models\Agent;
 use App\Models\Poste;
 use App\Models\Service;
@@ -16,10 +17,8 @@ class AffectationsController extends Controller
      */
     public function index()
     {
-        $agents = Agent::all();
-        $postes = Poste::all();
-        $services = Service::all();
-        return view('affectations.index', compact('agents', 'services', 'postes'));
+        $affectations = Affectation::all();
+        return view('affectations.index', compact('affectations'));
     }
 
     /**
@@ -29,7 +28,10 @@ class AffectationsController extends Controller
      */
     public function create()
     {
-        //
+        $agents = Agent::all();
+        $postes = Poste::all();
+        $services = Service::all();
+        return view('affectations.create', compact('agents', 'services', 'postes'));
     }
 
     /**
@@ -40,7 +42,18 @@ class AffectationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        Affectation::create([
+
+            'agent_id'=>$request->agent_id,
+            'service_id'=>$request->service_id,
+            'poste_id'=>$request->poste_id,
+            'date_affectation'=>$request->date_affectation
+
+        ]);
+
+       return redirect(route('affectations.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
+
     }
 
     /**
@@ -62,7 +75,11 @@ class AffectationsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $affectation = Affectation::with('service','poste', 'agent')->find($id);
+        $postes = Poste::all();
+        $agents = Agent::all();
+        $services = Service::all();
+        return view('affectations.edit', compact('affectation', 'agents', 'postes', 'services'));
     }
 
     /**
@@ -72,9 +89,19 @@ class AffectationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Affectation $affectation)
     {
-        //
+        $affectation->update([
+
+            'agent_id'=>$request->agent_id,
+            'service_id'=>$request->service_id,
+            'poste_id'=>$request->poste_id,
+            'date_affectation'=>$request->date_affectation
+
+        ]);
+
+       return redirect(route('affectations.index'))->with('success', 'La modification a été effetué avec succés');
+
     }
 
     /**
@@ -85,6 +112,7 @@ class AffectationsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Affectation::destroy($id);
+        return redirect(route('affectations.index'))->with('success', 'La suppression a été effetué avec succés!');
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Absence;
 use App\Models\Agent;
+use App\Models\Cursu;
 use Illuminate\Http\Request;
 
-class AbsencesController extends Controller
+class CursusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class AbsencesController extends Controller
      */
     public function index()
     {
-        $absences = Absence::with('agent')->get();
-        return view('absences.index', compact('absences'));
+        $cursus = Cursu::with('agent')->get();
+        return view('cursus.index', compact('cursus'));
     }
 
     /**
@@ -27,7 +27,7 @@ class AbsencesController extends Controller
     public function create()
     {
         $agents = Agent::all();
-        return view('absences.create', compact('agents'));
+        return view('cursus.create', compact('agents'));
     }
 
     /**
@@ -38,15 +38,22 @@ class AbsencesController extends Controller
      */
     public function store(Request $request)
     {
-        $absence  = Absence::create([
+            for($var=0; $var < count($request->ecole); $var++)
+         {
 
-            'agent_id'=>$request->agent_id,
-            'nombre_jour'=>$request->nombre_jour,
-            'motif_absence'=>$request->motif_absence
+            $cursu = Cursu::create([
+                'ecole'=>$request->ecole[$var],
+                'date_debut'=>$request->date_debut[$var],
+                'date_fin'=>$request->date_fin[$var],
+                'diplome'=>$request->diplome[$var],
+                'agent_id'=>$request->agent_id
+
 
         ]);
 
-        return redirect(route('absences.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
+         }
+
+         return redirect(route('cursus.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
 
     }
 
@@ -69,9 +76,8 @@ class AbsencesController extends Controller
      */
     public function edit($id)
     {
-        $agents = Agent::all();
-        $absence = Absence::with('agent')->find($id);
-        return view('absences.edit', compact('agents', 'absence'));
+        $cursu = Cursu::with('agent')->find($id);
+        return view('cursus.edit', compact('cursu'));
     }
 
     /**
@@ -81,17 +87,21 @@ class AbsencesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Absence $absence)
+    public function update(Request $request, Cursu $cursus)
     {
-        $absence->update([
 
-            'agent_id'=>$request->agent_id,
-            'nombre_jour'=>$request->nombre_jour,
-            'motif_absence'=>$request->motif_absence
+        $agent = $request->agent_id;
+        $cursus->update([
+
+            'ecole'=>$request->ecole,
+            'diplome'=>$request->diplome,
+            'date_debut'=>$request->date_debut,
+            'date_fin'=>$request->date_fin,
+            'agent_id'=>$agent
 
         ]);
 
-        return redirect(route('absences.index'))->with('success', 'La modification a été effetué avec succés');
+        return redirect(route('cursus.index'))->with('success', 'La modification a été effetué avec succés');
     }
 
     /**
@@ -102,7 +112,7 @@ class AbsencesController extends Controller
      */
     public function destroy($id)
     {
-        Absence::destroy($id);
-        return redirect(route('absences.index'))->with('success', 'La suppression a été effetué avec succés');
+        Cursu::destroy($id);
+        return redirect(route('cursus.index'))->with('success', 'La suppression a été effetué avec succés!');
     }
 }

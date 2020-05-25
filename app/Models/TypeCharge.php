@@ -12,6 +12,6 @@ class TypeCharge extends Model
 
     public function charges()
     {
-        return $this->hasMany('App\Models\Charges');
+        return $this->hasMany('App\Models\Charge');
     }
 }

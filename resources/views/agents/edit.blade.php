@@ -8,7 +8,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Modification d\'un agent') }}</strong></h1>
+    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Modification des informations d\'un employé') }}</strong></h1>
 </div>
 
 <!-- Content Row -->
@@ -27,61 +27,78 @@
                 <form class="user" method="POST" action="{{ route('agents.update', $agent) }}">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
-                  <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input id="" type="text" class="form-control form-control-user" name="matricule" value="{{ $agent->matricule }}" autofocus placeholder="Veillez entrer le matricule">
+
+                  <div class="form-row">
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="inputEmail4">Matricule : </label>
+                        <input class="multisteps-form__input form-control" type="text" name="matricule" value="{{ $agent->matricule }}" placeholder="Veillez entrer le matricule"/>
                     </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <select class="form-control form-control-user" value="" placeholder="Veillez entrer la référence du recrutement" name="recrutement_id" id="">
-                                <option value="">******Selectionner********</option>
-                            @foreach ($recrutements as $recrutement)
-                                <option @if($recrutement->id == $agent->recrutement_id)
-                                    {{ 'selected' }}
-                                    @endif value="{{$recrutement->id}}">{{$recrutement->description}}</option>
-                             @endforeach
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="inputEmail4">Ref_Recrutement : </label>
+                        <select class="multisteps-form__input form-control" value="" placeholder="Veillez entrer la référence du recrutement" name="recrutement_id" id="">
+                            <option value="">******Selectionner********</option>
+                                @foreach ($recrutements as $recrutement)
+                            <option @if($recrutement->id == $agent->recrutement_id) {{ 'selected' }} @endif value="{{$recrutement->id}}">
+                                {{$recrutement->description}}
+                            </option>
+                                @endforeach
                         </select>
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input id="" type="text" class="form-control form-control-user" name="nom" value="{{ $agent->nom }}" autofocus placeholder="Veillez entrer le nom de l'agent">
                     </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input id="" type="text" class="form-control form-control-user" name="prenom" value="{{ $agent->prenom }}" autofocus placeholder="Veillez entrer le prénom de l'agent">
-                      </div>
                   </div>
-                  <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input id="" type="date" class="form-control form-control-user" name="date_naiss" value="{{ $agent->date_naiss }}" autofocus placeholder="Veillez entrer la date de naissance">
+                  <div class="form-row">
+                    <div class="form-group col-6 col-sm-6">
+                        <label for="inputEmail4">Nom : </label>
+                        <input class="multisteps-form__input form-control" type="text" name="nom" value="{{ $agent->nom }}" placeholder="Veillez entrer le nom de lagent"/>
                     </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input id="" type="text" class="form-control form-control-user" name="lieu_naiss" value="{{ $agent->lieu_naiss }}" autofocus placeholder="Veillez entrer le lieu de naissance">
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input id="" type="text" class="form-control form-control-user" name="nationalite" value="{{ $agent->nationalite }}" autofocus placeholder="Veillez entrer la nationnalité de l'agent">
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="inputEmail4">Prénom : </label>
+                        <input class="multisteps-form__input form-control" type="text" name="prenom" value="{{ $agent->prenom }}" placeholder="Veillez entrer le prénom de lagent"/>
                     </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input id="" type="text" class="form-control form-control-user" name="sexe" value="{{ $agent->sexe }}" autofocus placeholder="Veillez entrer le sexe de l'agent">
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input id="" type="text" class="form-control form-control-user" name="telephone" value="{{ $agent->telephone }}" autofocus placeholder="Veillez entrer le numéro de téléphone">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="inputEmail4">Date Naissance : </label>
+                        <input class="multisteps-form__input form-control" type="date" name="date_naiss" value="{{ $agent->date_naiss }}" placeholder="Veillez entrer la date de naissance"/>
                     </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input id="" type="text" class="form-control form-control-user" name="email" value="{{ $agent->email }}" autofocus placeholder="Veillez entrer l'adresse mail">
-                      </div>
-                  </div>
-                  <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input id="" type="text" class="form-control form-control-user" name="fonction" value="{{ $agent->fonction }}" autofocus placeholder="Veillez entrer la fonction de l'agent">
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="inputEmail4">Lieu Naissance : </label>
+                        <input class="multisteps-form__input form-control" type="text" name="lieu_naiss" value="{{ $agent->lieu_naiss }}" placeholder="Veillez entrer le lieu de naissance"/>
                     </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input id="" type="text" class="form-control form-control-user" name="adresse" value="{{ $agent->adresse }}" autofocus placeholder="Veillez entrer l'adresse de l'agent">
-                      </div>
-                  </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="inputEmail4">Nationalité : </label>
+                        <input class="multisteps-form__input form-control" type="text" name="nationalite" value="{{ $agent->nationalite }}" placeholder="Veillez entrer la nationnalité de lagent"/>
+                    </div>
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="inputEmail4">Sexe : </label>
+                        <select class="multisteps-form__input form-control" value="" placeholder="Veillez entrer la référence du recrutement" name="sexe" id="">
+                               <option value="HOMME" @if($agent->sexe == 'HOMME') {{ 'selected' }} @endif>HOMME</option>
+                               <option value="FEMME" @if($agent->sexe == 'FEMME') {{ 'selected' }} @endif>FEMME</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6 col-sm-6">
+                        <label for="inputEmail4">Téléphone : </label>
+                        <input class="multisteps-form__input form-control" type="text" name="telephone" value="{{ $agent->telephone }}" placeholder="Veillez entrer le numéro de téléphone"/>
+                    </div>
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="inputEmail4">Email : </label>
+                        <input class="multisteps-form__input form-control" type="email" name="email" value="{{ $agent->email }}" placeholder="Veillez entrer ladresse mail"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="inputEmail4">Adresse : </label>
+                        <input class="multisteps-form__input form-control" type="text" name="adresse" value="{{ $agent->adresse }}" placeholder="Veillez entrer ladresse de lagent"/>
+                    </div>
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="inputEmail4">Occupation : </label>
+                        <input class="multisteps-form__input form-control" type="text" name="fonction" value="{{ $agent->fonction }}" autofocus placeholder="Veillez entrer la fonction de lagent"/>
+                    </div>
+                </div>
+
                   <hr>
                   <div class="row">
                     <div class="col-lg-3">
