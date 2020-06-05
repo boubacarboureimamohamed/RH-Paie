@@ -27,7 +27,7 @@
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Type Formation :</label>
-                        <select name="type_id" id="" class="form-control">
+                        <select name="type_formation_id" id="" class="form-control">
                             <option value="">***********Selectionner***********</option>
                             @foreach ($typeformations as $typeformation)
                               <option value="{{ $typeformation->id }}">{{ $typeformation->type_formation }}</option>
@@ -51,12 +51,19 @@
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Bilan :</label>
-                        <input id="" type="text" class="form-control" name="bilan_formation" value="" autofocus placeholder="Veillez entrer le bilan de la formation">
+                        <label for="">Attestation / Diplôme :</label>
+                        <input id="" type="text" class="form-control" name="attestation" value="" autofocus placeholder="Veillez entrer l'attestation ou le diplôme">
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Date :</label>
-                      <input id="" type="date" class="form-control" name="date" value="" autofocus placeholder="Veillez entrer la date de la formation">
+
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label for="">Veillez selectionner l'agent ou les agents :</label>
+                    </div>
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+
                     </div>
                   </div>
                   <table id="example-2" class="table table-striped table-bordered nowrap">

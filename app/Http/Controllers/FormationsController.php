@@ -16,7 +16,7 @@ class FormationsController extends Controller
      */
     public function index()
     {
-        $formations = Formation::with('typeformation')->get();
+        $formations = Formation::with('agents', 'typeFormation')->get();
         return view('formations.index', compact('formations'));
     }
 
@@ -42,21 +42,17 @@ class FormationsController extends Controller
     {
         $formation = Formation::create([
 
-            'type_id'=>$request->type_id,
+            'type_formation_id'=>$request->type_formation_id,
             'lieu'=>$request->lieu,
             'date_debut_formation'=>$request->date_debut_formation,
             'date_fin_formation'=>$request->date_fin_formation,
-            'bilan_formation'=>$request->bilan_formation,
-            'date'=>$request->date
-
+            'attestation'=>$request->attestation
         ]);
 
         for($var=0; $var < count($request->agent_id); $var++)
          {
 
-            $formation->agents()->attach([
-                'agent_id' => $request->agent_id[$var]
-            ]);
+            $formation->agents()->attach([$request->agent_id[$var]]);
          }
 
         return redirect(route('formations.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
@@ -98,21 +94,18 @@ class FormationsController extends Controller
     {
         $formation->update([
 
-            'type_id'=>$request->type_id,
+            'type_formation_id'=>$request->type_formation_id,
             'lieu'=>$request->lieu,
             'date_debut_formation'=>$request->date_debut_formation,
             'date_fin_formation'=>$request->date_fin_formation,
-            'bilan_formation'=>$request->bilan_formation,
-            'date'=>$request->date
+            'attestation'=>$request->attestation
 
         ]);
 
         for($var=0; $var < count($request->agent_id); $var++)
          {
 
-            $formation->agents()->attach([
-                'agent_id' => $request->agent_id[$var]
-            ]);
+            $formation->agents()->attach([$request->agent_id[$var]]);
 
          }
 

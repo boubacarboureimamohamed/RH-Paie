@@ -85,6 +85,17 @@ class DepartementsController extends Controller
 
         return redirect(route('departements.index'))->with('success', 'La modification a été effetué avec succés');
     }
+    public function updatedepartement(Request $request, Departement $departement)
+    {
+        $departement->update([
+
+            'libelle'=>$request->libelle
+
+        ]);
+
+        return redirect(route('departements.index'))->with('success', 'La modification a été effetué avec succés');
+
+    }
 
     /**
      * Remove the specified resource from storage.

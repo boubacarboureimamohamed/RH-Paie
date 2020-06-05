@@ -40,23 +40,24 @@ class MissionsController extends Controller
     {
         $mission = Mission::create([
 
-            'ref_mission'=>$request->ref_mission,
-            'iteneraire'=>$request->iteneraire,
-            'ordre_mission'=>$request->ordre_mission,
+            'numero_ordre_mission'=>$request->numero_ordre_mission,
+            'objet_mission'=>$request->objet_mission,
             'date_debut_mission'=>$request->date_debut_mission,
             'date_fin_mission'=>$request->date_fin_mission,
-            'motif_mission'=>$request->motif_mission,
-            'bilan_mission'=>$request->bilan_mission,
-            'date'=>$request->date
+            'depart'=>$request->depart,
+            'destination'=>$request->destination
 
         ]);
 
         for($var=0; $var < count($request->agent_id); $var++)
          {
 
-            $mission->agents()->attach([
-                'agent_id'=>$request->agent_id[$var]
-            ]);
+
+            $mission->agents()->attach(
+                $request->agent_id[$var],
+                    [
+                        'est_chef'=> $request->agent_id[$var] == $request->est_chef[0]
+                    ]);
 
          }
 
@@ -99,23 +100,24 @@ class MissionsController extends Controller
     {
         $mission->update([
 
-            'ref_mission'=>$request->ref_mission,
-            'iteneraire'=>$request->iteneraire,
-            'ordre_mission'=>$request->ordre_mission,
+            'numero_ordre_mission'=>$request->numero_ordre_mission,
+            'objet_mission'=>$request->objet_mission,
             'date_debut_mission'=>$request->date_debut_mission,
             'date_fin_mission'=>$request->date_fin_mission,
-            'motif_mission'=>$request->motif_mission,
-            'bilan_mission'=>$request->bilan_mission,
-            'date'=>$request->date
+            'depart'=>$request->depart,
+            'destination'=>$request->destination
 
         ]);
 
         for($var=0; $var < count($request->agent_id); $var++)
          {
 
-            $mission->agents()->attach([
-                'agent_id' => $request->agent_id[$var]
-            ]);
+            $mission->agents()->attach(
+                $request->agent_id[$var],
+                    [
+                        'est_chef'=> $request->agent_id[$var] == $request->est_chef[0]
+                    ]);
+
 
          }
 

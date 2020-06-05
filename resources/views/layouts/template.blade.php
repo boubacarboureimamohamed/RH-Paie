@@ -56,7 +56,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo1" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-users"></i>
-          <span>Information Employés</span>
+          <span>Informations Employés</span>
         </a>
         <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
@@ -97,7 +97,7 @@
       <div id="collapseAbsence" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{ route('absences.index') }}">Les absences</a>
-          <a class="collapse-item" href="{{ route('absences.index') }}">Les congés</a>
+          <a class="collapse-item" href="{{ route('conges.index') }}">Les congés</a>
           </div>
       </div>
       </li>
@@ -109,11 +109,11 @@
         <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePaie" aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-bookmark"></i>
-            <span>Bulletin de Salaire</span>
+            <span>Rémunérations</span>
         </a>
         <div id="collapsePaie" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="#">Les bulletins</a>
+            <a class="collapse-item" href="{{ route('affectationAvantages.index') }}">Les bases octoyées </a>
             </div>
         </div>
         </li>
@@ -129,9 +129,11 @@
         </a>
         <div id="configuration" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('avantages.index') }}">Les bases imposables </a>
+                <a class="collapse-item" href="">Les abattements </a>
+                <a class="collapse-item" href="{{ route('contrats.index') }} ">Les contrats</a>
                 <a class="collapse-item" href="{{ route('themes.index') }}">Les thèmes</a>
                 <a class="collapse-item" href="{{ route('postes.index') }}">Les postes</a>
-                <a class="collapse-item" href="{{ route('contrats.index') }} ">Les contrats</a>
                 <a class="collapse-item" href="{{ route('services.index') }}">Les services</a>
                 <a class="collapse-item" href="{{ route('directions.index') }}">Les directions</a>
                 <a class="collapse-item" href="{{ route('departements.index') }}">Les départements</a>
@@ -199,16 +201,12 @@
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    {{ ('Logout') }}
+                    {{ ('Se déconnecter') }}
                 </a>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

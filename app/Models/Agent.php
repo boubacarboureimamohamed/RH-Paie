@@ -60,4 +60,14 @@ class Agent extends Model
     {
         return $this->hasMany('App\Models\Affectation');
     }
+
+    public function conges()
+    {
+        return $this->hasMany('App\Models\Conge');
+    }
+
+    public function affectationAvantages()
+    {
+        return $this->hasMany('App\Models\AffectationAvantage');
+    }
 }

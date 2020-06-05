@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
          $this->call(UsersTableSeeder::class);
          $this->call(TypeformationTableSeeder::class);
          $this->call(TypechargeTableSeeder::class);
+         $this->call(TypecongeTableSeeder::class);
          $this->call(ModepaiementTableSeeder::class);
     }
 }

@@ -15,14 +15,12 @@ class CreateMissionsTable extends Migration
     {
         Schema::create('missions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('ref_mission');
-            $table->string('ordre_mission');
+            $table->string('numero_ordre_mission');
+            $table->string('objet_mission');
             $table->date('date_debut_mission');
             $table->date('date_fin_mission');
-            $table->string('iteneraire');
-            $table->string('motif_mission');
-            $table->string('bilan_mission');
-            $table->date('date');
+            $table->string('depart');
+            $table->string('destination');
             $table->timestamps();
         });
     }

@@ -21,7 +21,7 @@
     <div class="card mb-4 py-3 border-left-primary">
       <div class="card-body">
         <div class="btn-group btn-group-sm">
-               <a href="{{ route('departements.create') }}" class="btn btn-success" style="float: none;margin: 5px;">
+               <a href="" class="btn btn-success" style="float: none;margin: 5px;" data-toggle="modal" data-target="#exampleModal">
                    <span class="fas fa-fw fa-plus"></span>
                </a>
         </div>
@@ -41,7 +41,11 @@
                     <td><span> {{ $departement->id }} </span></td>
                     <td><span> {{ $departement->libelle }} </span></td>
                     <td>
-                        <a href="{{ route('departements.edit', $departement) }}" class="btn btn-warning">
+                        <a href="" data-toggle="modal" data-target="#exampleModal1"
+                        id="l{{ $departement->id }}"
+                        data-route="{{ route('modif', $departement->id) }}"
+                        data-libelle="{{ $departement->libelle }}"
+                        onclick="updateprime('#l{{ $departement->id }}')" class="btn btn-warning">
                             <span class="fas fa-fw fa-edit"></span>
                         </a>
                    </td>
@@ -67,6 +71,61 @@
   </div>
 
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form method="POST" action="{{ route('departements.store') }}">
+            @csrf
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="align:center;">Ajout d'un nouveau département</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Libellé :</label>
+                <input type="text" name="libelle" class="form-control" id="">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn" data-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn btn-success">Enregistrer</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form method="POST" id="idft">
+            {{ csrf_field() }}
+            {{ method_field('PUT') }}
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel1" style="align:center;">Modification d'un département</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Libellé :</label>
+                <input id="libelle" type="text" name="libelle" class="form-control">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn" data-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn btn-primary">Modifier</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
 @endsection
 
@@ -113,6 +172,12 @@
                 });
             }
 
-        </script>
+    </script>
+    <script>
+        function updateprime(departement){
+            $('#libelle').val($(departement).attr('data-libelle'))
+            $('#idft').attr('action',$(departement).attr('data-route'))
+                }
+    </script>
 
 @endsection

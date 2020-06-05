@@ -11,10 +11,9 @@ class Formation extends Model
         'lieu',
         'date_debut_formation',
         'date_fin_formation',
-        'bilan_formation',
-        'date',
-        'agents_id',
-        'type_id'
+        'attestation',
+        'agent_id',
+        'type_formation_id'
 
     ];
 
@@ -23,7 +22,7 @@ class Formation extends Model
         return $this->belongsToMany('App\Models\Agent', 'agent_formation');
     }
 
-    public function typeformation()
+    public function typeFormation()
     {
         return $this->belongsTo('App\Models\TypeFormation');
     }

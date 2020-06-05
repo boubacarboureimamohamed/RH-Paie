@@ -28,7 +28,7 @@
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Type Formation :</label>
-                        <select name="type_id" id="" class="form-control">
+                        <select name="type_formation_id" id="" class="form-control">
                             <option value="">************Selectionner************</option>
                             @foreach ($typeformations as $typeformation)
                                 <option @if($typeformation->id == $formation->type_id)
@@ -54,13 +54,20 @@
                     </div>
                     <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Bilan :</label>
-                        <input id="" type="text" class="form-control" name="bilan_formation" value="{{ $formation->bilan_formation }}" autofocus placeholder="Veillez entrer le bilan de la formation">
+                        <label for="">Attestation / Diplôme :</label>
+                        <input id="" type="text" class="form-control" name="attestation" value="{{ $formation->attestation }}" autofocus placeholder="Veillez entrer le bilan de la formation">
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Date :</label>
-                        <input id="" type="date" class="form-control" name="date" value="{{ $formation->date }}" autofocus placeholder="Veillez entrer la date de la formation">
+
                     </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                          <label for="">Veillez selectionner l'agent ou les agents :</label>
+                      </div>
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+
+                      </div>
                     </div>
                     <table id="example-2" class="table table-striped table-bordered nowrap">
                         <thead>

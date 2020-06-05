@@ -37,6 +37,7 @@ class CreateAgentsTable extends Migration
             $table->foreign('agent_id')->references('id')->on('agents');
             $table->bigInteger('mission_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('mission_id')->references('id')->on('missions');
+            $table->boolean('est_chef');
             $table->timestamps();
         });
 

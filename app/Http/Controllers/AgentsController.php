@@ -46,7 +46,6 @@ class AgentsController extends Controller
      */
     public function store(Request $request)
     {
-
         $agent = Agent::create([
             'matricule'=>$request->matricule,
             'recrutement_id'=>$request->recrutement_id,

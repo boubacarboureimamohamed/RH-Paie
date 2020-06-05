@@ -43,17 +43,6 @@
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Fonction : </label>
-                        <select  name="poste_id" value="" data-toggle="tooltip" class="form-control">
-                            <option value="">*************Selectionner*************</option>
-                          @foreach($postes as $poste)
-                            <option value="{{  $poste->id   }}">
-                                {{ $poste->intitule }}
-                            </option>
-                          @endforeach
-                        </select>
-                    </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Service : </label>
                         <select  name="service_id" value="" data-toggle="tooltip" class="form-control">
                             <option value="">*************Selectionner*************</option>
@@ -64,10 +53,21 @@
                           @endforeach
                         </select>
                     </div>
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label for="">Fonction : </label>
+                        <select  name="poste_id" value="" data-toggle="tooltip" class="form-control">
+                            <option value="">*************Selectionner*************</option>
+                          @foreach($postes as $poste)
+                            <option value="{{  $poste->id   }}">
+                                {{ $poste->intitule }}
+                            </option>
+                          @endforeach
+                        </select>
+                    </div>
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                      <label for="">Date Affectation</label>
+                      <label for="">Date Affectation :</label>
                       <input id="" type="date" class="form-control" name="date_affectation" value="" autofocus placeholder="Veillez entrer la date de la formation">
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">

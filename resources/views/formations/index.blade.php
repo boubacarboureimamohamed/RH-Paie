@@ -30,7 +30,7 @@
             <thead>
                 <tr>
                     <th>Numéro</th>
-                    <th>Lieu</th>
+                    <th>Type Formation</th>
                     <th>Date_Début</th>
                     <th>Date_Fin</th>
                     <th>Modifier</th>
@@ -41,7 +41,7 @@
                  @foreach ($formations as $formation)
                  <tr>
                     <td><span> {{ $formation->id }} </span></td>
-                    <td><span> {{ $formation->type_id }} </span></td>
+                    <td><span> {{ $formation->typeFormation->type_formation }} </span></td>
                     <td><span> {{ $formation->date_debut_formation }} </span></td>
                     <td><span> {{ $formation->date_fin_formation }} </span></td>
                     <td>

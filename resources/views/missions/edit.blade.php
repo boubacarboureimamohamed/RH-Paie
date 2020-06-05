@@ -27,22 +27,24 @@
                     {{ method_field('PUT') }}
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <label for="">Ref_Mission :</label>
-                          <input id="" type="text" class="form-control" name="ref_mission" value="{{ $mission->ref_mission }}" autofocus placeholder="Veillez entrer la référence de la mission">
+                            <label for="">Numéro Ordre Mission : </label>
+                          <input id="" type="text" class="form-control" name="numero_ordre_mission" value="{{ $mission->numero_ordre_mission }}" autofocus placeholder="Veillez entrer le numéro d'ordre de la mission">
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <label for="">Ordre Mission :</label>
-                            <input id="name" type="text" class="form-control" name="ordre_mission" value="{{ $mission->ordre_mission }}" required autocomplete="name" placeholder="Veillez saisir l'ordre du mission">
+                            <label for="">Objet Mission :</label>
+                            <textarea id="name" type="text" class="form-control" name="objet_mission" cols="10" rows="1" placeholder="Veillez saisir l'objet de la mission">
+                                {{ $mission->objet_mission }}
+                            </textarea>
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <label for="">Motif :</label>
-                            <input id="" type="text" class="form-control" name="motif_mission" value="{{ $mission->motif_mission }}" autofocus placeholder="Veillez entrer le motif de la mission">
+                            <label for="">Ville De Départ :</label>
+                            <input id="" type="text" class="form-control" name="depart" value="{{ $mission->depart }}" autofocus placeholder="Veillez entrer la ville de départ">
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <label for="">Iténéraire</label>
-                            <input id="" type="text" class="form-control" name="iteneraire" value="{{ $mission->iteneraire }}" autofocus placeholder="Veillez entrer l'iténeraire de la mission">
+                            <label for="">Ville De Destination :</label>
+                            <input id="" type="text" class="form-control" name="destination" value="{{ $mission->destination }}" autofocus placeholder="Veillez entrer la ville de destination">
                         </div>
                       </div>
                       <div class="form-group row">
@@ -57,12 +59,10 @@
                       </div>
                       <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <label for="">Bilan :</label>
-                          <input id="" type="text" class="form-control" name="bilan_mission" value="{{ $mission->bilan_mission }}" autofocus placeholder="Veillez entrer le bilan de la mission">
+                            <label for="">Veiller selectionner l'agent ou les agents :</label>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
-                            <label for="">Date :</label>
-                          <input id="" type="date" class="form-control" name="date" value="{{ $mission->date }}" autofocus placeholder="Veillez entrer la date de la mission">
+
                         </div>
                       </div>
                      <table id="example-2" class="table table-striped table-bordered nowrap">

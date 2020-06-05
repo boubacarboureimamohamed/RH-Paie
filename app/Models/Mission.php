@@ -8,20 +8,18 @@ class Mission extends Model
 {
     protected $fillable = [
 
-        'ref_mission',
-        'iteneraire',
-        'ordre_mission',
+        'numero_ordre_mission',
+        'objet_mission',
         'date_debut_mission',
         'date_fin_mission',
-        'motif_mission',
-        'bilan_mission',
-        'date',
+        'depart',
+        'destination',
         'agent_id'
 
     ];
 
     public function agents()
     {
-        return $this->belongsToMany('App\Models\Agent', 'agent_mission');
+        return $this->belongsToMany('App\Models\Agent', 'agent_mission')->withPivot('est_chef');
     }
 }

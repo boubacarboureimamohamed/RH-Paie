@@ -75,7 +75,7 @@ class AffectationsController extends Controller
      */
     public function edit($id)
     {
-        $affectation = Affectation::with('service','poste', 'agent')->find($id);
+        $affectation = Affectation::find($id);
         $postes = Poste::all();
         $agents = Agent::all();
         $services = Service::all();

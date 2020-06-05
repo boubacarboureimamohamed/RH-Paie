@@ -29,8 +29,7 @@
             <table id="table" class="table table-striped table-bordered nowrap">
             <thead>
                 <tr>
-                    <th>Numéro</th>
-                    <th>Référence</th>
+                    <th>Numéro Odre</th>
                     <th>Date_Début</th>
                     <th>Date_Fin</th>
                     <th>Modifier</th>
@@ -40,8 +39,7 @@
             <tbody>
                  @foreach ($missions as $mission)
                  <tr>
-                    <td><span> {{ $mission->id }} </span></td>
-                    <td><span> {{ $mission->ref_mission }} </span></td>
+                    <td><span> {{ $mission->numero_ordre_mission }} </span></td>
                     <td><span> {{ $mission->date_debut_mission }} </span></td>
                     <td><span> {{ $mission->date_fin_mission }} </span></td>
                     <td>

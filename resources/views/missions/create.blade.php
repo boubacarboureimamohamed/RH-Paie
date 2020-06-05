@@ -26,23 +26,22 @@
                     @csrf
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Ref_Mission {{-- comment --}}
-                        </label>
-                      <input id="" type="text" class="form-control" name="ref_mission" value="" autofocus placeholder="Veillez entrer la référence de la mission">
+                        <label for="">Numéro Ordre Mission : </label>
+                      <input id="" type="text" class="form-control" name="numero_ordre_mission" value="" autofocus placeholder="Veillez entrer le numéro d'ordre de la mission">
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Ordre Mission :</label>
-                        <input id="name" type="text" class="form-control" name="ordre_mission" value="" required autocomplete="name" placeholder="Veillez saisir l'ordre du mission">
+                        <label for="">Objet Mission :</label>
+                        <textarea id="name" type="text" class="form-control" name="objet_mission" cols="10" rows="1" placeholder="Veillez saisir l'objet de la mission"></textarea>
                     </div>
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Motif :</label>
-                        <input id="" type="text" class="form-control" name="motif_mission" value="" autofocus placeholder="Veillez entrer le motif de la mission">
+                        <label for="">Ville De Départ :</label>
+                        <input id="" type="text" class="form-control" name="depart" value="" autofocus placeholder="Veillez entrer la ville de départ">
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Iténéraire :</label>
-                        <input id="" type="text" class="form-control" name="iteneraire" value="" autofocus placeholder="Veillez entrer l'iténeraire de la mission">
+                        <label for="">Ville De Destination :</label>
+                        <input id="" type="text" class="form-control" name="destination" value="" autofocus placeholder="Veillez entrer la ville de destination">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -57,19 +56,18 @@
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Bilan :</label>
-                      <input id="" type="text" class="form-control" name="bilan_mission" value="" autofocus placeholder="Veillez entrer le bilan de la mission">
+                        <label for="">Veiller selectionner l'agent ou les agents :</label>
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Date :</label>
-                      <input id="" type="date" class="form-control" name="date" value="" autofocus placeholder="Veillez entrer la date de la mission">
+
                     </div>
                   </div>
-                 <table id="example-2" class="table table-striped table-bordered nowrap">
+                  <table id="example-2" class="table table-striped table-bordered nowrap">
                     <thead>
                         <tr>
                             <th>Matricule</th>
                             <th>Nom et Prénom</th>
+                            <th>Chef De Mission</th>
                             <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne"><i class="fas fa-fw fa-plus"></i></a></th>
                         </tr>
                     </thead>
@@ -92,13 +90,24 @@
                                 </div>
                             </td>
                             <td>
-                            <div class="col-sm-12">
-                                <div class="form-group form-primary">
-                                    <div class="input-group">
-                                        <input type="text" name="" title="" disabled data-toggle="tooltip" value="" id="agent1" class="form-control" placeholder=" ">
+                                <div class="col-sm-12">
+                                    <div class="form-group form-primary">
+                                        <div class="input-group">
+                                            <input type="text" name="" title="" disabled data-toggle="tooltip" value="" id="agent1" class="form-control" placeholder=" ">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </td>
+                            <td>
+                                <div class="col-sm-10">
+                                    <div class="form-group form-primary">
+                                        <div class="input-group">
+                                            <div class="form-check form-check-inline">
+                                                <input style="width: 30px;height: 30px;" id="chef1" class="form-check-input" type="radio" name="est_chef[]" value="1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                             <td style="text-align: center"><a href="#" class="btn btn-danger remove"><i class="fas fa-fw fa-minus"></i></i></a></td>
                         </tr>
@@ -110,14 +119,10 @@
 
                     </div>
                     <div class="col-lg-3">
-                    <a href="{{ route('missions.index') }}" class="btn btn-default btn-user btn-block">
-                            {{ ('Annuler') }}
-                    </a>
+                        <a href="{{ route('missions.index') }}" class="btn btn-default btn-user btn-block">Annuler </a>
                     </div>
                     <div class="col-lg-3">
-                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                            {{ ('Enregistrer') }}
-                        </button>
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Enregistrer</button>
                     </div>
                     <div class="col-lg-3">
 
@@ -139,9 +144,7 @@
 
 @section('js')
 <script>
-
     var count = 1;
-
     $('#addLigne').on('click', function (f) {
       f.preventDefault()
         addLigne();
@@ -174,6 +177,17 @@
                     '</div>' +
                 '</div>' +
             '</td>' +
+            '<td>' +
+                '<div class="col-sm-10">'+
+                    '<div class="form-group form-primary">'+
+                        '<div class="input-group">'+
+                            '<div class="form-check form-check-inline">'+
+                                '<input style="width: 30px;height: 30px;" id="chef'+count+'" class="form-check-input" type="radio" name="est_chef[]" value="1">'+
+                            '</div>'+
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</td>' +
             '<td style="text-align: center"><a href="#" class="btn btn-danger remove"><i class="fas fa-fw fa-minus"></i></a></td>'+
             '</tr>';
         $('#ligne').append(tr);
@@ -181,10 +195,10 @@
     $('#ligne').on('click', '.remove', function () {
         $(this).parent().parent().remove();
     })
-
     function change(ligne_id) {
        let agent = $('#select'+ligne_id+' option:selected').attr('data-agent')
        $('#agent'+ligne_id).val(agent)
+       $('#chef'+ligne_id).val($('#select'+ligne_id+' option:selected').val())
     }
 </script>
 

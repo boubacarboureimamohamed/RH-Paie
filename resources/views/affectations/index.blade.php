@@ -31,8 +31,8 @@
                 <tr>
                     <th>Matricule</th>
                     <th>Nom et Prénom</th>
-                    <th>Fonction</th>
                     <th>Service</th>
+                    <th>Fonction</th>
                     <th>Date Affectation</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
@@ -44,8 +44,8 @@
                     <tr>
                         <td><span>{{ $affectation->agent->matricule }}</span></td>
                         <td><span>{{ $affectation->agent->nom.' '.$affectation->agent->prenom }}</span></td>
-                        <td><span>{{ $affectation->poste->intitule }}</span></td>
                         <td><span>{{ $affectation->service->libelle }}</span></td>
+                        <td><span>{{ $affectation->poste->intitule }}</span></td>
                         <td><span>{{ $affectation->date_affectation }}</span></td>
                         <td>
                             <a href="{{ route('affectations.edit', $affectation) }}" class="btn btn-warning">
