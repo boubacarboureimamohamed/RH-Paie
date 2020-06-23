@@ -61,5 +61,17 @@ Route::resource('avantages', 'AvantagesController');
 
 Route::put('edit/{avantage}', 'AvantagesController@updateavantage')->name('modifavantage');
 
+Route::resource('abattements', 'AbattementsController');
+
+Route::resource('impots', 'ImpotsController');
+
+Route::put('edit/{impot}', 'ImpotsController@updateimpot')->name('modifimpot');
+
+Route::put('edit/{abattement}', 'AbattementsController@updateabattement')->name('modifabattement');
+
+Route::resource('paie', 'PayrollsController');
+
+Route::get('getData', 'PayrollsController@getData');
+
 Route::get('/home', 'HomeController@index')->name('home');
 

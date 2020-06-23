@@ -9,7 +9,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Liste des abattements pour charges de famille') }}</strong></h1>
+    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Les taux IUTS') }}</strong></h1>
 </div>
 
 <!-- Content Row -->
@@ -29,35 +29,36 @@
             <table id="table" class="table table-striped table-bordered nowrap">
             <thead>
                 <tr>
-                    <th>Nombre De Charge</th>
                     <th>Taux</th>
+                    <th>Tranches</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
             </thead>
             <tbody>
-                 @foreach ($abattements as $abattement)
+                 @foreach ($impots as $impot)
                  <tr>
-                    <td><span> {{ $abattement->nombre_charge.' Charge(s)' }} </span></td>
-                    <td><span> {{ $abattement->pourcentage.' %' }} </span></td>
+                    <td><span>{{ $impot->taux.' '.'%' }}</span></td>
+                    <td><span>{{ 'De'.' '.$impot->minimum.' '.'A'.' '.$impot->maximum }} </span></td>
                     <td>
                         <a href="" data-toggle="modal" data-target="#exampleModal1"
-                        id="l{{ $abattement->id }}"
-                        data-route="{{ route('modifabattement', $abattement->id) }}"
-                        data-nombre_charge="{{ $abattement->nombre_charge }}"
-                        data-pourcentage="{{ $abattement->pourcentage }}"
-                        onclick="updateabattement('#l{{ $abattement->id }}')"
+                        id="l{{ $impot->id }}"
+                        data-route="{{ route('modifimpot', $impot->id) }}"
+                        data-minimum="{{ $impot->minimum }}"
+                        data-maximum="{{ $impot->maximum }}"
+                        data-taux="{{ $impot->taux }}"
+                        onclick="updateimpot('#l{{ $impot->id }}')"
                         class="btn btn-warning">
                             <span class="fas fa-fw fa-edit"></span>
                         </a>
                    </td>
                     <td>
-                        <form method="POST" action="{{ route('abattements.destroy', $abattement) }}" id="form{{ $abattement->id }}">
+                        <form method="POST" action="{{ route('impots.destroy', $impot) }}" id="form{{ $impot->id }}">
 
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
 
-                            <button type="button" onclick="confirmation('#form{{ $abattement->id }}')" class="btn btn-danger" >
+                            <button type="button" onclick="confirmation('#form{{ $impot->id }}')" class="btn btn-danger" >
                                 <span class="fas fa-fw fa-trash"></span>
                             </button>
                         </form>
@@ -78,22 +79,26 @@
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <form method="POST" action="{{ route('abattements.store') }}">
+        <form method="POST" action="{{ route('impots.store') }}">
             @csrf
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style="align:center;">Ajout d'une nouvelle indemnité</h5>
+          <h5 class="modal-title" id="exampleModalLabel" style="align:center;">Ajout d'une tranche</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
             <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Nomre De Charge :</label>
-                <input type="number" name="nombre_charge" class="form-control">
+                <label for="recipient-name" class="col-form-label">Minimum :</label>
+                <input type="number" name="minimum" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Maximum :</label>
+                <input type="number" name="maximum" class="form-control">
             </div>
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Taux :</label>
-                <input type="number" name="pourcentage" class="form-control">
+                <input type="number" name="taux" class="form-control">
             </div>
         </div>
         <div class="modal-footer">
@@ -113,19 +118,23 @@
             {{ csrf_field() }}
             {{ method_field('PUT') }}
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel1" style="align:center;">Modification d'une indemnité</h5>
+          <h5 class="modal-title" id="exampleModalLabel1" style="align:center;">Modification d'une tranche</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
             <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Nomre De Charge :</label>
-                <input type="number" name="nombre_charge" id="nombre_charge" class="form-control">
+                <label for="recipient-name" class="col-form-label">Minimum :</label>
+                <input type="number" name="minimum" id="minimum" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Maximum :</label>
+                <input type="number" name="maximum" id="maximum" class="form-control">
             </div>
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Taux :</label>
-                <input type="number" name="pourcentage" id="pourcentage" class="form-control">
+                <input type="number" name="taux" id="taux" class="form-control">
             </div>
         </div>
         <div class="modal-footer">
@@ -184,10 +193,11 @@
 
     </script>
     <script>
-        function updateabattement(abattement){
-            $('#nombre_charge').val($(abattement).attr('data-nombre_charge'))
-            $('#pourcentage').val($(abattement).attr('data-pourcentage'))
-            $('#idft').attr('action',$(abattement).attr('data-route'))
+        function updateimpot(impot){
+            $('#minimum').val($(impot).attr('data-minimum'))
+            $('#maximum').val($(impot).attr('data-maximum'))
+            $('$taux').val()$(impot).attr('taux'))
+            $('#idft').attr('action',$(impot).attr('data-route'))
                 }
     </script>
 

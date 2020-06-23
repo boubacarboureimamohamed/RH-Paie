@@ -109,11 +109,13 @@
         <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePaie" aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-bookmark"></i>
-            <span>Rémunérations</span>
+            <span>Gestion de la paie</span>
         </a>
         <div id="collapsePaie" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ route('affectationAvantages.index') }}">Les bases octoyées </a>
+                <a class="collapse-item" href="{{ route('affectationAvantages.index') }}">Affectation des bases </a>
+                <a class="collapse-item" href="{{ route('contrats.index') }} ">Défition des contrats</a>
+                <a class="collapse-item" href="{{ route('paie.index') }}">Edition de la paie </a>
             </div>
         </div>
         </li>
@@ -129,9 +131,9 @@
         </a>
         <div id="configuration" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('abattements.index') }}">Les abattements</a>
                 <a class="collapse-item" href="{{ route('avantages.index') }}">Les bases imposables </a>
-                <a class="collapse-item" href="">Les abattements </a>
-                <a class="collapse-item" href="{{ route('contrats.index') }} ">Les contrats</a>
+                <a class="collapse-item" href="{{ route('impots.index') }}">Les taux IUTS</a>
                 <a class="collapse-item" href="{{ route('themes.index') }}">Les thèmes</a>
                 <a class="collapse-item" href="{{ route('postes.index') }}">Les postes</a>
                 <a class="collapse-item" href="{{ route('services.index') }}">Les services</a>
@@ -266,6 +268,12 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
+  <!-- Axios scripts for all pages-->
+  <script src="{{ asset('js/axios.min.js') }}"></script>
+  <script>
+      axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+  </script>
 
   @yield('js')
 

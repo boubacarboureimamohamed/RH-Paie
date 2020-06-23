@@ -10,15 +10,22 @@ class Contrat extends Model
 
         'ref_contrat',
         'description',
+        'salaire_base',
         'date',
         'date_debut_contrat',
         'date_fin_contrat',
-        'agent_id'
+        'agent_id',
+        'poste_id'
 
     ];
 
     public function agent()
     {
         return $this->belongsTo('App\Models\Agent');
+    }
+
+    public function poste()
+    {
+        return $this->belongsTo('App\Models\Poste');
     }
 }

@@ -70,4 +70,9 @@ class Agent extends Model
     {
         return $this->hasMany('App\Models\AffectationAvantage');
     }
+
+    public function payrolls()
+    {
+        return $this->hasMany('App\Models\Payroll');
+    }
 }

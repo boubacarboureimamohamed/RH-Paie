@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agent;
 use App\Models\Contrat;
+use App\Models\Poste;
 use Illuminate\Http\Request;
 
 class ContratsController extends Controller
@@ -28,7 +29,8 @@ class ContratsController extends Controller
     public function create()
     {
         $agents = Agent::all();
-        return view('contrats.create', compact('agents'));
+        $postes = Poste::all();
+        return view('contrats.create', compact('agents', 'postes'));
     }
 
     /**
@@ -43,8 +45,10 @@ class ContratsController extends Controller
 
             'ref_contrat'=>$request->ref_contrat,
             'description'=>$request->description,
-            'date'=>$request->date,
+            'date'=>date('Y-m-d H:i:s'),
             'agent_id'=>$request->agent_id,
+            'salaire_base'=>$request->salaire_base,
+            'poste_id'=>$request->poste_id,
             'date_debut_contrat'=>$request->date_debut_contrat,
             'date_fin_contrat'=>$request->date_fin_contrat
 
@@ -72,9 +76,10 @@ class ContratsController extends Controller
      */
     public function edit($id)
     {
+        $postes = Poste::all();
         $agents = Agent::all();
         $contrat = Contrat::find($id);
-        return view('contrats.edit', compact('contrat', 'agents'));
+        return view('contrats.edit', compact('contrat', 'agents', 'postes'));
     }
 
     /**
@@ -90,8 +95,10 @@ class ContratsController extends Controller
 
             'ref_contrat'=>$request->ref_contrat,
             'description'=>$request->description,
-            'date'=>$request->date,
+            'date'=>date('Y-m-d H:i:s'),
             'agent_id'=>$request->agent_id,
+            'salaire_base'=>$request->salaire_base,
+            'poste_id'=>$request->poste_id,
             'date_debut_contrat'=>$request->date_debut_contrat,
             'date_fin_contrat'=>$request->date_fin_contrat
 

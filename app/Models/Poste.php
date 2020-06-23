@@ -15,5 +15,10 @@ class Poste extends Model
         return $this->hasMany('App\Models\Affectation');
     }
 
+    public function contrats()
+    {
+        return $this->hasMany('App\Models\Contrat');
+    }
+
 
 }

@@ -29,9 +29,9 @@
             <table id="table" class="table table-striped table-bordered nowrap">
             <thead>
                 <tr>
-                    <th>Nom et Prénom</th>
                     <th>Référence</th>
-                    <th>Description</th>
+                    <th>Matricule</th>
+                    <th>Nom et Prénom</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
@@ -40,8 +40,8 @@
                  @foreach ($contrats as $contrat)
                  <tr>
                     <td><span> {{ $contrat->ref_contrat }} </span></td>
-                    <td><span> {{ $contrat->ref_contrat }} </span></td>
-                    <td><span> {{ $contrat->description }} </span></td>
+                    <td><span> {{ $contrat->agent->matricule }} </span></td>
+                    <td><span> {{ $contrat->agent->nom.' '.$contrat->agent->prenom }} </span></td>
                     <td>
                         <a href="{{ route('contrats.edit', $contrat) }}" class="btn btn-warning">
                             <span class="fas fa-fw fa-edit"></span>

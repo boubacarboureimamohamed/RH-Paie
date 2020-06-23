@@ -17,11 +17,14 @@ class CreateContratsTable extends Migration
             $table->bigIncrements('id');
             $table->string('ref_contrat');
             $table->string('description');
-            $table->date('date');
-            $table->date('date_debut_contrat');
-            $table->date('date_fin_contrat');
+            $table->double('salaire_base');
+            $table->dateTime('date');
+            $table->date('date_debut_contrat')->nullable();
+            $table->date('date_fin_contrat')->nullable();
             $table->bigInteger('agent_id')->unsigned()->index();
             $table->foreign('agent_id')->references('id')->on('agents');
+            $table->bigInteger('poste_id')->unsigned()->index();
+            $table->foreign('poste_id')->references('id')->on('postes');
             $table->timestamps();
         });
     }

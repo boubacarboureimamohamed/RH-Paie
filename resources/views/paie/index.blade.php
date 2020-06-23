@@ -9,7 +9,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Liste des employés ayant des bases imposables') }}</strong></h1>
+    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Liste des bulletins de paie') }}</strong></h1>
 </div>
 
 <!-- Content Row -->
@@ -21,9 +21,9 @@
     <div class="card mb-4 py-3 border-left-primary">
       <div class="card-body">
         <div class="btn-group btn-group-sm">
-            <a href="{{ route('affectationAvantages.create') }}" class="btn btn-success" style="float: none;margin: 5px;">
-                <span class="fas fa-fw fa-plus"></span>
-            </a>
+               <a href="{{ route('paie.create') }}" class="btn btn-success" style="float: none;margin: 5px;">
+                   <span class="fas fa-fw fa-plus"></span>
+               </a>
         </div>
         <div class="dt-responsive table-responsive">
             <table id="table" class="table table-striped table-bordered nowrap">
@@ -31,43 +31,39 @@
                 <tr>
                     <th>Matricule</th>
                     <th>Nom et Prénom</th>
-                    <th>Libellé</th>
-                    <th>Montant</th>
-                    <th>Détail</th>
+                    <th>Fonction</th>
+                    <th>Mois</th>
+                    <th>Salaire Net</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
             </thead>
             <tbody>
-                 @foreach ($affectationAvantages as $affectationAvantage)
-                 <tr>
-                    <td><span> {{ $affectationAvantage->agent->matricule }} </span></td>
-                    <td><span> {{ $affectationAvantage->agent->nom.' '.$affectationAvantage->agent->prenom}} </span></td>
-                    <td><span> {{ $affectationAvantage->avantage->libelle }} </span></td>
-                    <td><span> {{ $affectationAvantage->montant.' Franc CFA' }} </span></td>
+                @foreach ($payrolls as $payroll)
+                <tr>
+                    <td><span>{{ $payroll->agent->matricule }}</span></td>
+                    <td><span>{{ $payroll->agent->nom.' '.$payroll->agent->prenom}}</span></td>
+                    <td><span>{{ $payroll->agent->fonction }}</span></td>
+                    <td><span>{{ $payroll->mois }}</span></td>
+                    <td><span>{{ $payroll->net_a_payer }}</span></td>
                     <td>
-                        <a href="" class="btn btn-">
-                            <span class="fas fa-fw fa-eyes"></span>
-                        </a>
-                   </td>
-                    <td>
-                        <a href="{{ route('affectationAvantages.edit', $affectationAvantage) }}" class="btn btn-warning">
+                        <a href="" class="btn btn-warning">
                             <span class="fas fa-fw fa-edit"></span>
                         </a>
                    </td>
                     <td>
-                        <form method="POST" action="{{ route('affectationAvantages.destroy', $affectationAvantage) }}" id="form{{ $affectationAvantage->id }}">
+                        <form method="POST" action="" id="">
 
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
 
-                            <button type="button" onclick="confirmation('#form{{ $affectationAvantage->id }}')" class="btn btn-danger" >
+                            <button type="button" onclick="" class="btn btn-danger" >
                                 <span class="fas fa-fw fa-trash"></span>
                             </button>
                         </form>
                    </td>
                 </tr>
-                 @endforeach
+                @endforeach
             </tbody>
             </table>
             </div>
