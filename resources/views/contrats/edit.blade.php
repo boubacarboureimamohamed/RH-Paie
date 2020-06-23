@@ -31,22 +31,23 @@
                         <input id="" type="text" class="form-control" name="ref_contrat" value="{{ $contrat->ref_contrat }}" placeholder="Veillez entrer la référence du contrat">
                       </div>
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                          <label for="">Matricule :</label>
-                          <select class="multisteps-form__select form-control" onchange="change()" id="select" name="agent_id">
-                            <option selected="selected">***Sélectionnez***</option>
-                                @foreach ($agents as $agent)
-                            <option @if ($agent->id == $contrat->agent_id) {{ 'selected' }} @endif data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{ $agent->id }}">{{ $agent->matricule }}</option>
-                                @endforeach
-                        </select>
+                        <label for="">Référence Du Contrat :</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" name="description" value="description">
+                            <label class="custom-file-label" for="inputGroupFile01">Veillez choisir le fichier</label>
+                        </div>
                       </div>
                     </div>
                     <div class="form-group row">
-                      <div class="col-sm-6 mb-3 mb-sm-0">
-                          <label for="">Description :</label>
-                          <textarea id="" cols="10" rows="1" class="form-control" name="description" placeholder="Veillez saisir la description du contrat">
-                              {{ $contrat->description }}
-                          </textarea>
-                      </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label for="">Matricule :</label>
+                            <select class="multisteps-form__select form-control" onchange="change()" id="select" name="agent_id">
+                              <option selected="selected">***Sélectionnez***</option>
+                                  @foreach ($agents as $agent)
+                              <option @if ($agent->id == $contrat->agent_id) {{ 'selected' }} @endif data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{ $agent->id }}">{{ $agent->matricule }}</option>
+                                  @endforeach
+                          </select>
+                        </div>
                       <div class="form-group col-12 col-sm-6">
                           <label for="inputEmail4">Nom et Prénom : </label>
                           <input class="multisteps-form__input form-control" id="agent" type="text" disabled name="" value="" placeholder="Veillez entrer le nom de l'agent"/>
