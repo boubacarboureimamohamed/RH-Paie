@@ -90,6 +90,14 @@
                 <label for="recipient-name" class="col-form-label">Libellé :</label>
                 <input type="text" name="libelle" class="form-control">
             </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1" name="">
+                <label class="form-check-label" for="inlineCheckbox1">Imposable CNSS</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2" name="">
+                <label class="form-check-label" for="inlineCheckbox2">Imposable IUTS</label>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn" data-dismiss="modal">Annuler</button>
@@ -117,6 +125,14 @@
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Libellé :</label>
                 <input type="text" name="libelle" class="form-control" id="libelle">
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1" name="">
+                <label class="form-check-label" for="inlineCheckbox1">Imposable CNSS</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2" name="">
+                <label class="form-check-label" for="inlineCheckbox2">Imposable IUTS</label>
             </div>
         </div>
         <div class="modal-footer">

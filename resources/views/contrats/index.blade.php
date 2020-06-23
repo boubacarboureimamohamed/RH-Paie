@@ -30,6 +30,7 @@
             <thead>
                 <tr>
                     <th>Référence</th>
+                    <th>Contrat</th>
                     <th>Matricule</th>
                     <th>Nom et Prénom</th>
                     <th>Modifier</th>
@@ -39,14 +40,19 @@
             <tbody>
                  @foreach ($contrats as $contrat)
                  <tr>
-                    <td><span> {{ $contrat->ref_contrat }} </span></td>
-                    <td><span> {{ $contrat->agent->matricule }} </span></td>
-                    <td><span> {{ $contrat->agent->nom.' '.$contrat->agent->prenom }} </span></td>
+                    <td>{{ $contrat->ref_contrat }}</td>
+                        @if ($contrat->description)
+                    <td>
+                        <a><img src="{{ asset('Ref_contrat/'.$contrat->description) }}"></a>
+                    </td>
+                         @endif
+                    <td>{{ $contrat->agent->matricule }}</td>
+                    <td>{{ $contrat->agent->nom.' '.$contrat->agent->prenom }}</td>
                     <td>
                         <a href="{{ route('contrats.edit', $contrat) }}" class="btn btn-warning">
                             <span class="fas fa-fw fa-edit"></span>
                         </a>
-                   </td>
+                   </td>    
                     <td>
                         <form method="POST" action="{{ route('contrats.destroy', $contrat) }}" id="form{{ $contrat->id }}">
 

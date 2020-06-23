@@ -44,7 +44,7 @@ class ContratsController extends Controller
         Contrat::create([
 
             'ref_contrat'=>$request->ref_contrat,
-            'description'=>$request->description,
+            'description'=>$request->description->storePublicly('Ref_contrat', ['disk' => 'public']),
             'date'=>date('Y-m-d H:i:s'),
             'agent_id'=>$request->agent_id,
             'salaire_base'=>$request->salaire_base,
