@@ -43,7 +43,7 @@
                     <td>{{ $contrat->ref_contrat }}</td>
                         @if ($contrat->description)
                     <td>
-                        <a><img src="{{ asset('Ref_contrat/'.$contrat->description) }}"></a>
+                        <a href="{{ asset($contrat->description) }}" class="btn btn-link">Visualiser</a>
                     </td>
                          @endif
                     <td>{{ $contrat->agent->matricule }}</td>
@@ -52,7 +52,7 @@
                         <a href="{{ route('contrats.edit', $contrat) }}" class="btn btn-warning">
                             <span class="fas fa-fw fa-edit"></span>
                         </a>
-                   </td>    
+                   </td>
                     <td>
                         <form method="POST" action="{{ route('contrats.destroy', $contrat) }}" id="form{{ $contrat->id }}">
 
