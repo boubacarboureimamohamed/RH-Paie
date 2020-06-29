@@ -38,7 +38,8 @@ class AvantagesController extends Controller
     {
         Avantage::create([
 
-            'libelle'=>$request->libelle
+            'libelle'=>$request->libelle,
+            'imposable'=>$request->imposable
 
         ]);
 
@@ -80,7 +81,8 @@ class AvantagesController extends Controller
 
         $avantage->update([
 
-            'libelle'=>$request->libelle
+            'libelle'=>$request->libelle,
+            'imposable'=>$request->imposable
 
         ]);
 

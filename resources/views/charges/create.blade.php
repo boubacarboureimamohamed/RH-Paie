@@ -21,7 +21,7 @@
       <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-              <div class="p-5">
+              <div class="p-3">
                 <form class="user" method="POST" action="{{ route('charges.store') }}">
                     @csrf
                     <div class="form-row">

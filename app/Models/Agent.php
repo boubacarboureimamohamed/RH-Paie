@@ -18,7 +18,7 @@ class Agent extends Model
         'fonction',
         'nationalite',
         'adresse',
-        'recrutement_id'
+        'situation_matrimoniale'
     ];
 
     public function recrutement()

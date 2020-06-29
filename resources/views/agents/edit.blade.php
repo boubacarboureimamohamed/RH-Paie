@@ -33,48 +33,46 @@
                         <label for="inputEmail4">Matricule : </label>
                         <input class="multisteps-form__input form-control" type="text" name="matricule" value="{{ $agent->matricule }}" placeholder="Veillez entrer le matricule"/>
                     </div>
-                    <div class="form-group col-12 col-sm-6">
-                        <label for="inputEmail4">Ref_Recrutement : </label>
-                        <select class="multisteps-form__input form-control" value="" placeholder="Veillez entrer la référence du recrutement" name="recrutement_id" id="">
-                            <option value="">******Selectionner********</option>
-                                @foreach ($recrutements as $recrutement)
-                            <option @if($recrutement->id == $agent->recrutement_id) {{ 'selected' }} @endif value="{{$recrutement->id}}">
-                                {{$recrutement->description}}
-                            </option>
-                                @endforeach
-                        </select>
-                    </div>
-                  </div>
-                  <div class="form-row">
                     <div class="form-group col-6 col-sm-6">
                         <label for="inputEmail4">Nom : </label>
                         <input class="multisteps-form__input form-control" type="text" name="nom" value="{{ $agent->nom }}" placeholder="Veillez entrer le nom de lagent"/>
                     </div>
+                  </div>
+                  <div class="form-row">
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Prénom : </label>
                         <input class="multisteps-form__input form-control" type="text" name="prenom" value="{{ $agent->prenom }}" placeholder="Veillez entrer le prénom de lagent"/>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Date Naissance : </label>
                         <input class="multisteps-form__input form-control" type="date" name="date_naiss" value="{{ $agent->date_naiss }}" placeholder="Veillez entrer la date de naissance"/>
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Lieu Naissance : </label>
                         <input class="multisteps-form__input form-control" type="text" name="lieu_naiss" value="{{ $agent->lieu_naiss }}" placeholder="Veillez entrer le lieu de naissance"/>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Nationalité : </label>
                         <input class="multisteps-form__input form-control" type="text" name="nationalite" value="{{ $agent->nationalite }}" placeholder="Veillez entrer la nationnalité de lagent"/>
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Sexe : </label>
-                        <select class="multisteps-form__input form-control" value="" placeholder="Veillez entrer la référence du recrutement" name="sexe" id="">
+                        <select class="multisteps-form__input form-control" name="sexe" id="">
                                <option value="HOMME" @if($agent->sexe == 'HOMME') {{ 'selected' }} @endif>HOMME</option>
                                <option value="FEMME" @if($agent->sexe == 'FEMME') {{ 'selected' }} @endif>FEMME</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-12 col-sm-6">
+                        <label for="inputEmail4">Situation matrimoniale : </label>
+                        <select class="multisteps-form__input form-control" name="situation_matrimoniale">
+                            <option value="CELIBATAIRE" @if($agent->situation_matrimoniale == 'CELIBATAIRE') {{ 'selected' }} @endif>Célibataire</option>
+                            <option value="DIVORCE" @if($agent->situation_matrimoniale == 'DIVORCE') {{ 'selected' }} @endif>Divorcé(e)</option>
+                            <option value="MARIE" @if($agent->situation_matrimoniale == 'MARIE') {{ 'selected' }} @endif>Marié(e)</option>
+                            <option value="VEUF" @if($agent->situation_matrimoniale == 'VEUF') {{ 'selected' }} @endif>Veuf(ve)</option>
                         </select>
                     </div>
                 </div>

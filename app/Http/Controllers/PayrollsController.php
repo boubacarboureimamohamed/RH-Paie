@@ -31,7 +31,7 @@ class PayrollsController extends Controller
      */
     public function create()
     {
-        $agents = Agent::all();
+        $agents = Agent::has('contrats')->get();
         return view('paie.create', compact('agents'));
     }
 

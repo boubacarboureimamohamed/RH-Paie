@@ -7,7 +7,6 @@ use App\Models\Charge;
 use App\Models\Contrat;
 use App\Models\Cursu;
 use App\Models\Poste;
-use App\Models\Recrutement;
 use App\Models\TypeCharge;
 use Illuminate\Http\Request;
 
@@ -33,9 +32,8 @@ class AgentsController extends Controller
     {
         $postes = Poste::all();
         $contrats = Contrat::all();
-        $recrutements = Recrutement::all();
         $typecharges = TypeCharge::all();
-        return view('agents.create', compact('recrutements', 'postes', 'contrats', 'typecharges'));
+        return view('agents.create', compact('postes', 'contrats', 'typecharges'));
     }
 
     /**
@@ -48,7 +46,6 @@ class AgentsController extends Controller
     {
         $agent = Agent::create([
             'matricule'=>$request->matricule,
-            'recrutement_id'=>$request->recrutement_id,
             'nom'=>$request->nom,
             'prenom'=>$request->prenom,
             'date_naiss'=>$request->date_naiss,
@@ -58,7 +55,8 @@ class AgentsController extends Controller
             'nationalite'=>$request->nationalite,
             'adresse'=>$request->adresse,
             'sexe'=>$request->sexe,
-            'fonction'=>$request->fonction
+            'fonction'=>$request->fonction,
+            'situation_matrimoniale'=>$request->situation_matrimoniale
         ]);
 
         for($var=0; $var < count($request->ecole); $var++)
@@ -117,9 +115,8 @@ class AgentsController extends Controller
      */
     public function edit($id)
     {
-        $recrutements = Recrutement::all();
         $agent = Agent::find($id);
-        return view('agents.edit', compact('recrutements', 'agent'));
+        return view('agents.edit', compact('agent'));
     }
 
     /**
@@ -134,7 +131,6 @@ class AgentsController extends Controller
         $agent->update([
 
             'matricule'=>$request->matricule,
-            'recrutement_id'=>$request->recrutement_id,
             'nom'=>$request->nom,
             'prenom'=>$request->prenom,
             'date_naiss'=>$request->date_naiss,
@@ -144,7 +140,8 @@ class AgentsController extends Controller
             'nationalite'=>$request->nationalite,
             'adresse'=>$request->adresse,
             'sexe'=>$request->sexe,
-            'fonction'=>$request->fonction
+            'fonction'=>$request->fonction,
+            'situation_matrimoniale'=>$request->situation_matrimoniale
 
         ]);
 

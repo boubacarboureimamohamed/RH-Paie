@@ -11,6 +11,8 @@
 
   <title>{{ config('app.name', 'GRH') }}</title>
 
+  <link rel="icon" type="image/png" href="{{ asset('img/favicon.ico') }}"/>
+
   <!-- Custom fonts for this template-->
   <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 

@@ -25,7 +25,7 @@ class PostesController extends Controller
      */
     public function create()
     {
-        return view('postes.create');
+        //
     }
 
     /**
@@ -76,15 +76,17 @@ class PostesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Poste $poste)
+    public function updateposte(Request $request, Poste $poste)
     {
+
         $poste->update([
 
-            'intitule'=>$request->intitule
+            'libelle'=>$request->libelle
 
         ]);
 
         return redirect(route('postes.index'))->with('success', 'La modification a été effetué avec succés');
+
     }
 
     /**

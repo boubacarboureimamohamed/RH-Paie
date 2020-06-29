@@ -39,11 +39,15 @@ Route::resource('themes', 'ThemesController');
 
 Route::resource('postes', 'PostesController');
 
+Route::put('edit/{poste}', 'PostesController@updateposte')->name('modifposte');
+
 Route::resource('contrats', 'ContratsController');
 
 Route::resource('affectations', 'AffectationsController');
 
 Route::resource('affectationAvantages', 'AffectationAvantagesController');
+
+Route::get('bases_imposables_agent/{id}', 'AffectationAvantagesController@avantageAgent')->name('avantages_agent');
 
 Route::resource('departements', 'DepartementsController');
 

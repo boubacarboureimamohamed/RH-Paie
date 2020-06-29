@@ -8,7 +8,8 @@ class Avantage extends Model
 {
     protected $fillable = [
 
-        'libelle'
+        'libelle',
+        'imposable'
 
     ];
 

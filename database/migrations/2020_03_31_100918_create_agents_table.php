@@ -26,8 +26,7 @@ class CreateAgentsTable extends Migration
             $table->string('fonction');
             $table->string('telephone')->unique();
             $table->string('email')->unique()->nullable();
-            $table->bigInteger('recrutement_id')->unsigned()->index()->nullable();
-            $table->foreign('recrutement_id')->references('id')->on('recrutements');
+            $table->string('situation_matrimoniale');
             $table->timestamps();
         });
 

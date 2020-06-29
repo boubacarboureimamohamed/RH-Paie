@@ -21,9 +21,9 @@
     <div class="card mb-4 py-3 border-left-primary">
       <div class="card-body">
         <div class="btn-group btn-group-sm">
-               <a href="{{ route('postes.create') }}" class="btn btn-success" style="float: none;margin: 5px;">
-                   <span class="fas fa-fw fa-plus"></span>
-               </a>
+            <a href="" class="btn btn-success" style="float: none;margin: 5px;" data-toggle="modal" data-target="#exampleModal">
+                <span class="fas fa-fw fa-plus"></span>
+            </a>
         </div>
         <div class="dt-responsive table-responsive">
             <table id="table" class="table table-striped table-bordered nowrap">
@@ -41,7 +41,12 @@
                     <td><span> {{ $poste->id }} </span></td>
                     <td><span> {{ $poste->intitule }} </span></td>
                     <td>
-                        <a href="{{ route('postes.edit', $poste) }}" class="btn btn-warning">
+                        <a href="" data-toggle="modal" data-target="#exampleModal1"
+                        id="l{{ $poste->id }}"
+                        data-route="{{ route('modifposte', $poste->id) }}"
+                        data-intitule="{{ $poste->intitule }}"
+                        onclick="updateposte('#l{{ $poste->id }}')"
+                        class="btn btn-warning">
                             <span class="fas fa-fw fa-edit"></span>
                         </a>
                    </td>
@@ -67,6 +72,64 @@
   </div>
 
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form method="POST" action="{{ route('postes.store') }}">
+            @csrf
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="align:center;">Ajout d'un poste</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Intitulé :</label>
+                <input type="text" name="intitule" class="form-control">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn" data-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn btn-success">Enregistrer</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form method="post" id="idfts">
+            {{ csrf_field() }}
+            {{ method_field('PUT') }}
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel1" style="align:center;">Modification d'un poste</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Intitulé :</label>
+                <input type="text" name="intitule" class="form-control" id="intitule">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn" data-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn btn-primary">Modifier</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
 
 @endsection
 
@@ -114,5 +177,12 @@
             }
 
         </script>
+    <script>
+        function updateposte(poste){
+
+            $('#intitule').val($(poste).attr('data-intitule'))
+            $('#idfts').attr('action', $(poste).attr('data-route'))
+                }
+    </script>
 
 @endsection

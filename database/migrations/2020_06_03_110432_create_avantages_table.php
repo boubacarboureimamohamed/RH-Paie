@@ -16,6 +16,7 @@ class CreateAvantagesTable extends Migration
         Schema::create('avantages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('libelle');
+            $table->integer('imposable')->nullable();
             $table->timestamps();
         });
 

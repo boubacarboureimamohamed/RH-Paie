@@ -30,41 +30,21 @@
             <thead>
                 <tr>
                     <th>Matricule</th>
-                    <th>Nom et Prénom</th>
-                    <th>Libellé</th>
-                    <th>Montant</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
                     <th>Détail</th>
-                    <th>Modifier</th>
-                    <th>Supprimer</th>
                 </tr>
             </thead>
             <tbody>
                  @foreach ($affectationAvantages as $affectationAvantage)
                  <tr>
-                    <td><span> {{ $affectationAvantage->agent->matricule }} </span></td>
-                    <td><span> {{ $affectationAvantage->agent->nom.' '.$affectationAvantage->agent->prenom}} </span></td>
-                    <td><span> {{ $affectationAvantage->avantage->libelle }} </span></td>
-                    <td><span> {{ $affectationAvantage->montant.' Franc CFA' }} </span></td>
+                    <td><span> {{ $affectationAvantage->matricule }} </span></td>
+                    <td><span> {{ $affectationAvantage->nom}} </span></td>
+                    <td><span> {{ $affectationAvantage->prenom}} </span></td>
                     <td>
-                        <a href="" class="btn btn-">
-                            <span class="fas fa-fw fa-eyes"></span>
+                        <a href="{{ route('avantages_agent', $affectationAvantage->id) }}" class="btn btn-primary">
+                            <span class="fas fa-fw fa-eye"></span>
                         </a>
-                   </td>
-                    <td>
-                        <a href="{{ route('affectationAvantages.edit', $affectationAvantage) }}" class="btn btn-warning">
-                            <span class="fas fa-fw fa-edit"></span>
-                        </a>
-                   </td>
-                    <td>
-                        <form method="POST" action="{{ route('affectationAvantages.destroy', $affectationAvantage) }}" id="form{{ $affectationAvantage->id }}">
-
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-
-                            <button type="button" onclick="confirmation('#form{{ $affectationAvantage->id }}')" class="btn btn-danger" >
-                                <span class="fas fa-fw fa-trash"></span>
-                            </button>
-                        </form>
                    </td>
                 </tr>
                  @endforeach

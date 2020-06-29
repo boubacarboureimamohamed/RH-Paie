@@ -12,33 +12,27 @@
 
     <title>{{ config('app.name', 'GRH') }}</title>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{{ asset('img/favicon.ico') }}"/>
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('vendor/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('vendor/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/util.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
 
-    <!-- Custom fonts for this template-->
-    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-
-    <!-- Custom styles for this template-->
-    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 </head>
-<body class="bg-gradient-primary">
+<body>
 
-    <div class="container">
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
 
             @yield('content')
 
-        </div>
-    </div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+    <!--===============================================================================================-->
+	<script src="{{ asset('vendor/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+        <script src="{{ asset('vendor/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!--===============================================================================================-->
+        <script src="{{ asset('vendor/vendor/main.js') }}"></script>
 </body>
 </html>

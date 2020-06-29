@@ -66,15 +66,15 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-12 col-sm-6">
-                            <label for="inputEmail4">Nationalité : </label>
-                            <input class="multisteps-form__input form-control" type="text" name="nationalite" value="" placeholder="Veillez entrer la nationnalité de lagent"/>
+                                <label for="inputEmail4">Nationalité : </label>
+                                <input class="multisteps-form__input form-control" type="text" name="nationalite" value="" placeholder="Veillez entrer la nationnalité de lagent"/>
                             </div>
                             <div class="form-group col-12 col-sm-6">
-                            <label for="inputEmail4">Sexe : </label>
-                            <select class="multisteps-form__input form-control" value="" placeholder="Veillez entrer la référence du recrutement" name="sexe" id="">
-                                   <option value="HOMME">HOMME</option>
-                                   <option value="FEMME">FEMME</option>
-                            </select>
+                                <label for="inputEmail4">Sexe : </label>
+                                <select class="multisteps-form__input form-control" placeholder="Veillez entrer la référence du recrutement" name="sexe" id="">
+                                    <option value="HOMME">HOMME</option>
+                                    <option value="FEMME">FEMME</option>
+                                </select>
                             </div>
                         </div>
                         <div class="button-row d-flex mt-4">
@@ -115,12 +115,12 @@
                                 <input class="multisteps-form__input form-control" type="text" name="matricule" value="" placeholder="Veillez entrer le matricule"/>
                             </div>
                             <div class="form-group col-12 col-sm-6">
-                                <label for="inputEmail4">Ref_Recrutement : </label>
-                                <select class="multisteps-form__input form-control" value="" placeholder="Veillez entrer la référence du recrutement" name="recrutement_id" id="">
-                                    <option value="">Choisissez la référence du recrutement</option>
-                                @foreach ($recrutements as $recrutement)
-                                    <option value="{{$recrutement->id}}">{{$recrutement->description}}</option>
-                                 @endforeach
+                                <label for="inputEmail4">Situation matrimoniale : </label>
+                                <select class="multisteps-form__input form-control" placeholder="Veillez sélectionner la situation matrimoniale" name="situation_matrimoniale" id="">
+                                    <option value="CELIBATAIRE">Célibataire</option>
+                                    <option value="DIVORCE">Divorcé(e)</option>
+                                    <option value="MARIE">Marié(e)</option>
+                                    <option value="VEUF">Veuf(ve)</option>
                                 </select>
                             </div>
                             </div>
@@ -278,7 +278,7 @@
                                         <div class="">
                                             <div class="form-group form-primary">
                                                 <div class="input-group">
-                                                    <select class="multisteps-form__input form-control" value="" placeholder="Veillez entrer la référence du recrutement" name="sexec[]" id="">
+                                                    <select class="multisteps-form__input form-control" placeholder="Veillez entrer la référence du recrutement" name="sexec[]" id="">
                                                            <option value="HOMME">HOMME</option>
                                                            <option value="FEMME">FEMME</option>
                                                     </select>

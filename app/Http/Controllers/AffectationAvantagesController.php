@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AffectationAvantage;
 use App\Models\Agent;
 use App\Models\Avantage;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class AffectationAvantagesController extends Controller
@@ -16,7 +17,10 @@ class AffectationAvantagesController extends Controller
      */
     public function index()
     {
-        $affectationAvantages = AffectationAvantage::all();
+       /* $affectationAvantages = DB::select("SELECT distinct a.matricule, a.nom, a.prenom, a.id as id FROM agents a, affectation_avantages av WHERE a.id = av.agent_id"); */
+
+        $affectationAvantages = Agent::has('affectationAvantages')->get();
+
         return view('affectationAvantages.index', compact('affectationAvantages'));
     }
 
@@ -114,5 +118,12 @@ class AffectationAvantagesController extends Controller
         AffectationAvantage::destroy($id);
         return redirect(route('affectationAvantages.index'))->with('success', 'La suppression a été effetué avec succés');
 
+    }
+    public function avantageAgent($id)
+    {
+        $agent = Agent::find($id);
+        $avntg_agnts = AffectationAvantage::where('agent_id', $agent->id)->get();
+        $agt = AffectationAvantage::where('agent_id', $agent->id)->first();
+        return view('affectationAvantages.show', compact('agent', 'avntg_agnts', 'agt'));
     }
 }
