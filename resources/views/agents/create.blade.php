@@ -117,10 +117,10 @@
                             <div class="form-group col-12 col-sm-6">
                                 <label for="inputEmail4">Situation matrimoniale : </label>
                                 <select class="multisteps-form__input form-control" placeholder="Veillez sélectionner la situation matrimoniale" name="situation_matrimoniale" id="">
-                                    <option value="CELIBATAIRE">Célibataire</option>
-                                    <option value="DIVORCE">Divorcé(e)</option>
-                                    <option value="MARIE">Marié(e)</option>
-                                    <option value="VEUF">Veuf(ve)</option>
+                                    <option value="Célibataire">Célibataire</option>
+                                    <option value="Divorcé(e)">Divorcé(e)</option>
+                                    <option value="Marié(e)">Marié(e)</option>
+                                    <option value="Veuf(ve)">Veuf(ve)</option>
                                 </select>
                             </div>
                             </div>

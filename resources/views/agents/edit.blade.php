@@ -20,10 +20,7 @@
     <div class="card mb-4 py-3 border-left-primary">
       <div class="card-body">
         <div class="row">
-            <div class="col-lg-1">
-
-            </div>
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <form class="user" method="POST" action="{{ route('agents.update', $agent) }}">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
@@ -69,10 +66,10 @@
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Situation matrimoniale : </label>
                         <select class="multisteps-form__input form-control" name="situation_matrimoniale">
-                            <option value="CELIBATAIRE" @if($agent->situation_matrimoniale == 'CELIBATAIRE') {{ 'selected' }} @endif>Célibataire</option>
-                            <option value="DIVORCE" @if($agent->situation_matrimoniale == 'DIVORCE') {{ 'selected' }} @endif>Divorcé(e)</option>
-                            <option value="MARIE" @if($agent->situation_matrimoniale == 'MARIE') {{ 'selected' }} @endif>Marié(e)</option>
-                            <option value="VEUF" @if($agent->situation_matrimoniale == 'VEUF') {{ 'selected' }} @endif>Veuf(ve)</option>
+                            <option value="Célibataire" @if($agent->situation_matrimoniale == 'Célibataire') {{ 'selected' }} @endif>Célibataire</option>
+                            <option value="Divorcé(e)" @if($agent->situation_matrimoniale == 'Divorcé(e)') {{ 'selected' }} @endif>Divorcé(e)</option>
+                            <option value="Marié(e)" @if($agent->situation_matrimoniale == 'Marié(e)') {{ 'selected' }} @endif>Marié(e)</option>
+                            <option value="Veuf(ve)" @if($agent->situation_matrimoniale == 'Veuf(ve)') {{ 'selected' }} @endif>Veuf(ve)</option>
                         </select>
                     </div>
                 </div>
@@ -118,9 +115,6 @@
                    </div>
                   <hr>
                 </form>
-            </div>
-            <div class="col-lg-1">
-
             </div>
           </div>
       </div>

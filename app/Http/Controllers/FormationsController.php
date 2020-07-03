@@ -51,7 +51,6 @@ class FormationsController extends Controller
 
         for($var=0; $var < count($request->agent_id); $var++)
          {
-
             $formation->agents()->attach([$request->agent_id[$var]]);
          }
 

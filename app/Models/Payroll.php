@@ -13,6 +13,7 @@ class Payroll extends Model
         'net_a_payer',
         'agent_id'
     ];
+    protected $dates = ['mois'];
 
     public function agent()
     {

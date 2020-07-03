@@ -67,7 +67,7 @@
                  @endforeach
             </tbody>
             </table>
-            <div class="btn-group btn-group-sm" style="position: relative; left: 900px">
+            <div class="btn-group btn-group-sm" style="position: relative; left: 945px">
                 <a href="{{ route('affectationAvantages.index') }}" class="btn btn-primary" style="float: none;margin: 5px;">
                     <span class="fas fa-fw fa-arrow-left"></span>Retour
                 </a>

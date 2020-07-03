@@ -41,7 +41,7 @@
                                         <label for="">Au :</label>
                                         <input id="" type="date" class="form-control" name="fin_mois" value="" placeholder="">
                                     </div>
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-3 mb-sm-0" >
                                         <label for="">Veillez sélectionner les agents :</label>
                                         <select id='custom-headers' class="form-control searchable" name="agent_id[]" multiple='multiple'>
                                             @foreach ($agents as $agent)
@@ -89,4 +89,5 @@
     <script type="text/javascript" src="{{ asset('vendor/multiselect/js/jquery.quicksearch.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendor/select2/js/select2.full.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendor/select2/js/select2-custom.js') }}"></script>
+
 @endsection

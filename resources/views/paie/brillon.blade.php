@@ -229,7 +229,6 @@
 
                     var p_af = 0;
                     response.data.abattements.forEach(element => {
-
                         if(response.data.nb_charges == element.nombre_charge)
                             {
                                 $('#abattement').val(element.pourcentage);

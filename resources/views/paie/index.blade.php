@@ -31,10 +31,10 @@
                 <tr>
                     <th>Matricule</th>
                     <th>Nom et Prénom</th>
-                    <th>Fonction</th>
                     <th>Mois</th>
                     <th>Salaire Net</th>
-                    <th>Modifier</th>
+                    <th>Détail</th>
+                    <th>Imprimer</th>
                     <th>Supprimer</th>
                 </tr>
             </thead>
@@ -43,21 +43,25 @@
                 <tr>
                     <td><span>{{ $payroll->agent->matricule }}</span></td>
                     <td><span>{{ $payroll->agent->nom.' '.$payroll->agent->prenom}}</span></td>
-                    <td><span>{{ $payroll->agent->fonction }}</span></td>
-                    <td><span>{{ $payroll->mois }}</span></td>
-                    <td><span>{{ $payroll->net_a_payer }}</span></td>
+                    <td><span>{{ $payroll->mois->format('F Y') }}</span></td>
+                    <td><span>{{ $payroll->net_a_payer.' '.'Franc CFA' }}</span></td>
                     <td>
-                        <a href="" class="btn btn-warning">
-                            <span class="fas fa-fw fa-edit"></span>
+                        <a href="{{ route('show_payroll', $payroll->id) }}" class="btn btn-warning">
+                            <span class="fas fa-fw fa-eye"></span>
                         </a>
                    </td>
+                   <td>
+                        <a href="" class="btn btn-primary">
+                            <span class="fas fa-fw fa-print"></span>
+                        </a>
+                    </td>
                     <td>
-                        <form method="POST" action="" id="">
+                        <form method="POST" action="{{ route('paie.destroy', $payroll) }}" id="form{{ $payroll->id }}">
 
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
 
-                            <button type="button" onclick="" class="btn btn-danger" >
+                            <button type="button" onclick="confirmation('#form{{ $payroll->id }}')" class="btn btn-danger" >
                                 <span class="fas fa-fw fa-trash"></span>
                             </button>
                         </form>
