@@ -51,7 +51,7 @@
                         </a>
                    </td>
                    <td>
-                        <a href="" class="btn btn-primary">
+                        <a href="{{ route('print_payroll', $payroll->id) }}" class="btn btn-primary">
                             <span class="fas fa-fw fa-print"></span>
                         </a>
                     </td>

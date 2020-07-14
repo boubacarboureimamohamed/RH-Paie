@@ -123,10 +123,18 @@
         </div>
         <!-- end of col-lg-12 -->
 
-        <div class="btn-group btn-group-sm" style="position: relative; left: 940px">
-            <a href="{{ route('paie.index') }}" class="btn btn-primary" style="float: none;margin: 5px;">
-                <span class="fas fa-fw fa-arrow-left"></span>Retour
-            </a>
+        <div style="text-align: center;">
+            <div class="btn-group btn-group-sm">
+                <a href="{{ route('paie.index') }}" class="btn btn-default" style="float: none;margin: 5px;">
+                    <span class="fas fa-fw fa-arrow-left"></span>Retour
+                </a>
+            </div>
+
+            <div class="btn-group btn-group-sm"">
+                <a href="{{ route('print_payroll', $payroll->id) }}" class="btn btn-primary">
+                    <span class="fas fa-fw fa-print"></span>Imprimer
+                </a>
+            </div>
         </div>
 
     </div>

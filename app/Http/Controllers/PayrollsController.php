@@ -10,6 +10,8 @@ use App\Models\Charge;
 use App\Models\Contrat;
 use App\Models\Impot;
 use App\Models\Payroll;
+use Barryvdh\DomPDF\Facade as PDF;
+
 use Illuminate\Http\Request;
 
 class PayrollsController extends Controller
@@ -225,6 +227,117 @@ class PayrollsController extends Controller
         $nb_charges = Charge::where('agent_id', '=', $payroll->agent->id)->count();
         $bases_imposables = AffectationAvantage::where('agent_id', '=', $payroll->agent->id)->with('avantage')->get();
         return view('paie.show', compact('payroll', 'contrat', 'nb_charges', 'bases_imposables'));
+
+    }
+
+
+    public function printPayroll($id)
+    {
+        $payroll = Payroll::find($id);
+
+        $tableau_bases_imposables = [];
+        $pourcentage_a_fam = 0;
+        $salaires_bases = 0;
+        $total_bases_imposables = 0;
+        $somme_sb_tbi = 0;
+        $somme_sb_tbi_cnss = 0;
+        $somme_sb_tbi_cnss_aprof = 0;
+        $somme_sb_tbi_cnss_aprof_afam = 0;
+        $pourcentage_iuts = 0;
+        $somme_sb_tbi_cnss_aprof_afam_iuts = 0;
+
+        $taux_iuts = Impot::all();
+        $abattements = Abattement::all();
+
+        $a = 0;
+        $b = 0;
+        $c = 0;
+        $x = 0;
+        $y = 0;
+        $z = 0;
+        $somme_bi = 0;
+        $somme_cnss = 0;
+        $somme_iuts = 0;
+        $somme_a_fam = 0;
+        $somme_a_prof = 0;
+
+        $contrat = Contrat::where('agent_id', '=', $payroll->agent->id)->with('poste')->orderByDesc('date_debut_contrat')->first();
+        $nb_charges = Charge::where('agent_id', '=', $payroll->agent->id)->count();
+        $bases_imposables = AffectationAvantage::where('agent_id', '=', $payroll->agent->id)->with('avantage')->get();
+
+        $tableau_bases_imposables[] = $bases_imposables;
+        $salaires_bases = $contrat->salaire_base;
+
+        foreach($bases_imposables as $bases_imposable)
+            {
+                $somme_bi = $somme_bi + $bases_imposable->montant;
+            }
+        $total_bases_imposables = $somme_bi;
+
+
+                $x = $somme_bi + $salaires_bases;
+
+        $somme_sb_tbi = $x;
+
+
+                $somme_cnss = (($somme_sb_tbi * 5.25) / 100);
+
+        $somme_sb_tbi_cnss = ($somme_sb_tbi) - ($somme_cnss);
+
+
+                $somme_a_prof = (($somme_sb_tbi_cnss * 15) / 100);
+
+        $somme_sb_tbi_cnss_aprof = ($somme_sb_tbi_cnss) - ($somme_a_prof);
+
+        foreach($abattements as $abattement)
+            {
+                        $y = $nb_charges;
+
+                if($abattement->nombre_charge == $y)
+                    {
+                        $z = $abattement->pourcentage;
+                    }
+            }
+        $pourcentage_a_fam = $z;
+
+
+                        $a = $pourcentage_a_fam;
+
+                $somme_a_fam = (($somme_sb_tbi_cnss_aprof * $a) / 100);
+
+        $somme_sb_tbi_cnss_aprof_afam = ($somme_sb_tbi_cnss_aprof) - ($somme_a_fam);
+
+        foreach($taux_iuts as $tranche)
+            {
+
+                        $b = $somme_sb_tbi_cnss_aprof_afam;
+
+                if($b >= $tranche->minimum && $b <= $tranche->maximum)
+                    {
+                        $c = $tranche->taux;
+                    }
+            }
+        $pourcentage_iuts = $c;
+
+
+                        $somme_iuts = (($somme_sb_tbi_cnss_aprof_afam * $pourcentage_iuts) / 100);
+
+
+        $somme_sb_tbi_cnss_aprof_afam_iuts = ($somme_sb_tbi_cnss_aprof_afam) - ($somme_iuts);
+
+        /* dd($abattements, $taux_iuts, $tableau_contrats, $tableau_bases_imposables,
+                 $nb_charges, $pourcentage_a_fam, $salaires_bases,
+                 $total_bases_imposables, $somme_sb_tbi, $somme_sb_tbi_cnss,
+                 $somme_sb_tbi_cnss_aprof, $somme_sb_tbi_cnss_aprof_afam,
+                $pourcentage_iuts, $somme_sb_tbi_cnss_aprof_afam_iuts); */
+
+        $pdf = PDF::loadView('paie.pdf', compact('payroll', 'contrat', 'nb_charges', 'bases_imposables',
+         'total_bases_imposables', 'somme_sb_tbi', 'somme_sb_tbi_cnss', 'somme_sb_tbi_cnss_aprof', 'somme_cnss',
+         'somme_a_prof', 'somme_a_fam', 'somme_sb_tbi_cnss_aprof_afam', 'pourcentage_iuts',
+         'somme_iuts', 'somme_sb_tbi_cnss_aprof_afam_iuts'))->setPaper('a4', $oriantation = 'portrait');
+
+         $filename = 'Bulletin_Paie_'.$payroll->agent->matricule;
+        return $pdf->stream($filename.'.pdf');
 
     }
 

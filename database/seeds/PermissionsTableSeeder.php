@@ -13,21 +13,21 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         Permission::create([
-            'name' => "creer_user" ]);
+            'name' => "create_user" ]);
 
         Permission::create([
-            'name' => "editer_user"]);
+            'name' => "update_user"]);
 
         Permission::create([
-            'name' => "supprimer_user" ]);
+            'name' => "delete_user" ]);
 
         Permission::create([
-            'name' => "creer_role" ]);
+            'name' => "create_role" ]);
 
         Permission::create([
-            'name' => "editer_role"]);
+            'name' => "update_role"]);
 
         Permission::create([
-            'name' => "supprimer_role" ]);
+            'name' => "delete_role" ]);
     }
 }

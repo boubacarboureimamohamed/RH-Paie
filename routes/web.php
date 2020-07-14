@@ -79,5 +79,7 @@ Route::get('getData', 'PayrollsController@getData');
 
 Route::get('bulletin_paie/{id}', 'PayrollsController@showPayroll')->name('show_payroll');
 
+Route::get('imprimer_bulletin_paie/{id}', 'PayrollsController@printPayroll')->name('print_payroll');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
