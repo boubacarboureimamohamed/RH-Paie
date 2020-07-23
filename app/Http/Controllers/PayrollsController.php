@@ -8,6 +8,7 @@ use App\Models\AffectationAvantage;
 use App\Models\Agent;
 use App\Models\Charge;
 use App\Models\Contrat;
+use App\Models\Cotisation;
 use App\Models\Impot;
 use App\Models\Payroll;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -61,6 +62,7 @@ class PayrollsController extends Controller
 
         $taux_iuts = Impot::all();
         $abattements = Abattement::all();
+        $cotisations_cnss_anpe = Cotisation::all();
 
         for($var=0; $var < count($request->agent_id); $var++)
             {
@@ -70,6 +72,8 @@ class PayrollsController extends Controller
                 $x = 0;
                 $y = 0;
                 $z = 0;
+                $m = 0;
+                $n = 0;
                 $somme_bi = 0;
                 $somme_cnss = 0;
                 $somme_iuts = 0;
@@ -99,7 +103,19 @@ class PayrollsController extends Controller
 
                 foreach($somme_sb_tbi as $somme_sbtbi)
                     {
-                        $somme_cnss = ($somme_sbtbi) -(($somme_sbtbi * 5.25) / 100);
+                        foreach($cotisations_cnss_anpe as $cotisationscnss_anpe)
+                            {
+                                $m = $cotisationscnss_anpe->plafond_cnss_employe;
+                                $n = $cotisationscnss_anpe->taux_cnss_employe;
+                            }
+                            if($somme_sbtbi <= $m && $somme_sbtbi > 0)
+                                {
+                                    $somme_cnss = ($somme_sbtbi) - (($somme_sbtbi * $n) / 100);
+                                }
+                            if($somme_sbtbi > $m)
+                                {
+                                    $somme_cnss = ($somme_sbtbi) - (($m * $n) / 100);
+                                }
                     }
                 $somme_sb_tbi_cnss[] = $somme_cnss;
 
@@ -164,7 +180,7 @@ class PayrollsController extends Controller
 
             }
 
-            /* dd($abattements, $taux_iuts, $tableau_contrats, $tableau_bases_imposables,
+            /* dd($abattements, $taux_iuts, $cotisations_cnss_anpe, $tableau_contrats, $tableau_bases_imposables,
                  $tableau_nb_charges, $pourcentage_a_fam, $salaires_bases,
                  $total_bases_imposables, $somme_sb_tbi, $somme_sb_tbi_cnss,
                  $somme_sb_tbi_cnss_aprof, $somme_sb_tbi_cnss_aprof_afam,
@@ -248,6 +264,7 @@ class PayrollsController extends Controller
 
         $taux_iuts = Impot::all();
         $abattements = Abattement::all();
+        $cotisations_cnss_anpe = Cotisation::all();
 
         $a = 0;
         $b = 0;
@@ -255,11 +272,20 @@ class PayrollsController extends Controller
         $x = 0;
         $y = 0;
         $z = 0;
+        $m = 0;
+        $n = 0;
+        $cnss = 0;
         $somme_bi = 0;
         $somme_cnss = 0;
         $somme_iuts = 0;
         $somme_a_fam = 0;
         $somme_a_prof = 0;
+        $cotisation_cnss = 0;
+        $cotisation_anpe = 0;
+        $t_cnss_employeur = 0;
+        $p_cnss_employeur = 0;
+        $t_anpe_employeur = 0;
+        $p_anpe_employeur = 0;
 
         $contrat = Contrat::where('agent_id', '=', $payroll->agent->id)->with('poste')->orderByDesc('date_debut_contrat')->first();
         $nb_charges = Charge::where('agent_id', '=', $payroll->agent->id)->count();
@@ -279,11 +305,45 @@ class PayrollsController extends Controller
 
         $somme_sb_tbi = $x;
 
+        foreach($cotisations_cnss_anpe as $cotisationscnss_anpe)
+        {
+            $m = $cotisationscnss_anpe->plafond_cnss_employe;
+            $n = $cotisationscnss_anpe->taux_cnss_employe;
+            $t_cnss_employeur = $cotisationscnss_anpe->taux_cnss_employeur;
+            $p_cnss_employeur = $cotisationscnss_anpe->plafond_cnss_employeur;
+            $t_anpe_employeur = $cotisationscnss_anpe->taux_anpe;
+            $p_anpe_employeur = $cotisationscnss_anpe->plafond_anpe;
+        }
+        if($somme_sb_tbi <= $m && $somme_sb_tbi > 0)
+            {
+                $somme_cnss = ($somme_sb_tbi) - (($somme_sb_tbi * $n) / 100);
+                $cnss = (($somme_sb_tbi * $n) / 100);
+            }
+        if($somme_sb_tbi > $m)
+            {
+                $somme_cnss = ($somme_sb_tbi) - (($m * $n) / 100);
+                $cnss = (($m * $n) / 100);
+            }
 
-                $somme_cnss = (($somme_sb_tbi * 5.25) / 100);
+        if($somme_sb_tbi <= $p_cnss_employeur && $somme_sb_tbi > 0)
+            {
+                $cotisation_cnss = (($somme_sb_tbi * $t_cnss_employeur) / 100);
+            }
+        if($somme_sb_tbi > $p_cnss_employeur)
+            {
+                $cotisation_cnss = (($p_cnss_employeur * $t_cnss_employeur) / 100);
+            }
 
-        $somme_sb_tbi_cnss = ($somme_sb_tbi) - ($somme_cnss);
+        if($somme_sb_tbi <= $p_anpe_employeur && $somme_sb_tbi > 0)
+            {
+                $cotisation_anpe = (($somme_sb_tbi * $t_anpe_employeur) / 100);
+            }
+        if($somme_sb_tbi > $p_anpe_employeur)
+            {
+                $cotisation_anpe = (($p_anpe_employeur * $t_anpe_employeur) / 100);
+            }
 
+        $somme_sb_tbi_cnss = $somme_cnss;
 
                 $somme_a_prof = (($somme_sb_tbi_cnss * 15) / 100);
 
@@ -333,8 +393,8 @@ class PayrollsController extends Controller
 
         $pdf = PDF::loadView('paie.pdf', compact('payroll', 'contrat', 'nb_charges', 'bases_imposables',
          'total_bases_imposables', 'somme_sb_tbi', 'somme_sb_tbi_cnss', 'somme_sb_tbi_cnss_aprof', 'somme_cnss',
-         'somme_a_prof', 'somme_a_fam', 'somme_sb_tbi_cnss_aprof_afam', 'pourcentage_iuts',
-         'somme_iuts', 'somme_sb_tbi_cnss_aprof_afam_iuts'))->setPaper('a4', $oriantation = 'portrait');
+         'somme_a_prof', 'somme_a_fam', 'somme_sb_tbi_cnss_aprof_afam', 'pourcentage_iuts', 'cnss', 'cotisation_cnss', 'cotisation_anpe',
+         'somme_iuts', 'somme_sb_tbi_cnss_aprof_afam_iuts', 't_cnss_employeur', 't_anpe_employeur'))->setPaper('a4', $oriantation = 'portrait');
 
          $filename = 'Bulletin_Paie_'.$payroll->agent->matricule;
         return $pdf->stream($filename.'.pdf');

@@ -21,31 +21,41 @@
       <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-              <div class="p-5">
                 <form class="user" method="POST" action="{{ route('contrats.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">
                           <label for="">Référence Du Contrat : </label>
-                        <input id="" type="text" class="form-control" name="ref_contrat" value="" placeholder="Veillez entrer la référence du contrat">
+                        <input id="" type="text" class="form-control @error('ref_contrat') is-invalid @enderror" name="ref_contrat" value="" placeholder="Veillez entrer la référence du contrat">
+                        @error('ref_contrat')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                       </div>
                       <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Référence Du Contrat :</label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile01" name="description">
+                            <input type="file" class="custom-file-input @error('description') is-invalid @enderror" id="inputGroupFile01" name="description">
                             <label class="custom-file-label" for="inputGroupFile01">Veillez choisir le fichier</label>
+                            @error('description')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                       </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="">Matricule :</label>
-                            <select class="multisteps-form__select form-control" onchange="change()" id="select" name="agent_id">
-                                <option selected="selected">***Sélectionnez***</option>
-                                    @foreach ($agents as $agent)
-                                <option data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{ $agent->id }}">{{ $agent->matricule }}</option>
-                                    @endforeach
+                            <select  name="agent_id" onchange="change()" id="select" value="" data-toggle="tooltip" class="form-control @error('agent_id') is-invalid @enderror">
+                                <option value="">*************Selectionner*************</option>
+                              @foreach($agents as $agent)
+                                <option data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{  $agent->id   }}">
+                                    {{ $agent->matricule }}
+                                </option>
+                              @endforeach
                             </select>
+                            @error('agent_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="inputEmail4">Nom et Prénom : </label>
@@ -55,26 +65,40 @@
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="">Titre De Poste :</label>
-                            <select class="multisteps-form__select form-control" id="" name="poste_id">
-                              <option selected="selected">***Sélectionnez***</option>
-                                  @foreach ($postes as $poste)
-                              <option value="{{ $poste->id }}">{{ $poste->intitule }}</option>
-                                  @endforeach
-                          </select>
+                            <select  name="poste_id" value="" data-toggle="tooltip" class="form-control @error('poste_id') is-invalid @enderror">
+                                <option value="">*************Selectionner*************</option>
+                              @foreach($postes as $poste)
+                                <option value="{{  $poste->id   }}">
+                                    {{ $poste->intitule }}
+                                </option>
+                              @endforeach
+                            </select>
+                            @error('poste_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="inputEmail4">Salaire De Base : </label>
-                            <input id="" type="text" class="form-control" name="salaire_base" value="" placeholder="Veillez entrer le salaire de base de l'agent">
+                            <input id="" type="text" class="form-control @error('salaire_base') is-invalid @enderror" name="salaire_base" value="" placeholder="Veillez entrer le salaire de base de l'agent">
+                            @error('salaire_base')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="">Date Début :</label>
-                            <input id="" type="date" class="form-control" name="date_debut_contrat" value="" placeholder="Veillez entrer la date début du contrat">
+                            <input id="" type="date" class="form-control @error('date_debut_contrat') is-invalid @enderror" name="date_debut_contrat" value="" placeholder="Veillez entrer la date début du contrat">
+                            @error('date_debut_contrat')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="inputEmail4">Date Fin : </label>
-                            <input id="" type="date" class="form-control" name="date_fin_contrat" value="" autofocus placeholder="Veillez entrer la date fin du contrat">
+                            <input id="" type="date" class="form-control @error('date_fin_contrat') is-invalid @enderror" name="date_fin_contrat" value="" autofocus placeholder="Veillez entrer la date fin du contrat">
+                            @error('date_fin_contrat')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                   <hr>
@@ -98,7 +122,6 @@
                    </div>
                   <hr>
                 </form>
-              </div>
             </div>
           </div>
       </div>

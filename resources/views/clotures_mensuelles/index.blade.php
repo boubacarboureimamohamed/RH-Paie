@@ -9,7 +9,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Liste des employés') }}</strong></h1>
+    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Liste des clôtures') }}</strong></h1>
 </div>
 
 <!-- Content Row -->
@@ -21,56 +21,37 @@
     <div class="card mb-4 py-3 border-left-primary">
       <div class="card-body">
         <div class="btn-group btn-group-sm">
-            <a href="{{ route('agents.create') }}" class="btn btn-success" style="float: none;margin: 5px;">
-                <span class="fas fa-fw fa-plus"></span>
-            </a>
+               <a href="{{ route('clotures_mensuelles.create') }}" class="btn btn-success" style="float: none;margin: 5px;">
+                   <span class="fas fa-fw fa-plus"></span>
+               </a>
         </div>
         <div class="dt-responsive table-responsive">
             <table id="table" class="table table-striped table-bordered nowrap">
             <thead>
                 <tr>
-                    <th>Matricule</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Référence Contrat</th>
+                    <th>Numéro</th>
+                    <th>Date Clôture</th>
                     <th>Détail</th>
-                    <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
             </thead>
             <tbody>
-                 @foreach ($agents as $agent)
+                 @foreach ($clotures as $cloture)
                  <tr>
-                    <td>{{ $agent->matricule }}</td>
-                    <td>{{ $agent->nom }}</td>
-                    <td>{{ $agent->prenom }}</td>
-                        @if ($agent->contrats->last())
+                    <td></td>
+                    <td></td>
                     <td>
-                        <a href="{{ $agent->contrats->last()->description }}" class="btn btn-link">Visualiser</a>
-                    </td>
-                        @else
-                    <td>
-
-                    </td>
-                        @endif
-                    {{-- <td>{{ $agent->contrats->last()->description ?? ' ' }}</td> --}}
-                    <td>
-                        <a href="" class="btn btn-warning">
-                            <span class="fas fa-fw fa-eye"></span>
+                        <a href="{{ route('clotures_mensuelles.edit', $cloture) }}" class="btn btn-warning">
+                            <span class="fas fa-fw fa-edit"></span>
                         </a>
                    </td>
-                   <td>
-                       <a href="{{ route('agents.edit', $agent) }}" class="btn btn-primary">
-                           <span class="fas fa-fw fa-edit"></span>
-                       </a>
-                  </td>
                     <td>
-                        <form method="POST" action="{{ route('agents.destroy', $agent) }}" id="form{{ $agent->id }}">
+                        <form method="POST" action="{{ route('clotures_mensuelles.destroy', $cloture) }}" id="form{{ $cloture->id }}">
 
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
 
-                            <button type="button" onclick="confirmation('#form{{ $agent->id }}')" class="btn btn-danger" >
+                            <button type="button" onclick="confirmation('#form{{ $cloture->id }}')" class="btn btn-danger" >
                                 <span class="fas fa-fw fa-trash"></span>
                             </button>
                         </form>
@@ -79,7 +60,7 @@
                  @endforeach
             </tbody>
             </table>
-            </div>
+        </div>
       </div>
     </div>
 

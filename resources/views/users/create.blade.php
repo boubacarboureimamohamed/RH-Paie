@@ -27,12 +27,13 @@
 
             </div>
             <div class="col-lg-10">
-              <div class="p-5">
+              <div>
                 <form class="user" method="POST" action="{{ route('register') }}">
                     @csrf
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input id="firstname" type="text" class="form-control form-control-user @error('firstname') is-invalid @enderror" name="firstname" value="{{ old('firstname') }}" required autocomplete="firstname" autofocus placeholder="Veillez entrer le nom">
+                        <label for="inputEmail4">Nom : </label>
+                      <input id="firstname" type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" value="{{ old('firstname') }}" required autocomplete="firstname" autofocus placeholder="Veillez entrer le nom">
                         @error('firstname')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -40,7 +41,8 @@
                         @enderror
                     </div>
                     <div class="col-sm-6">
-                        <input id="secondname" type="text" class="form-control form-control-user @error('secondname') is-invalid @enderror" name="secondname" value="{{ old('secondname') }}" required autocomplete="secondname" autofocus placeholder="Veillez entrer le prénom">
+                        <label for="inputEmail4">Prénom : </label>
+                        <input id="secondname" type="text" class="form-control  @error('secondname') is-invalid @enderror" name="secondname" value="{{ old('secondname') }}" required autocomplete="secondname" autofocus placeholder="Veillez entrer le prénom">
                         @error('secondname')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -49,7 +51,8 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <input id="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Veillez enter l'adresse mail s'il vous plaît!">
+                    <label for="inputEmail4">Email : </label>
+                    <input id="email" type="email" class="form-control  @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Veillez enter l'adresse mail s'il vous plaît!">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -58,7 +61,8 @@
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Confirmer mot de passe">
+                        <label for="inputEmail4">Mot de pass : </label>
+                        <input id="password" type="password" class="form-control  @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Confirmer mot de passe">
                         @error('password')
                            <span class="invalid-feedback" role="alert">
                                <strong>{{ $message }}</strong>
@@ -66,7 +70,8 @@
                        @enderror
                     </div>
                     <div class="col-sm-6">
-                      <input id="password-confirm" type="password" class="form-control form-control-user" name="password_confirmation" required autocomplete="new-password" placeholder="Confirmer mot de passe">
+                        <label for="inputEmail4">Confirmer  mot de pass: </label>
+                      <input id="password-confirm" type="password" class="form-control " name="password_confirmation" required autocomplete="new-password" placeholder="Confirmer mot de passe">
                     </div>
                   </div>
                   <div class="form-group">

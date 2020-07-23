@@ -21,13 +21,12 @@
       <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-              <div class="p-5">
                 <form class="user" method="POST" action="{{ route('conges.store') }}">
                     @csrf
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Matricule :</label>
-                        <select  name="agent_id" onchange="change()" id="select" value="" data-toggle="tooltip" class="form-control">
+                        <select  name="agent_id" onchange="change()" id="select" value="" data-toggle="tooltip" class="form-control @error('agent_id') is-invalid @enderror">
                             <option value="">*************Selectionner*************</option>
                           @foreach($agents as $agent)
                             <option data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{  $agent->id   }}">
@@ -35,6 +34,9 @@
                             </option>
                           @endforeach
                         </select>
+                        @error('agent_id')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Nom et Prénom</label>
@@ -44,7 +46,7 @@
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Type De Congé : </label>
-                        <select  name="type_conge_id" value="" data-toggle="tooltip" class="form-control">
+                        <select  name="type_conge_id" value="" data-toggle="tooltip" class="form-control @error('type_conge_id') is-invalid @enderror">
                             <option value="">*************Selectionner*************</option>
                           @foreach($typeconges as $typeconge)
                             <option value="{{  $typeconge->id   }}">
@@ -52,16 +54,25 @@
                             </option>
                           @endforeach
                         </select>
+                        @error('type_conge_id')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Date Début : </label>
-                        <input id="" type="date" class="form-control" name="date_debut_conge" value="" autofocus placeholder="Veillez entrer la date début du congé">
+                        <input id="" type="date" class="form-control @error('date_debut_conge') is-invalid @enderror" name="date_debut_conge" value="{{ old('date_debut_conge') }}" autofocus placeholder="Veillez entrer la date début du congé">
+                        @error('date_debut_conge')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                       <label for="">Date Fin :</label>
-                      <input id="" type="date" class="form-control" name="date_fin_conge" value="" autofocus placeholder="Veillez entrer la date fin du congé">
+                      <input id="" type="date" class="form-control @error('date_fin_conge') is-invalid @enderror" name="date_fin_conge" value="{{ old('date_fin_conge') }}" autofocus placeholder="Veillez entrer la date fin du congé">
+                      @error('date_fin_conge')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
 
@@ -73,7 +84,7 @@
 
                     </div>
                     <div class="col-lg-3">
-                    <a href="{{ route('affectations.index') }}" class="btn btn-default btn-user btn-block">
+                    <a href="{{ route('conges.index') }}" class="btn btn-default btn-user btn-block">
                             {{ ('Annuler') }}
                     </a>
                     </div>
@@ -88,7 +99,6 @@
                    </div>
                   <hr>
                 </form>
-              </div>
             </div>
           </div>
       </div>

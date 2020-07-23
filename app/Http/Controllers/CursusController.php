@@ -38,6 +38,16 @@ class CursusController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+
+            'ecole'=>'required',
+            'date_debut'=>'required',
+            'date_fin'=>'required',
+            'diplome'=>'required',
+            'agent_id'=>'required'
+
+        ]);
+
             for($var=0; $var < count($request->ecole); $var++)
          {
 
@@ -89,6 +99,15 @@ class CursusController extends Controller
      */
     public function update(Request $request, Cursu $cursus)
     {
+        $this->validate($request, [
+
+            'ecole'=>'required',
+            'date_debut'=>'required',
+            'date_fin'=>'required',
+            'diplome'=>'required',
+            'agent_id'=>'required'
+
+        ]);
 
         $agent = $request->agent_id;
         $cursus->update([

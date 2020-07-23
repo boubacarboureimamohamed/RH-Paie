@@ -38,6 +38,14 @@ class AbsencesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+
+            'agent_id'=>'required',
+            'nombre_jour'=>'required|integer',
+            'motif_absence'=>'required'
+
+        ]);
+
         $absence  = Absence::create([
 
             'agent_id'=>$request->agent_id,
@@ -83,6 +91,14 @@ class AbsencesController extends Controller
      */
     public function update(Request $request, Absence $absence)
     {
+        $this->validate($request, [
+
+            'agent_id'=>'required',
+            'nombre_jour'=>'required|integer',
+            'motif_absence'=>'required'
+
+        ]);
+
         $absence->update([
 
             'agent_id'=>$request->agent_id,

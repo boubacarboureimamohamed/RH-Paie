@@ -32,7 +32,8 @@
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                   <div class="form-group">
-                    <input id="name" type="text" class="form-control form-control-user" name="name" value="{{ $role->name }}" required autocomplete="name" placeholder="Veillez enter le rôle ">
+                    <label for="inputEmail4">Rôle : </label>
+                    <input id="name" type="text" class="form-control" name="name" value="{{ $role->name }}" required autocomplete="name" placeholder="Veillez enter le rôle ">
                   </div>
                   <div class="form-group">
                     <!-- Multi-select start -->

@@ -31,8 +31,8 @@
                   <div class="form-row">
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Matricule : </label>
-                        <input class="multisteps-form__input form-control" type="text" disabled name="matricule" value="{{ $cursu->agent->matricule }}" placeholder="Veillez entrer le matricule"/>
-                        <input class="multisteps-form__input form-control" type="hidden" name="agent_id" value="{{ $cursu->agent->id }}" placeholder="Veillez entrer le matricule"/>
+                        <input class="form-control" type="text" disabled name="matricule" value="{{ $cursu->agent->matricule }}" placeholder="Veillez entrer le matricule"/>
+                        <input class="form-control" type="hidden" name="agent_id" value="{{ $cursu->agent->id }}" placeholder="Veillez entrer le matricule"/>
                     </div>
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Nom et Prénom : </label>

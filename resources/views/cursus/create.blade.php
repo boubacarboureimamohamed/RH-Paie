@@ -27,12 +27,15 @@
                     <div class="form-row">
                         <div class="form-group col-12 col-sm-6">
                             <label for="inputEmail4">Matricule : </label>
-                            <select class="multisteps-form__select form-control" onchange="change()" id="select" name="agent_id">
+                            <select class="form-control @error('agent_id') is-invalid @enderror" onchange="change()" id="select" name="agent_id">
                                 <option selected="selected">***Sélectionnez***</option>
                                     @foreach ($agents as $agent)
                                 <option data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{ $agent->id }}">{{ $agent->matricule }}</option>
                                     @endforeach
                             </select>
+                            @error('agent_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group col-12 col-sm-6">
                             <label for="inputEmail4">Nom et Prénom : </label>
@@ -55,7 +58,10 @@
                                     <div class="">
                                         <div class="form-group form-primary">
                                             <div class="input-group">
-                                                <input type="text" name="ecole[]" title="" data-toggle="tooltip" value="" id="" class="form-control" placeholder="Ecole / Institut">
+                                                <input type="text" name="ecole[]" title="" data-toggle="tooltip" value="" id="" class="form-control @error('ecole') is-invalid @enderror" placeholder="Ecole / Institut">
+                                                @error('ecole')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -64,7 +70,10 @@
                                     <div class="">
                                         <div class="form-group form-primary">
                                             <div class="input-group">
-                                                <input type="date" name="date_debut[]" title="" data-toggle="tooltip" value="" id="" class="form-control" placeholder="Date Début">
+                                                <input type="date" name="date_debut[]" title="" data-toggle="tooltip" value="" id="" class="form-control @error('date_debut') is-invalid @enderror" placeholder="Date Début">
+                                                @error('date_debut')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -73,7 +82,10 @@
                                     <div class="">
                                         <div class="form-group form-primary">
                                             <div class="input-group">
-                                                <input type="date" name="date_fin[]" title="" data-toggle="tooltip" value="" id="" class="form-control" placeholder="Date Fin">
+                                                <input type="date" name="date_fin[]" title="" data-toggle="tooltip" value="" id="" class="form-control @error('date_fin') is-invalid @enderror" placeholder="Date Fin">
+                                                @error('date_fin')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
@@ -82,7 +94,10 @@
                                     <div class="">
                                         <div class="form-group form-primary">
                                             <div class="input-group">
-                                                <input type="text" name="diplome[]" title="" data-toggle="tooltip" value="" id="" class="form-control" placeholder="Diplôme / Certificat">
+                                                <input type="text" name="diplome[]" title="" data-toggle="tooltip" value="" id="" class="form-control @error('diplome') is-invalid @enderror" placeholder="Diplôme / Certificat">
+                                                @error('diplome')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>

@@ -19,7 +19,8 @@ class AgentsController extends Controller
      */
     public function index()
     {
-        $agents = Agent::all();
+        $agents = Agent::with('contrats')->get();
+        //dd($agents);
         return view('agents.index', compact('agents'));
     }
 
@@ -44,6 +45,23 @@ class AgentsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+
+            'matricule'=>'required',
+            'nom'=>'required',
+            'prenom'=>'required',
+            'date_naiss'=>'required',
+            'lieu_naiss'=>'required',
+            'telephone'=>'required',
+            'email'=>'required',
+            'nationalite'=>'required',
+            'adresse'=>'required',
+            'sexe'=>'required',
+            'fonction'=>'required',
+            'situation_matrimoniale'=>'required'
+
+        ]);
+
         $agent = Agent::create([
             'matricule'=>$request->matricule,
             'nom'=>$request->nom,
@@ -128,6 +146,23 @@ class AgentsController extends Controller
      */
     public function update(Request $request, Agent $agent)
     {
+        $this->validate($request, [
+
+            'matricule'=>'required',
+            'nom'=>'required',
+            'prenom'=>'required',
+            'date_naiss'=>'required',
+            'lieu_naiss'=>'required',
+            'telephone'=>'required',
+            'email'=>'required',
+            'nationalite'=>'required',
+            'adresse'=>'required',
+            'sexe'=>'required',
+            'fonction'=>'required',
+            'situation_matrimoniale'=>'required'
+
+        ]);
+
         $agent->update([
 
             'matricule'=>$request->matricule,

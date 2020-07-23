@@ -40,6 +40,16 @@ class CongesController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request, [
+
+            'agent_id'=>'required',
+            'type_conge_id'=>'required',
+            'date_fin_conge'=>'required',
+            'date_debut_conge'=>'required'
+
+        ]);
+
         Conge::create([
 
             'agent_id'=>$request->agent_id,
@@ -87,6 +97,15 @@ class CongesController extends Controller
      */
     public function update(Request $request, Conge $conge)
     {
+        $this->validate($request, [
+
+            'agent_id'=>'required',
+            'type_conge_id'=>'required',
+            'date_fin_conge'=>'required',
+            'date_debut_conge'=>'required'
+
+        ]);
+
         $conge->update([
 
             'agent_id'=>$request->agent_id,

@@ -83,3 +83,7 @@ Route::get('imprimer_bulletin_paie/{id}', 'PayrollsController@printPayroll')->na
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::resource('cotisations_cnss_anpe', 'CotisationsController');
+
+Route::resource('clotures_mensuelles', 'ClotureMensuellesController');
+

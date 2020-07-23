@@ -63,7 +63,7 @@
         </a>
         <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ route('agents.index') }}">Liste employés</a>
+            <a class="collapse-item" href="{{ route('agents.index') }}">Liste des employés</a>
             <a class="collapse-item" href="{{ route('charges.index') }}">Les charges</a>
             <a class="collapse-item" href="{{ route('cursus.index') }}">Les cursus</a>
           </div>
@@ -77,11 +77,12 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePerso" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Dossier du personnel</span>
+          <span>Dossier Du Personnel</span>
         </a>
         <div id="collapsePerso" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{ route('affectations.index') }}">Les affectations</a>
+            <a class="collapse-item" href="{{ route('contrats.index') }} ">Les contrats</a>
           <a class="collapse-item" href="{{ route('formations.index') }}">Les formations</a>
           <a class="collapse-item" href="{{ route('missions.index') }}">Les missions</a>
           </div>
@@ -112,13 +113,13 @@
         <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePaie" aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-bookmark"></i>
-            <span>Gestion de la paie</span>
+            <span>Traitement Des Salaires</span>
         </a>
         <div id="collapsePaie" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('affectationAvantages.index') }}">Affectation des bases </a>
-                <a class="collapse-item" href="{{ route('contrats.index') }} ">Défition des contrats</a>
-                <a class="collapse-item" href="{{ route('paie.index') }}">Edition de la paie </a>
+                <a class="collapse-item" href="{{ route('affectationAvantages.index') }}">Affectation des rubriques </a>
+                <a class="collapse-item" href="{{ route('paie.index') }}">Edition des bulletins </a>
+                <a class="collapse-item" href="{{ route('clotures_mensuelles.index') }}">Clôture mensuelle</a>
             </div>
         </div>
         </li>
@@ -136,6 +137,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('abattements.index') }}">Les abattements</a>
                 <a class="collapse-item" href="{{ route('avantages.index') }}">Les bases imposables </a>
+                <a class="collapse-item" href="{{ route('cotisations_cnss_anpe.index') }}">Les taux ANPE/CNSS</a>
                 <a class="collapse-item" href="{{ route('impots.index') }}">Les taux IUTS</a>
                 <a class="collapse-item" href="{{ route('themes.index') }}">Les thèmes</a>
                 <a class="collapse-item" href="{{ route('postes.index') }}">Les postes</a>

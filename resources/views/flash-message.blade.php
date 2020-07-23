@@ -16,11 +16,6 @@
         @endif
 
 
-        @if ($errors->any())
-        swal('Erreur!', `@foreach($errors->all() as $error) {{ $error . "\n" }} @endforeach`, 'error')
-
-        @endif
-
 
     });
 

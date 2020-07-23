@@ -9,7 +9,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Liste des employés') }}</strong></h1>
+    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Les taux ANPE et CNSS') }}</strong></h1>
 </div>
 
 <!-- Content Row -->
@@ -21,7 +21,7 @@
     <div class="card mb-4 py-3 border-left-primary">
       <div class="card-body">
         <div class="btn-group btn-group-sm">
-            <a href="{{ route('agents.create') }}" class="btn btn-success" style="float: none;margin: 5px;">
+            <a href="{{ route('cotisations_cnss_anpe.create') }}" class="btn btn-success" style="float: none;margin: 5px;">
                 <span class="fas fa-fw fa-plus"></span>
             </a>
         </div>
@@ -29,48 +29,37 @@
             <table id="table" class="table table-striped table-bordered nowrap">
             <thead>
                 <tr>
-                    <th>Matricule</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Référence Contrat</th>
-                    <th>Détail</th>
+                    <th>Taux ANPE</th>
+                    <th>Plafond ANPE</th>
+                    <th>Taux CNSS employé</th>
+                    <th>Plafond CNSS employé</th>
+                    <th>Taux CNSS employeur</th>
+                    <th>Plafond CNSS employeur</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
             </thead>
             <tbody>
-                 @foreach ($agents as $agent)
+                 @foreach ($cotisations as $cotisation)
                  <tr>
-                    <td>{{ $agent->matricule }}</td>
-                    <td>{{ $agent->nom }}</td>
-                    <td>{{ $agent->prenom }}</td>
-                        @if ($agent->contrats->last())
+                    <td>{{ $cotisation->taux_anpe.' '.'%' }}</td>
+                    <td>{{ $cotisation->plafond_anpe.' '.'Franc CFA' }}</td>
+                    <td>{{ $cotisation->taux_cnss_employe.' '.'%' }}</td>
+                    <td>{{ $cotisation->plafond_cnss_employe.' '.'Franc CFA' }}</td>
+                    <td>{{ $cotisation->taux_cnss_employeur.' '.'%' }}</td>
+                    <td>{{ $cotisation->plafond_cnss_employeur.' '.'Franc CFA' }}</td>
                     <td>
-                        <a href="{{ $agent->contrats->last()->description }}" class="btn btn-link">Visualiser</a>
-                    </td>
-                        @else
-                    <td>
-
-                    </td>
-                        @endif
-                    {{-- <td>{{ $agent->contrats->last()->description ?? ' ' }}</td> --}}
-                    <td>
-                        <a href="" class="btn btn-warning">
-                            <span class="fas fa-fw fa-eye"></span>
+                        <a href="{{ route('cotisations_cnss_anpe.edit', $cotisation) }}" class="btn btn-primary">
+                            <span class="fas fa-fw fa-edit"></span>
                         </a>
                    </td>
-                   <td>
-                       <a href="{{ route('agents.edit', $agent) }}" class="btn btn-primary">
-                           <span class="fas fa-fw fa-edit"></span>
-                       </a>
-                  </td>
                     <td>
-                        <form method="POST" action="{{ route('agents.destroy', $agent) }}" id="form{{ $agent->id }}">
+                        <form method="POST" action="{{ route('cotisations_cnss_anpe.destroy', $cotisation) }}" id="form{{ $cotisation->id }}">
 
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
 
-                            <button type="button" onclick="confirmation('#form{{ $agent->id }}')" class="btn btn-danger" >
+                            <button type="button" onclick="confirmation('#form{{ $cotisation->id }}')" class="btn btn-danger" >
                                 <span class="fas fa-fw fa-trash"></span>
                             </button>
                         </form>
@@ -132,6 +121,6 @@
                 });
             }
 
-        </script>
+    </script>
 
 @endsection

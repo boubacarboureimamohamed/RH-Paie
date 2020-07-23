@@ -31,7 +31,8 @@
                 <form class="user" method="POST" action="{{ route('roles.store') }}">
                     @csrf
                   <div class="form-group">
-                    <input id="name" type="text" class="form-control form-control-user" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Veillez renseigner le nom du rôle ">
+                    <label for="inputEmail4">Rôle : </label>
+                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Veillez renseigner le nom du rôle ">
                   </div>
                   <div class="form-group">
                     <!-- Multi-select start -->

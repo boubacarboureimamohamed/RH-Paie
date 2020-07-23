@@ -28,16 +28,17 @@
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="">Matricule :</label>
-                            <select  name="agent_id" onchange="change()" id="select" value="" data-toggle="tooltip" class="form-control">
+                            <select  name="agent_id" onchange="change()" id="select" value="" data-toggle="tooltip" class="form-control @error('agent_id') is-invalid @enderror">
                                 <option value="">*************Selectionner*************</option>
                                 @foreach ($agents as $agent)
                                     <option @if($agent->id == $affectation->agent_id) {{ 'selected' }} @endif data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{  $agent->id   }}">
                                         {{ $agent->matricule }}
                                     </option>
                                 @endforeach
-
-
                             </select>
+                            @error('agent_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="">Nom et Prénom</label>
@@ -47,7 +48,7 @@
                       <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="">Service : </label>
-                            <select  name="service_id" value="" data-toggle="tooltip" class="form-control">
+                            <select  name="service_id" value="" data-toggle="tooltip" class="form-control @error('service_id') is-invalid @enderror">
                                 <option value="">*************Selectionner*************</option>
                               @foreach($services as $service)
                                 <option @if($service->id == $affectation->service_id) {{ 'selected' }} @endif value="{{  $service->id   }}">
@@ -55,10 +56,13 @@
                                 </option>
                               @endforeach
                             </select>
+                            @error('service_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="">Fonction : </label>
-                            <select  name="poste_id" value="" data-toggle="tooltip" class="form-control">
+                            <select  name="poste_id" value="" data-toggle="tooltip" class="form-control @error('poste_id') is-invalid @enderror">
                                 <option value="">*************Selectionner*************</option>
                               @foreach($postes as $poste)
                                 <option @if($poste->id == $affectation->poste_id) {{ 'selected' }} @endif value="{{  $poste->id   }}">
@@ -66,12 +70,18 @@
                                 </option>
                               @endforeach
                             </select>
+                            @error('poste_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                           <label for="">Date Affectation</label>
-                          <input id="" type="date" class="form-control" name="date_affectation" value="{{ $affectation->date_affectation }}" autofocus placeholder="Veillez entrer la date de la formation">
+                          <input id="" type="date" class="form-control @error('date_affectation') is-invalid @enderror" name="date_affectation" value="{{ $affectation->date_affectation }}" autofocus placeholder="Veillez entrer la date de la formation">
+                          @error('date_affectation')
+                             <div class="alert alert-danger">{{ $message }}</div>
+                          @enderror
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
 

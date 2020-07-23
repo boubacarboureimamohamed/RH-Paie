@@ -42,6 +42,14 @@ class AffectationsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+
+            'agent_id'=>'required',
+            'service_id'=>'required',
+            'poste_id'=>'required',
+            'date_affectation'=>'required'
+
+        ]);
 
         Affectation::create([
 
@@ -91,6 +99,15 @@ class AffectationsController extends Controller
      */
     public function update(Request $request, Affectation $affectation)
     {
+        $this->validate($request, [
+
+            'agent_id'=>'required',
+            'service_id'=>'required',
+            'poste_id'=>'required',
+            'date_affectation'=>'required'
+
+        ]);
+
         $affectation->update([
 
             'agent_id'=>$request->agent_id,

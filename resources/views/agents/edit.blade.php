@@ -28,69 +28,105 @@
                   <div class="form-row">
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Matricule : </label>
-                        <input class="multisteps-form__input form-control" type="text" name="matricule" value="{{ $agent->matricule }}" placeholder="Veillez entrer le matricule"/>
+                        <input class="multisteps-form__input form-control @error('matricule') is-invalid @enderror" type="text" name="matricule" value="{{ $agent->matricule }}" placeholder="Veillez entrer le matricule"/>
+                        @error('matricule')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group col-6 col-sm-6">
                         <label for="inputEmail4">Nom : </label>
-                        <input class="multisteps-form__input form-control" type="text" name="nom" value="{{ $agent->nom }}" placeholder="Veillez entrer le nom de lagent"/>
+                        <input class="multisteps-form__input form-control @error('nom') is-invalid @enderror" type="text" name="nom" value="{{ $agent->nom }}" placeholder="Veillez entrer le nom de lagent"/>
+                        @error('nom')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                   </div>
                   <div class="form-row">
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Prénom : </label>
-                        <input class="multisteps-form__input form-control" type="text" name="prenom" value="{{ $agent->prenom }}" placeholder="Veillez entrer le prénom de lagent"/>
+                        <input class="multisteps-form__input form-control @error('prenom') is-invalid @enderror" type="text" name="prenom" value="{{ $agent->prenom }}" placeholder="Veillez entrer le prénom de lagent"/>
+                        @error('prenom')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Date Naissance : </label>
-                        <input class="multisteps-form__input form-control" type="date" name="date_naiss" value="{{ $agent->date_naiss }}" placeholder="Veillez entrer la date de naissance"/>
+                        <input class="multisteps-form__input form-control @error('date_naiss') is-invalid @enderror" type="date" name="date_naiss" value="{{ $agent->date_naiss }}" placeholder="Veillez entrer la date de naissance"/>
+                        @error('date_naiss')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Lieu Naissance : </label>
-                        <input class="multisteps-form__input form-control" type="text" name="lieu_naiss" value="{{ $agent->lieu_naiss }}" placeholder="Veillez entrer le lieu de naissance"/>
+                        <input class="multisteps-form__input form-control @error('lieu_naiss') is-invalid @enderror" type="text" name="lieu_naiss" value="{{ $agent->lieu_naiss }}" placeholder="Veillez entrer le lieu de naissance"/>
+                        @error('lieu_naiss')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Nationalité : </label>
-                        <input class="multisteps-form__input form-control" type="text" name="nationalite" value="{{ $agent->nationalite }}" placeholder="Veillez entrer la nationnalité de lagent"/>
+                        <input class="multisteps-form__input form-control @error('nationalite') is-invalid @enderror" type="text" name="nationalite" value="{{ $agent->nationalite }}" placeholder="Veillez entrer la nationnalité de lagent"/>
+                        @error('nationalite')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Sexe : </label>
-                        <select class="multisteps-form__input form-control" name="sexe" id="">
+                        <select class="multisteps-form__input form-control @error('sexe') is-invalid @enderror" name="sexe" id="">
                                <option value="HOMME" @if($agent->sexe == 'HOMME') {{ 'selected' }} @endif>HOMME</option>
                                <option value="FEMME" @if($agent->sexe == 'FEMME') {{ 'selected' }} @endif>FEMME</option>
                         </select>
+                        @error('sexe')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Situation matrimoniale : </label>
-                        <select class="multisteps-form__input form-control" name="situation_matrimoniale">
+                        <select class="multisteps-form__input form-control @error('situation_matrimoniale') is-invalid @enderror" name="situation_matrimoniale">
                             <option value="Célibataire" @if($agent->situation_matrimoniale == 'Célibataire') {{ 'selected' }} @endif>Célibataire</option>
                             <option value="Divorcé(e)" @if($agent->situation_matrimoniale == 'Divorcé(e)') {{ 'selected' }} @endif>Divorcé(e)</option>
                             <option value="Marié(e)" @if($agent->situation_matrimoniale == 'Marié(e)') {{ 'selected' }} @endif>Marié(e)</option>
                             <option value="Veuf(ve)" @if($agent->situation_matrimoniale == 'Veuf(ve)') {{ 'selected' }} @endif>Veuf(ve)</option>
                         </select>
+                        @error('situation_matrimoniale')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-6 col-sm-6">
                         <label for="inputEmail4">Téléphone : </label>
-                        <input class="multisteps-form__input form-control" type="text" name="telephone" value="{{ $agent->telephone }}" placeholder="Veillez entrer le numéro de téléphone"/>
+                        <input class="multisteps-form__input form-control @error('telephone') is-invalid @enderror" type="text" name="telephone" value="{{ $agent->telephone }}" placeholder="Veillez entrer le numéro de téléphone"/>
+                        @error('telephone')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Email : </label>
-                        <input class="multisteps-form__input form-control" type="email" name="email" value="{{ $agent->email }}" placeholder="Veillez entrer ladresse mail"/>
+                        <input class="multisteps-form__input form-control @error('email') is-invalid @enderror" type="email" name="email" value="{{ $agent->email }}" placeholder="Veillez entrer ladresse mail"/>
+                        @error('email')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Adresse : </label>
-                        <input class="multisteps-form__input form-control" type="text" name="adresse" value="{{ $agent->adresse }}" placeholder="Veillez entrer ladresse de lagent"/>
+                        <input class="multisteps-form__input form-control @error('adresse') is-invalid @enderror" type="text" name="adresse" value="{{ $agent->adresse }}" placeholder="Veillez entrer ladresse de lagent"/>
+                        @error('adresse')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Occupation : </label>
-                        <input class="multisteps-form__input form-control" type="text" name="fonction" value="{{ $agent->fonction }}" autofocus placeholder="Veillez entrer la fonction de lagent"/>
+                        <input class="multisteps-form__input form-control @error('fonction') is-invalid @enderror" type="text" name="fonction" value="{{ $agent->fonction }}" autofocus placeholder="Veillez entrer la fonction de lagent"/>
+                        @error('fonction')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 

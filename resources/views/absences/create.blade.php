@@ -21,13 +21,12 @@
       <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-              <div class="p-5">
                 <form class="user" method="POST" action="{{ route('absences.store') }}">
                     @csrf
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Matricule :</label>
-                        <select  name="agent_id" onchange="change()" id="select" value="" data-toggle="tooltip" class="form-control">
+                        <select  name="agent_id" onchange="change()" id="select" value="{{ old('agent_id') }}" data-toggle="tooltip" class="form-control @error('agent_id') is-invalid @enderror">
                             <option value="">*************Selectionner*************</option>
                           @foreach($agents as $agent)
                             <option data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{  $agent->id   }}">
@@ -35,6 +34,9 @@
                             </option>
                           @endforeach
                         </select>
+                        @error('agent_id')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Nom et Prénom :</label>
@@ -44,11 +46,17 @@
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Nombre de jour :</label>
-                      <input id="" type="number" class="form-control" name="nombre_jour" value="" autofocus placeholder="Veillez entrer le nombre de jour d'absence">
+                      <input id="" type="number" class="form-control @error('nombre_jour') is-invalid @enderror" name="nombre_jour" value="{{ old('nombre_jour') }}" autofocus placeholder="Veillez entrer le nombre de jour d'absence">
+                      @error('nombre_jour')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Motif :</label>
-                        <textarea name="motif_absence" class="form-control" id="" cols="10" rows="1" placeholder="Veillez entrer le motif de l'absence"></textarea>
+                        <textarea name="motif_absence" class="form-control @error('motif_absence') is-invalid @enderror" value="{{ old('motif_absence') }}" id="" cols="10" rows="1" placeholder="Veillez entrer le motif de l'absence"></textarea>
+                        @error('motif_absence')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                   </div>
                   <hr>
@@ -72,7 +80,6 @@
                    </div>
                   <hr>
                 </form>
-              </div>
             </div>
           </div>
       </div>

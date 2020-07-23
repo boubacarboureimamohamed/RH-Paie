@@ -41,6 +41,17 @@ class ContratsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+
+            'ref_contrat'=>'required',
+            'description'=>'required',
+            'agent_id'=>'required',
+            'salaire_base'=>'required',
+            'poste_id'=>'required',
+            'date_debut_contrat'=>'required'
+
+        ]);
+
         Contrat::create([
 
             'ref_contrat'=>$request->ref_contrat,
@@ -91,6 +102,17 @@ class ContratsController extends Controller
      */
     public function update(Request $request, Contrat $contrat)
     {
+        $this->validate($request, [
+
+            'ref_contrat'=>'required',
+            'description'=>'required',
+            'agent_id'=>'required',
+            'salaire_base'=>'required',
+            'poste_id'=>'required',
+            'date_debut_contrat'=>'required'
+
+        ]);
+
         $contrat->update([
 
             'ref_contrat'=>$request->ref_contrat,
