@@ -41,9 +41,15 @@
                                         <label for="">Au :</label>
                                         <input id="" type="date" class="form-control" name="fin_mois" value="" placeholder="">
                                     </div>
-                                    <div class="col-sm-6 mb-3 mb-sm-0" >
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label for="">Veillez sélectionner les agents :</label>
-                                        <select id='custom-headers' class="form-control searchable" name="agent_id[]" multiple='multiple'>
+                                        <br>
+                                        <button type="button" class="btn btn-primary waves-effect waves-light m-b-10" id='select-all'>Sélectionner tout
+                                        </button>
+                                        <button type="button" class="btn btn-primary waves-effect waves-light m-b-10" id='deselect-all'>Désélectionner tout
+                                        </button>
+                                        <br><br>
+                                        <select id='public-methods' name="agent_id[]" multiple='multiple'>
                                             @foreach ($agents as $agent)
                                                 <option value='{{ $agent->id }}'>{{ $agent->matricule.' - '.$agent->nom.' '.$agent->prenom }}</option>
                                             @endforeach

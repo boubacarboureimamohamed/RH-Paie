@@ -29,8 +29,8 @@
             <table id="table" class="table table-striped table-bordered nowrap">
             <thead>
                 <tr>
-                    <th>Numéro</th>
-                    <th>Date Clôture</th>
+                    <th>Mois Clôturé</th>
+                    <th>Date Du Clôture</th>
                     <th>Détail</th>
                     <th>Supprimer</th>
                 </tr>

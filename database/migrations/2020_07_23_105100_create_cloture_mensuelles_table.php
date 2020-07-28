@@ -17,6 +17,8 @@ class CreateClotureMensuellesTable extends Migration
             $table->bigIncrements('id');
             $table->date('mois_cloture');
             $table->date('date_cloture');
+            $table->bigInteger('payroll_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('payroll_id')->references('id')->on('payrolls');
             $table->timestamps();
         });
     }

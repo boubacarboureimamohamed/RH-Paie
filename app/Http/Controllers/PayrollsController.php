@@ -6,6 +6,7 @@ use App\Models\Abattement;
 use App\Models\Absence;
 use App\Models\AffectationAvantage;
 use App\Models\Agent;
+use App\Models\Avantage;
 use App\Models\Charge;
 use App\Models\Contrat;
 use App\Models\Cotisation;
@@ -53,7 +54,11 @@ class PayrollsController extends Controller
         $pourcentage_a_fam = [];
         $salaires_bases = [];
         $total_bases_imposables = [];
+        $salaire_ni_cnss = [];
+        $somme_ni_iuts = [];
+        $salaire_brut = [];
         $somme_sb_tbi = [];
+        $somme_ni_cnss = [];
         $somme_sb_tbi_cnss = [];
         $somme_sb_tbi_cnss_aprof = [];
         $somme_sb_tbi_cnss_aprof_afam = [];
@@ -61,6 +66,7 @@ class PayrollsController extends Controller
         $somme_sb_tbi_cnss_aprof_afam_iuts = [];
 
         $taux_iuts = Impot::all();
+        $avantages = Avantage::all();
         $abattements = Abattement::all();
         $cotisations_cnss_anpe = Cotisation::all();
 
@@ -74,6 +80,10 @@ class PayrollsController extends Controller
                 $z = 0;
                 $m = 0;
                 $n = 0;
+                $o = 0;
+                $r = 0;
+                $oo = 0;
+                $rr = 0;
                 $somme_bi = 0;
                 $somme_cnss = 0;
                 $somme_iuts = 0;
@@ -99,7 +109,25 @@ class PayrollsController extends Controller
                     {
                         $x = $somme_bi + $salaire_base;
                     }
-                $somme_sb_tbi[] = $x;
+                $salaire_brut[] = $x;
+
+                foreach ($bases_imposables as $bases_ni)
+                    {
+                    if($bases_ni->avantage->imposable == 1)
+                        {
+                            $o = $o + $bases_ni->montant;
+                        }
+                    }
+                $somme_ni_cnss[] = $o;
+
+                foreach ($salaire_brut as $salairebrut)
+                    {
+                        foreach ($somme_ni_cnss as $somme_nicnss)
+                            {
+                                $r = $salairebrut - $somme_nicnss;
+                            }
+                    }
+                $somme_sb_tbi[] = $r;
 
                 foreach($somme_sb_tbi as $somme_sbtbi)
                     {
@@ -117,7 +145,25 @@ class PayrollsController extends Controller
                                     $somme_cnss = ($somme_sbtbi) - (($m * $n) / 100);
                                 }
                     }
-                $somme_sb_tbi_cnss[] = $somme_cnss;
+                $salaire_ni_cnss[] = $somme_cnss;
+
+                foreach ($bases_imposables as $bases_nii)
+                    {
+                    if($bases_nii->avantage->imposable == 2)
+                        {
+                            $oo = $oo + $bases_nii->montant;
+                        }
+                    }
+                $somme_ni_iuts[] = $oo;
+
+                foreach ($salaire_ni_cnss as $salaire_nicnss)
+                    {
+                        foreach ($somme_ni_iuts as $somme_niiuts)
+                            {
+                                $rr = $salaire_nicnss - $somme_niiuts;
+                            }
+                    }
+                $somme_sb_tbi_cnss[] = $rr;
 
                 foreach($somme_sb_tbi_cnss as $somme_sbtbicnss)
                     {
@@ -180,11 +226,11 @@ class PayrollsController extends Controller
 
             }
 
-            /* dd($abattements, $taux_iuts, $cotisations_cnss_anpe, $tableau_contrats, $tableau_bases_imposables,
+            dd($abattements, $taux_iuts, $avantages, $cotisations_cnss_anpe, $tableau_contrats, $tableau_bases_imposables,
                  $tableau_nb_charges, $pourcentage_a_fam, $salaires_bases,
-                 $total_bases_imposables, $somme_sb_tbi, $somme_sb_tbi_cnss,
+                 $total_bases_imposables, $salaire_brut, $somme_ni_cnss, $somme_ni_iuts, $somme_sb_tbi, $somme_sb_tbi_cnss,
                  $somme_sb_tbi_cnss_aprof, $somme_sb_tbi_cnss_aprof_afam,
-                $pourcentage_iuts, $somme_sb_tbi_cnss_aprof_afam_iuts); */
+                $pourcentage_iuts, $somme_sb_tbi_cnss_aprof_afam_iuts);
 
         return redirect(route('paie.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
     }
@@ -255,6 +301,10 @@ class PayrollsController extends Controller
         $pourcentage_a_fam = 0;
         $salaires_bases = 0;
         $total_bases_imposables = 0;
+        $somme_ni_cnss = 0;
+        $salaire_ni_cnss = 0;
+        $somme_ni_iuts = 0;
+        $salaire_brut = 0;
         $somme_sb_tbi = 0;
         $somme_sb_tbi_cnss = 0;
         $somme_sb_tbi_cnss_aprof = 0;
@@ -263,6 +313,7 @@ class PayrollsController extends Controller
         $somme_sb_tbi_cnss_aprof_afam_iuts = 0;
 
         $taux_iuts = Impot::all();
+        $avantages = Avantage::all();
         $abattements = Abattement::all();
         $cotisations_cnss_anpe = Cotisation::all();
 
@@ -274,6 +325,10 @@ class PayrollsController extends Controller
         $z = 0;
         $m = 0;
         $n = 0;
+        $o = 0;
+        $r = 0;
+        $oo = 0;
+        $rr = 0;
         $cnss = 0;
         $somme_bi = 0;
         $somme_cnss = 0;
@@ -284,8 +339,10 @@ class PayrollsController extends Controller
         $cotisation_anpe = 0;
         $t_cnss_employeur = 0;
         $p_cnss_employeur = 0;
+        $plafond_cnss = 0;
         $t_anpe_employeur = 0;
         $p_anpe_employeur = 0;
+        $plafond_anpe = 0;
 
         $contrat = Contrat::where('agent_id', '=', $payroll->agent->id)->with('poste')->orderByDesc('date_debut_contrat')->first();
         $nb_charges = Charge::where('agent_id', '=', $payroll->agent->id)->count();
@@ -300,10 +357,22 @@ class PayrollsController extends Controller
             }
         $total_bases_imposables = $somme_bi;
 
-
                 $x = $somme_bi + $salaires_bases;
 
-        $somme_sb_tbi = $x;
+        $salaire_brut = $x;
+
+        foreach ($bases_imposables as $bases_ni)
+            {
+            if($bases_ni->avantage->imposable == 1)
+                {
+                    $o = $o + $bases_ni->montant;
+                }
+            }
+        $somme_ni_cnss = $o;
+
+                 $r = $salaire_brut - $somme_ni_cnss;
+
+        $somme_sb_tbi = $r;
 
         foreach($cotisations_cnss_anpe as $cotisationscnss_anpe)
         {
@@ -328,22 +397,39 @@ class PayrollsController extends Controller
         if($somme_sb_tbi <= $p_cnss_employeur && $somme_sb_tbi > 0)
             {
                 $cotisation_cnss = (($somme_sb_tbi * $t_cnss_employeur) / 100);
+                $plafond_cnss = $somme_sb_tbi;
             }
         if($somme_sb_tbi > $p_cnss_employeur)
             {
                 $cotisation_cnss = (($p_cnss_employeur * $t_cnss_employeur) / 100);
+                $plafond_cnss = $p_cnss_employeur;
             }
 
         if($somme_sb_tbi <= $p_anpe_employeur && $somme_sb_tbi > 0)
             {
                 $cotisation_anpe = (($somme_sb_tbi * $t_anpe_employeur) / 100);
+                $plafond_anpe = $somme_sb_tbi;
             }
         if($somme_sb_tbi > $p_anpe_employeur)
             {
                 $cotisation_anpe = (($p_anpe_employeur * $t_anpe_employeur) / 100);
+                $plafond_anpe = $p_anpe_employeur;
             }
 
-        $somme_sb_tbi_cnss = $somme_cnss;
+        $salaire_ni_cnss = $somme_cnss;
+
+        foreach ($bases_imposables as $bases_nii)
+            {
+            if($bases_nii->avantage->imposable == 2)
+                {
+                    $oo = $oo + $bases_nii->montant;
+                }
+            }
+        $somme_ni_iuts = $oo;
+
+                $rr = $salaire_ni_cnss - $somme_ni_iuts;
+
+        $somme_sb_tbi_cnss = $rr;
 
                 $somme_a_prof = (($somme_sb_tbi_cnss * 15) / 100);
 
@@ -391,8 +477,8 @@ class PayrollsController extends Controller
                  $somme_sb_tbi_cnss_aprof, $somme_sb_tbi_cnss_aprof_afam,
                 $pourcentage_iuts, $somme_sb_tbi_cnss_aprof_afam_iuts); */
 
-        $pdf = PDF::loadView('paie.pdf', compact('payroll', 'contrat', 'nb_charges', 'bases_imposables',
-         'total_bases_imposables', 'somme_sb_tbi', 'somme_sb_tbi_cnss', 'somme_sb_tbi_cnss_aprof', 'somme_cnss',
+        $pdf = PDF::loadView('paie.pdf', compact('payroll', 'contrat', 'nb_charges', 'bases_imposables', 'plafond_anpe',
+         'total_bases_imposables', 'somme_sb_tbi', 'somme_sb_tbi_cnss', 'somme_sb_tbi_cnss_aprof', 'somme_cnss', 'plafond_cnss',
          'somme_a_prof', 'somme_a_fam', 'somme_sb_tbi_cnss_aprof_afam', 'pourcentage_iuts', 'cnss', 'cotisation_cnss', 'cotisation_anpe',
          'somme_iuts', 'somme_sb_tbi_cnss_aprof_afam_iuts', 't_cnss_employeur', 't_anpe_employeur'))->setPaper('a4', $oriantation = 'portrait');
 

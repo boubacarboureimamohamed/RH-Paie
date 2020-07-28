@@ -75,7 +75,7 @@ Route::put('edit/{abattement}', 'AbattementsController@updateabattement')->name(
 
 Route::resource('paie', 'PayrollsController');
 
-Route::get('getData', 'PayrollsController@getData');
+Route::get('getData', 'ClotureMensuellesController@getData');
 
 Route::get('bulletin_paie/{id}', 'PayrollsController@showPayroll')->name('show_payroll');
 

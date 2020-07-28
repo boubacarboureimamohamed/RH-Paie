@@ -93,11 +93,11 @@
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1" name="imposable">
-                <label class="form-check-label" for="inlineCheckbox1">Imposable CNSS</label>
+                <label class="form-check-label" for="inlineCheckbox1">Non Imposable CNSS</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2" name="imposable">
-                <label class="form-check-label" for="inlineCheckbox2">Imposable IUTS</label>
+                <label class="form-check-label" for="inlineCheckbox2">Non Imposable IUTS</label>
             </div>
         </div>
         <div class="modal-footer">
@@ -129,11 +129,11 @@
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1" name="imposable">
-                <label class="form-check-label" for="inlineCheckbox1">Imposable CNSS</label>
+                <label class="form-check-label" for="inlineCheckbox1">Non Imposable CNSS</label>
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2" name="imposable">
-                <label class="form-check-label" for="inlineCheckbox2">Imposable IUTS</label>
+                <label class="form-check-label" for="inlineCheckbox2">Non Imposable IUTS</label>
             </div>
         </div>
         <div class="modal-footer">

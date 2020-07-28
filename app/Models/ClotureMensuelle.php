@@ -9,12 +9,13 @@ class ClotureMensuelle extends Model
     protected $fillable = [
 
         'mois_cloture',
-        'date_cloture'
+        'date_cloture',
+        'payroll_id'
 
-    ];
+        ];
 
-    public function payrolls()
-    {
+        public function payrolls()
+        {
         return $this->hasMany('App\Models\Payroll');
-    }
+        }
 }

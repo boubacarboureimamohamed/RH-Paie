@@ -88,4 +88,19 @@ class ClotureMensuellesController extends Controller
         ClotureMensuelle::destroy($id);
         return redirect(route('clotures_mensuelles.index'))->with('success', 'La suppression a été effetué avec succés!');
     }
+
+
+    public function getData(Request $request)
+    {
+        $mois_cloture = $request->mois_cloture.'-01';
+        $payrolls = Payroll::where('mois', '=', $mois_cloture)->with('agent')->get();
+
+        return json_encode([
+
+            'mois_cloture' => $mois_cloture,
+            'payrolls' => $payrolls
+
+            ]);
+    }
+
 }

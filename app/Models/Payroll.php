@@ -11,8 +11,7 @@ class Payroll extends Model
         'debut_mois',
         'fin_mois',
         'net_a_payer',
-        'agent_id',
-        'cloture_mensuelle_id'
+        'agent_id'
     ];
     protected $dates = ['mois'];
 

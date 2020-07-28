@@ -21,8 +21,6 @@ class CreatePayrollsTable extends Migration
             $table->double('net_a_payer');
             $table->bigInteger('agent_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('agent_id')->references('id')->on('agents');
-            $table->bigInteger('cloture_mensuelle_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('cloture_mensuelle_id')->references('id')->on('cloture_mensuelles');
             $table->timestamps();
         });
     }

@@ -8,9 +8,9 @@
         <tbody>
             <tr>
                 <th style="border: 1px solid; padding: 5px;">Nom </th>
-                <td style="border: 1px solid; padding: 5px;">{{ $payroll->agent->nom}}</td>
-                <th style="border: 1px solid; padding: 5px;">Pénom </th>
-                <td style="border: 1px solid; padding: 5px;">{{ $payroll->agent->prenom}}</td>
+                <td style="border: 1px solid; padding: 5px;">{{ $payroll->agent->nom.' '.$payroll->agent->prenom}}</td>
+                <th style="border: 1px solid; padding: 5px;">Charge Familiale</th>
+                <td style="border: 1px solid; padding: 5px; text-align: center;">{{ $nb_charges}}</td>
             </tr>
             <tr>
                 <th style="border: 1px solid; padding: 5px;">Fonction </th>
@@ -47,27 +47,15 @@
                 <th style="border: 1px solid; padding: 5px;"></th>
                 <th style="border: 1px solid; padding: 5px;">{{ $contrat->salaire_base }}</th>
             </tr>
-            <tr>
-                <th style="border: 1px solid; padding: 5px;">Prime d'anciéneté</th>
-                <th style="border: 1px solid; padding: 5px;">0%</th>
-                <th style="border: 1px solid; padding: 5px;"></th>
-                <th style="border: 1px solid; padding: 5px;"></th>
-                <th style="border: 1px solid; padding: 5px;">0.00</th>
-            </tr>
-            <tr>
-                <th style="border: 1px solid; padding: 5px;">Bases imposables</th>
-                <th style="border: 1px solid; padding: 5px;"></th>
-                <th style="border: 1px solid; padding: 5px;">{{ $total_bases_imposables }}</th>
-                <th style="border: 1px solid; padding: 5px;"></th>
-                <th style="border: 1px solid; padding: 5px;"></th>
-            </tr>
-            <tr>
-                <th style="border: 1px solid; padding: 5px;">Bases non imposables</th>
-                <th style="border: 1px solid; padding: 5px;"></th>
-                <th style="border: 1px solid; padding: 5px;"></th>
-                <th style="border: 1px solid; padding: 5px;">0.00</th>
-                <th style="border: 1px solid; padding: 5px;"></th>
-            </tr>
+            @foreach ($bases_imposables as $base_imposable)
+                <tr>
+                    <th style="border: 1px solid; padding: 5px;">{{ $base_imposable->avantage->libelle }}</th>
+                    <th style="border: 1px solid; padding: 5px;"></th>
+                    <th style="border: 1px solid; padding: 5px;">{{ $base_imposable->montant }}</th>
+                    <th style="border: 1px solid; padding: 5px;"></th>
+                    <th style="border: 1px solid; padding: 5px;"></th>
+                </tr>
+            @endforeach
             <tr>
                 <th style="border: 1px solid; padding: 5px;">Salaire brut</th>
                 <th style="border: 1px solid; padding: 5px;"></th>
@@ -83,7 +71,7 @@
                 <th style="border: 1px solid; padding: 5px;">{{ $cnss }}</th>
             </tr>
             <tr>
-                <th style="border: 1px solid; padding: 5px;">Abattement Professionnel</th>
+                <th style="border: 1px solid; padding: 5px;">Abat.Professionnel</th>
                 <th style="border: 1px solid; padding: 5px;">15%</th>
                 <th style="border: 1px solid; padding: 5px;">{{ $somme_sb_tbi_cnss }}</th>
                 <th style="border: 1px solid; padding: 5px;"></th>
@@ -150,6 +138,7 @@
         <thead>
             <tr>
                 <th> </th>
+                <th style="border: 1px solid; padding: 5px; background-color: rgb(180, 180, 180);">Plafond</th>
                 <th style="border: 1px solid; padding: 5px; background-color: rgb(180, 180, 180);">Taux</th>
                 <th style="border: 1px solid; padding: 5px; background-color: rgb(180, 180, 180);">Net à payer </th>
             </tr>
@@ -157,11 +146,13 @@
         <tbody>
             <tr>
                 <th style="border: 1px solid; padding: 5px;">Cotisation CNSS Employeur</th>
+                <th style="border: 1px solid; padding: 5px;">{{ $plafond_cnss }}</th>
                 <th style="border: 1px solid; padding: 5px;">{{ $t_cnss_employeur.' '.'%' }}</th>
                 <th style="border: 1px solid; padding: 5px;">{{ $cotisation_cnss }}</th>
             </tr>
             <tr>
                 <th style="border: 1px solid; padding: 5px;">Cotisation ANPE Employeur</th>
+                <th style="border: 1px solid; padding: 5px;">{{ $plafond_anpe }}</th>
                 <th style="border: 1px solid; padding: 5px;">{{ $t_anpe_employeur.' '.'%' }}</th>
                 <th style="border: 1px solid; padding: 5px;">{{ $cotisation_anpe }}</th>
             </tr>
