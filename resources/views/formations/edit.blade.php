@@ -28,7 +28,7 @@
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Type Formation :</label>
-                        <select name="type_formation_id" id="" class="form-control">
+                        <select name="type_formation_id" id="" class="form-control @error('type_formation_id') is-invalid @enderror">
                             <option value="">************Selectionner************</option>
                             @foreach ($typeformations as $typeformation)
                                 <option @if($typeformation->id == $formation->type_id)
@@ -36,30 +36,45 @@
                                     @endif value="{{ $typeformation->id }}">{{ $typeformation->type_formation }}</option>
                             @endforeach
                         </select>
+                        @error('type_formation_id')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Lieu Formation :</label>
-                        <input id="" type="text" class="form-control" name="lieu" value="{{ $formation->lieu }}" autofocus placeholder="Veillez entrer le lieu de la formation">
+                        <input id="" type="text" class="form-control @error('lieu') is-invalid @enderror" name="lieu" value="{{ $formation->lieu }}" autofocus placeholder="Veillez entrer le lieu de la formation">
+                        @error('lieu')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     </div>
                     <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Date Début :</label>
-                        <input id="" type="date" class="form-control" name="date_debut_formation" value="{{ $formation->date_debut_formation }}" autofocus placeholder="Veillez entrer la date début de la formation">
-                    </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Date Fin :</label>
-                        <input id="" type="date" class="form-control" name="date_fin_formation" value="{{ $formation->date_fin_formation }}" autofocus placeholder="Veillez entrer la date fin de la formation">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label for="">Date Début :</label>
+                            <input id="" type="date" class="form-control @error('date_debut_formation') is-invalid @enderror" name="date_debut_formation" value="{{ $formation->date_debut_formation }}" autofocus placeholder="Veillez entrer la date début de la formation">
+                            @error('date_debut_formation')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label for="">Date Fin :</label>
+                            <input id="" type="date" class="form-control @error('date_fin_formation') is-invalid @enderror" name="date_fin_formation" value="{{ $formation->date_fin_formation }}" autofocus placeholder="Veillez entrer la date fin de la formation">
+                            @error('date_fin_formation')
+                                 <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Attestation / Diplôme :</label>
-                        <input id="" type="text" class="form-control" name="attestation" value="{{ $formation->attestation }}" autofocus placeholder="Veillez entrer le bilan de la formation">
-                    </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label for="">Attestation / Diplôme :</label>
+                            <input id="" type="text" class="form-control @error('attestation') is-invalid @enderror" name="attestation" value="{{ $formation->attestation }}" autofocus placeholder="Veillez entrer le bilan de la formation">
+                            @error('attestation')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
 
-                    </div>
+                        </div>
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6 mb-3 mb-sm-0">

@@ -38,12 +38,12 @@ class CotisationsController extends Controller
     {
         $this->validate($request, [
 
-            'taux_cnss_employe'=>'required',
-            'plafond_cnss_employe'=>'required',
-            'taux_cnss_employeur'=>'required',
-            'plafond_cnss_employeur'=>'required',
-            'taux_anpe'=>'required',
-            'plafond_anpe'=>'required'
+            'taux_cnss_employe'=>'required|numeric',
+            'plafond_cnss_employe'=>'required|numeric',
+            'taux_cnss_employeur'=>'required|numeric',
+            'plafond_cnss_employeur'=>'required|numeric',
+            'taux_anpe'=>'required|numeric',
+            'plafond_anpe'=>'required|numeric'
 
         ]);
 
@@ -95,12 +95,12 @@ class CotisationsController extends Controller
     {
         $this->validate($request, [
 
-            'taux_cnss_employe'=>'required',
-            'plafond_cnss_employe'=>'required',
-            'taux_cnss_employeur'=>'required',
-            'plafond_cnss_employeur'=>'required',
-            'taux_anpe'=>'required',
-            'plafond_anpe'=>'required'
+            'taux_cnss_employe'=>'required|numeric',
+            'plafond_cnss_employe'=>'required|numeric',
+            'taux_cnss_employeur'=>'required|numeric',
+            'plafond_cnss_employeur'=>'required|numeric',
+            'taux_anpe'=>'required|numeric',
+            'plafond_anpe'=>'required|numeric'
 
         ]);
 

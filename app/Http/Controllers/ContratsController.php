@@ -46,7 +46,7 @@ class ContratsController extends Controller
             'ref_contrat'=>'required',
             'description'=>'required',
             'agent_id'=>'required',
-            'salaire_base'=>'required',
+            'salaire_base'=>'required|numeric',
             'poste_id'=>'required',
             'date_debut_contrat'=>'required'
 
@@ -74,9 +74,12 @@ class ContratsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function showContrat($id)
     {
-        //
+        $contrat = Contrat::find($id);
+        return view('contrats.show', compact('contrat'));
+
     }
 
     /**
@@ -107,7 +110,7 @@ class ContratsController extends Controller
             'ref_contrat'=>'required',
             'description'=>'required',
             'agent_id'=>'required',
-            'salaire_base'=>'required',
+            'salaire_base'=>'required|numeric',
             'poste_id'=>'required',
             'date_debut_contrat'=>'required'
 

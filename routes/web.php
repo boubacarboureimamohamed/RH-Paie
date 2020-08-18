@@ -87,3 +87,11 @@ Route::resource('cotisations_cnss_anpe', 'CotisationsController');
 
 Route::resource('clotures_mensuelles', 'ClotureMensuellesController');
 
+Route::resource('volumes_horaires', 'VolumeHorairesController');
+
+Route::put('edit/{volume_horaire}', 'VolumeHorairesController@update_volume_horaire')->name('modif_volume_horaire');
+
+Route::get('absence/{id}', 'AbsencesController@showAbsence')->name('show_absence');
+
+Route::get('contrat/{id}', 'ContratsController@showContrat')->name('show_contrat');
+

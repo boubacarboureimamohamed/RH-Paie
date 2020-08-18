@@ -89,11 +89,17 @@
         <div class="modal-body">
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Nomre De Charge :</label>
-                <input type="number" name="nombre_charge" class="form-control">
+                <input type="number" name="nombre_charge" class="form-control @error('nombre_charge') is-invalid @enderror">
+                @error('nombre_charge')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Taux :</label>
-                <input type="number" name="pourcentage" class="form-control">
+                <input type="number" name="pourcentage" class="form-control @error('pourcentage') is-invalid @enderror">
+                @error('pourcentage')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
         <div class="modal-footer">
@@ -121,11 +127,17 @@
         <div class="modal-body">
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Nomre De Charge :</label>
-                <input type="number" name="nombre_charge" id="nombre_charge" class="form-control">
+                <input type="number" name="nombre_charge" id="nombre_charge" class="form-control @error('nombre_charge') is-invalid @enderror">
+                @error('nombre_charge')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Taux :</label>
-                <input type="number" name="pourcentage" id="pourcentage" class="form-control">
+                <input type="number" name="pourcentage" id="pourcentage" class="form-control @error('pourcentage') is-invalid @enderror">
+                @error('pourcentage')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
         <div class="modal-footer">

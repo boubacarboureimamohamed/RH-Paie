@@ -36,6 +36,11 @@ class AvantagesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+
+            'libelle'=>'required'
+        ]);
+
         Avantage::create([
 
             'libelle'=>$request->libelle,
@@ -78,6 +83,11 @@ class AvantagesController extends Controller
      */
     public function updateavantage(Request $request, Avantage $avantage)
     {
+        $this->validate($request, [
+
+            'libelle'=>'required'
+        ]);
+
 
         $avantage->update([
 

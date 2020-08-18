@@ -10,7 +10,7 @@ class ClotureMensuelle extends Model
 
         'mois_cloture',
         'date_cloture',
-        'payroll_id'
+        'payroll_id[]'
 
         ];
 

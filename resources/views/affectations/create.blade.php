@@ -42,6 +42,9 @@
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Nom et Prénom</label>
                         <input type="text" name="" title="" disabled data-toggle="tooltip" value="" id="agent" class="form-control" placeholder=" ">
+                        @error('agent_id')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror 
                     </div>
                   </div>
                   <div class="form-group row">

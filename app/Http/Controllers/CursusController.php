@@ -40,10 +40,10 @@ class CursusController extends Controller
     {
         $this->validate($request, [
 
-            'ecole'=>'required',
+            'ecole'=>'required|alpha',
             'date_debut'=>'required',
             'date_fin'=>'required',
-            'diplome'=>'required',
+            'diplome'=>'required|alpha',
             'agent_id'=>'required'
 
         ]);
@@ -101,10 +101,10 @@ class CursusController extends Controller
     {
         $this->validate($request, [
 
-            'ecole'=>'required',
+            'ecole'=>'required|alpha',
             'date_debut'=>'required',
             'date_fin'=>'required',
-            'diplome'=>'required',
+            'diplome'=>'required|alpha',
             'agent_id'=>'required'
 
         ]);

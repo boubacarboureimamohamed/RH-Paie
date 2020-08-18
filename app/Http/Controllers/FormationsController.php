@@ -40,6 +40,16 @@ class FormationsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+
+            'type_formation_id'=>'required',
+            'lieu'=>'required|alpha',
+            'date_debut_formation'=>'required',
+            'date_fin_formation'=>'required',
+            'attestation'=>'required|alpha'
+
+        ]);
+
         $formation = Formation::create([
 
             'type_formation_id'=>$request->type_formation_id,
@@ -91,6 +101,16 @@ class FormationsController extends Controller
      */
     public function update(Request $request, Formation $formation)
     {
+        $this->validate($request, [
+
+            'type_formation_id'=>'required',
+            'lieu'=>'required|alpha',
+            'date_debut_formation'=>'required',
+            'date_fin_formation'=>'required',
+            'attestation'=>'required|alpha'
+
+        ]);
+
         $formation->update([
 
             'type_formation_id'=>$request->type_formation_id,

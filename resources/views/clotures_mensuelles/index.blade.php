@@ -36,7 +36,7 @@
                 </tr>
             </thead>
             <tbody>
-                 @foreach ($clotures as $cloture)
+                 @foreach ($clotures_mensuelles as $cloture_mensuelle)
                  <tr>
                     <td></td>
                     <td></td>
@@ -46,12 +46,12 @@
                         </a>
                    </td>
                     <td>
-                        <form method="POST" action="{{ route('clotures_mensuelles.destroy', $cloture) }}" id="form{{ $cloture->id }}">
+                        <form method="POST" action="{{ route('clotures_mensuelles.destroy', $cloture_mensuelle) }}" id="form{{ $cloture_mensuelle->id }}">
 
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
 
-                            <button type="button" onclick="confirmation('#form{{ $cloture->id }}')" class="btn btn-danger" >
+                            <button type="button" onclick="confirmation('#form{{ $cloture_mensuelle->id }}')" class="btn btn-danger" >
                                 <span class="fas fa-fw fa-trash"></span>
                             </button>
                         </form>

@@ -20,10 +20,7 @@
     <div class="card mb-4 py-3 border-left-primary">
       <div class="card-body">
         <div class="row">
-            <div class="col-lg-1">
-
-            </div>
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <form class="user" method="POST" action="{{ route('charges.update', $charge) }}">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
@@ -110,9 +107,6 @@
                    </div>
                   <hr>
                 </form>
-            </div>
-            <div class="col-lg-1">
-
             </div>
           </div>
       </div>

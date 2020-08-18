@@ -38,6 +38,17 @@ class MissionsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+
+            'numero_ordre_mission'=>'required',
+            'objet_mission'=>'required',
+            'date_debut_mission'=>'required',
+            'date_fin_mission'=>'required',
+            'depart'=>'required|alpha',
+            'destination'=>'required|alpha'
+
+        ]);
+
         $mission = Mission::create([
 
             'numero_ordre_mission'=>$request->numero_ordre_mission,
@@ -98,6 +109,17 @@ class MissionsController extends Controller
      */
     public function update(Request $request, Mission $mission)
     {
+        $this->validate($request, [
+
+            'numero_ordre_mission'=>'required',
+            'objet_mission'=>'required',
+            'date_debut_mission'=>'required',
+            'date_fin_mission'=>'required',
+            'depart'=>'required|alpha',
+            'destination'=>'required|alpha'
+
+        ]);
+
         $mission->update([
 
             'numero_ordre_mission'=>$request->numero_ordre_mission,

@@ -36,7 +36,7 @@ class PayrollsController extends Controller
      */
     public function create()
     {
-        $agents = Agent::has('contrats')->get();
+        $agents = Agent::has('contrats')->get(); 
         return view('paie.create', compact('agents'));
     }
 
@@ -48,6 +48,14 @@ class PayrollsController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request, [
+
+            'mois'=>'required',
+            'agent_id'=>'required'
+
+        ]);
+
         $tableau_contrats = [];
         $tableau_bases_imposables = [];
         $tableau_nb_charges = [];
@@ -217,20 +225,23 @@ class PayrollsController extends Controller
                 $somme_sb_tbi_cnss_aprof_afam_iuts[] = $somme_iuts;
 
                 $bulletin_paie = Payroll::create([
+                    $m = $request->mois.'-01',
+                    //$dm = date("Y-m-01", strtotime($m)),
+                    //$fm = date("Y-m-t", strtotime($m)),
                     'mois'=>$request->mois.'-01',
-                    'debut_mois'=>$request->debut_mois,
-                    'fin_mois'=>$request->fin_mois,
+                    'debut_mois'=>date("Y-m-01", strtotime($m)),
+                    'fin_mois'=>date("Y-m-t", strtotime($m)),
                     'net_a_payer'=>$somme_sb_tbi_cnss_aprof_afam_iuts[$var],
                     'agent_id'=>$request->agent_id[$var]
                 ]);
 
             }
-
-            dd($abattements, $taux_iuts, $avantages, $cotisations_cnss_anpe, $tableau_contrats, $tableau_bases_imposables,
+            // dd($m, $dm, $fm);
+            /* dd($abattements, $taux_iuts, $avantages, $cotisations_cnss_anpe, $tableau_contrats, $tableau_bases_imposables,
                  $tableau_nb_charges, $pourcentage_a_fam, $salaires_bases,
                  $total_bases_imposables, $salaire_brut, $somme_ni_cnss, $somme_ni_iuts, $somme_sb_tbi, $somme_sb_tbi_cnss,
                  $somme_sb_tbi_cnss_aprof, $somme_sb_tbi_cnss_aprof_afam,
-                $pourcentage_iuts, $somme_sb_tbi_cnss_aprof_afam_iuts);
+                $pourcentage_iuts, $somme_sb_tbi_cnss_aprof_afam_iuts); */
 
         return redirect(route('paie.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
     }

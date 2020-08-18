@@ -31,8 +31,8 @@
                 <tr>
                     <th>Matricule</th>
                     <th>Nom et Prénom</th>
-                    <th>Nombre Jour</th>
-                    <th>Motif Absence</th>
+                    <th>Nombre de jour</th>
+                    <th>Détail</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
@@ -43,9 +43,13 @@
                    <td><span> {{ $absence->agent->matricule }} </span></td>
                    <td><span> {{ $absence->agent->nom.' '.$absence->agent->prenom }} </span></td>
                    <td><span> {{ $absence->nombre_jour }} </span></td>
-                   <td><span> {{ $absence->motif_absence }} </span></td>
                    <td>
-                       <a href="{{ route('absences.edit', $absence) }}" class="btn btn-warning">
+                       <a href="{{ route('show_absence', $absence->id) }}" class="btn btn-warning">
+                           <span class="fas fa-fw fa-eye"></span>
+                       </a>
+                   </td>
+                   <td>
+                       <a href="{{ route('absences.edit', $absence) }}" class="btn btn-primary">
                            <span class="fas fa-fw fa-edit"></span>
                        </a>
                   </td>

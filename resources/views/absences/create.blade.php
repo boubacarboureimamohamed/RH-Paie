@@ -27,7 +27,7 @@
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Matricule :</label>
                         <select  name="agent_id" onchange="change()" id="select" value="{{ old('agent_id') }}" data-toggle="tooltip" class="form-control @error('agent_id') is-invalid @enderror">
-                            <option value="">*************Selectionner*************</option>
+                          <option value="">***********************Selectionner***********************</option>
                           @foreach($agents as $agent)
                             <option data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{  $agent->id   }}">
                                 {{ $agent->matricule }}
@@ -50,6 +50,29 @@
                       @error('nombre_jour')
                           <div class="alert alert-danger">{{ $message }}</div>
                       @enderror
+                    </div>
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label for="">Mois :</label>
+                        <input type="month" name="mois_absence" class="form-control @error('mois_absence') is-invalid @enderror" value="{{ old('motif_absence') }}">
+                        @error('mois_absence')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label for="">Type d'absence :</label>
+                        <select  name="type_absence_id" value="{{ old('type_absence_id') }}" class="form-control @error('type_absence_id') is-invalid @enderror">
+                            <option value="">***********************Selectionner***********************</option>
+                          @foreach($type_absences as $type_absence)
+                            <option value="{{  $type_absence->id   }}">
+                                {{ $type_absence->type_absence }}
+                            </option>
+                          @endforeach
+                        </select>
+                        @error('type_absence_id')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="">Motif :</label>

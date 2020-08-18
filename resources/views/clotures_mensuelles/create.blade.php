@@ -35,10 +35,10 @@
                         <label for="">Date du clôture : </label>
                         <input id="" type="" class="form-control" name="date_cloture" disabled value="{{ $dateCloture->toDateTimeString() }}" placeholder="Veillez entrer la date du clôture">
                         <input id="" type="" class="form-control" hidden name="date_cloture" value="{{ $dateCloture->toDateTimeString() }}" placeholder="Veillez entrer la date du clôture">
-                        <input id="" type="text" class="form-control" hidden name="payroll_id[]" value="" placeholder="Veillez entrer les bulletins de paie">
                     </div>
                     </div>
                     <label for="">Les paiements du mois de  : </label>
+                    <input id="" type="text" class="form-control" hidden name="payroll_id[]" value="" placeholder="Veillez entrer les bulletins de paie">
                     <div class="dt-responsive table-responsive">
                         <table class="table table-striped table-bordered nowrap">
                             <thead>

@@ -16,8 +16,8 @@ class ClotureMensuellesController extends Controller
      */
     public function index()
     {
-        $clotures = ClotureMensuelle::all();
-        return view('clotures_mensuelles.index', compact('clotures'));
+        $clotures_mensuelles = ClotureMensuelle::all();
+        return view('clotures_mensuelles.index', compact('clotures_mensuelles'));
     }
 
     /**
@@ -40,7 +40,28 @@ class ClotureMensuellesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       // dd($request->all());
+
+        $mois = $request->mois_cloture.'-01';
+
+        for($var=0; $var < count($request->mois_cloture); $var++)
+         {
+            $x = 0;
+            $payrolls = Payroll::where('mois', '=', $mois)->with('agent')->get();
+            foreach ($payrolls as $payroll)
+                {
+                    $x = $payroll->id;
+                }
+            $cloture_mensuelle = ClotureMensuelle::create([
+
+                'mois_cloture'=>$request->mois_cloture.'-01',
+                'date_cloture'=>$request->date_cloture,
+                'payroll_id'=>$x
+
+            ]);
+         }
+
+        return redirect(route('clotures_mensuelles.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
     }
 
     /**

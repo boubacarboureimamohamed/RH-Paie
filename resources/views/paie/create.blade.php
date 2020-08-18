@@ -29,17 +29,10 @@
                                 <div class="form-row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label for="">Mois :</label>
-                                        <input id="" type="month" class="form-control" name="mois" value="" placeholder="">
-                                    </div>
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label for="">Du :</label>
-                                        <input id="" type="date" class="form-control" name="debut_mois" value="" placeholder="">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <label for="">Au :</label>
-                                        <input id="" type="date" class="form-control" name="fin_mois" value="" placeholder="">
+                                        <input id="" type="month" class="form-control @error('mois') is-invalid @enderror" name="mois" value="" placeholder="">
+                                        @error('mois')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label for="">Veillez sélectionner les agents :</label>
@@ -49,11 +42,14 @@
                                         <button type="button" class="btn btn-primary waves-effect waves-light m-b-10" id='deselect-all'>Désélectionner tout
                                         </button>
                                         <br><br>
-                                        <select id='public-methods' name="agent_id[]" multiple='multiple'>
+                                        <select id='public-methods' name="agent_id[]" multiple='multiple' class="form-control @error('agent_id') is-invalid @enderror">
                                             @foreach ($agents as $agent)
                                                 <option value='{{ $agent->id }}'>{{ $agent->matricule.' - '.$agent->nom.' '.$agent->prenom }}</option>
                                             @endforeach
-                                        </select>
+                                        </select> 
+                                        @error('agent_id')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <hr>

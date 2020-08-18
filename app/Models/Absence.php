@@ -10,13 +10,21 @@ class Absence extends Model
 
         'agent_id',
         'nombre_jour',
-        'motif_absence'
+        'motif_absence',
+        'mois_absence',
+        'montant_a_prelever',
+        'type_absence_id'
 
-    ];
+        ];
 
+    protected $dates = ['mois_absence'];
+
+    public function type_absence()
+        {
+        return $this->belongsTo('App\Models\TypeAbsence');
+        }
     public function agent()
-    {
+        {
         return $this->belongsTo('App\Models\Agent');
-    }
-
+        }
 }

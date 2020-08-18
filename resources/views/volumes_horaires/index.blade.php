@@ -9,7 +9,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Liste des bases imposables (Avantges, Indemnités, Primes)') }}</strong></h1>
+    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Les volumes horaires') }}</strong></h1>
 </div>
 
 <!-- Content Row -->
@@ -30,34 +30,36 @@
             <thead>
                 <tr>
                     <th>Numéro</th>
-                    <th>Libellé</th>
+                    <th>Intitulé</th>
+                    <th>Nombre d'heure</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
             </thead>
             <tbody>
-                 @foreach ($avantages as $avantage)
+                 @foreach ($volume_horaires as $volume_horaire)
                  <tr>
-                    <td><span> {{ $avantage->id }} </span></td>
-                    <td><span> {{ $avantage->libelle }} </span></td>
+                    <td>{{ $volume_horaire->id }}</td>
+                    <td>{{ $volume_horaire->intitule }}</td>
+                    <td>{{ $volume_horaire->nbr_heure.' '.'heure(s)' }}</td>
                     <td>
                         <a href="" data-toggle="modal" data-target="#exampleModal1"
-                        id="l{{ $avantage->id }}"
-                        data-route="{{ route('modifavantage', $avantage->id) }}"
-                        data-libelle="{{ $avantage->libelle }}"
-                        data-imposable="{{ $avantage->imposable }}"
-                        onclick="updateavantage('#l{{ $avantage->id }}')"
+                        id="l{{ $volume_horaire->id }}"
+                        data-route="{{ route('modif_volume_horaire', $volume_horaire->id) }}"
+                        data-intitule="{{ $volume_horaire->intitule }}"
+                        data-nbr_heure="{{ $volume_horaire->nbr_heure }}"
+                        onclick="update_volume_horaire('#l{{ $volume_horaire->id }}')"
                         class="btn btn-warning">
                             <span class="fas fa-fw fa-edit"></span>
                         </a>
                    </td>
                     <td>
-                        <form method="POST" action="{{ route('avantages.destroy', $avantage) }}" id="form{{ $avantage->id }}">
+                        <form method="POST" action="{{ route('volumes_horaires.destroy', $volume_horaire) }}" id="form{{ $volume_horaire->id }}">
 
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
 
-                            <button type="button" onclick="confirmation('#form{{ $avantage->id }}')" class="btn btn-danger" >
+                            <button type="button" onclick="confirmation('#form{{ $volume_horaire->id }}')" class="btn btn-danger" >
                                 <span class="fas fa-fw fa-trash"></span>
                             </button>
                         </form>
@@ -78,29 +80,22 @@
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <form method="POST" action="{{ route('avantages.store') }}">
+        <form method="POST" action="{{ route('volumes_horaires.store') }}">
             @csrf
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style="align:center;">Ajout d'une base imposable</h5>
+          <h5 class="modal-title" id="exampleModalLabel" style="align:center;">Ajout d'un nouveau volume horaire</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
             <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Libellé :</label>
-                <input type="text" name="libelle" class="form-control @error('libelle') is-invalid @enderror">
-                @error('libelle')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
+                <label for="recipient-name" class="col-form-label">Intitulé :</label>
+                <input type="text" name="intitule" class="form-control">
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1" name="imposable">
-                <label class="form-check-label" for="inlineCheckbox1">Non Imposable CNSS</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2" name="imposable">
-                <label class="form-check-label" for="inlineCheckbox2">Non Imposable IUTS</label>
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nombre d'heure :</label>
+                <input type="number" name="nbr_heure" class="form-control">
             </div>
         </div>
         <div class="modal-footer">
@@ -116,30 +111,23 @@
   <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <form method="post" id="idfts">
+        <form method="POST" id="idft">
             {{ csrf_field() }}
             {{ method_field('PUT') }}
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel1" style="align:center;">Modification d'une base imposable</h5>
+          <h5 class="modal-title" id="exampleModalLabel1" style="align:center;">Modification d'un volume horaire</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
             <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Libellé :</label>
-                <input type="text" name="libelle" class="form-control @error('libelle') is-invalid @enderror" id="libelle">
-                @error('libelle')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
+                <label for="recipient-name" class="col-form-label">Intitulé :</label>
+                <input type="text" name="intitule" id="intitule" class="form-control">
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1" name="imposable">
-                <label class="form-check-label" for="inlineCheckbox1">Non Imposable CNSS</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2" name="imposable">
-                <label class="form-check-label" for="inlineCheckbox2">Non Imposable IUTS</label>
+            <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nombre d'heure :</label>
+                <input type="number" name="nbr_heure" id="nbr_heure" class="form-control">
             </div>
         </div>
         <div class="modal-footer">
@@ -198,10 +186,10 @@
 
     </script>
     <script>
-        function updateavantage(avantage){
-
-            $('#libelle').val($(avantage).attr('data-libelle'))
-            $('#idfts').attr('action', $(avantage).attr('data-route'))
+        function update_volume_horaire(volume_horaire){
+            $('#intitule').val($(volume_horaire).attr('data-intitule'))
+            $('#nbr_heure').val($(volume_horaire).attr('data-nbr_heure'))
+            $('#idft').attr('action',$(volume_horaire).attr('data-route'))
                 }
     </script>
 

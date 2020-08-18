@@ -32,7 +32,7 @@
                         @enderror
                       </div>
                       <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="">Référence Du Contrat :</label>
+                        <label for="">Description Du Contrat :</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input @error('description') is-invalid @enderror" id="inputGroupFile01" name="description">
                             <label class="custom-file-label" for="inputGroupFile01">Veillez choisir le fichier</label>

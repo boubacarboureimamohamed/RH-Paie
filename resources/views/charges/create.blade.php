@@ -27,16 +27,22 @@
                     <div class="form-row">
                         <div class="form-group col-12 col-sm-6">
                             <label for="inputEmail4">Matricule : </label>
-                            <select class="multisteps-form__select form-control" onchange="change()" id="select" name="agent_id">
+                            <select class="form-control @error('agent_id') is-invalid @enderror" onchange="change()" id="select" name="agent_id">
                                 <option selected="selected">***Sélectionnez***</option>
                                     @foreach ($agents as $agent)
                                 <option data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{ $agent->id }}">{{ $agent->matricule }}</option>
                                     @endforeach
                             </select>
+                            @error('agent_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group col-12 col-sm-6">
                             <label for="inputEmail4">Nom et Prénom : </label>
                             <input class="multisteps-form__input form-control" id="agent" type="text" disabled name="" value="" placeholder="Veillez entrer le nom de lagent"/>
+                            @error('agent_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <table id="example-2" class="table table-striped table-bordered nowrap">

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Abattement;
-use App\Models\Abattements;
+use App\Models\VolumeHoraire;
 use Illuminate\Http\Request;
 
-class AbattementsController extends Controller
+class VolumeHorairesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class AbattementsController extends Controller
      */
     public function index()
     {
-        $abattements = Abattement::all();
-        return view('abattements.index', compact('abattements'));
+        $volume_horaires = VolumeHoraire::all();
+        return view('volumes_horaires.index', compact('volume_horaires'));
     }
 
     /**
@@ -37,21 +36,14 @@ class AbattementsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $volume_horaire = VolumeHoraire::create([
 
-            'nombre_charge'=>'required|numeric',
-            'pourcentage'=>'required|numeric'
-
-        ]);
-
-        Abattement::create([
-
-            'nombre_charge'=>$request->nombre_charge,
-            'pourcentage'=>$request->pourcentage
+            'intitule'=>$request->intitule,
+            'nbr_heure'=>$request->nbr_heure
 
         ]);
 
-        return redirect(route('abattements.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
+        return redirect(route('volumes_horaires.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
 
     }
 
@@ -84,23 +76,21 @@ class AbattementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateabattement(Request $request, Abattement $abattement)
+    public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        //
+    }
 
-            'nombre_charge'=>'required|numeric',
-            'pourcentage'=>'required|numeric'
+    public function update_volume_horaire(Request $request, VolumeHoraire $volume_horaire)
+    {
+        $volume_horaire->update([
 
-        ]);
-
-        $abattement->update([
-
-            'nombre_charge'=>$request->nombre_charge,
-            'pourcentage'=>$request->pourcentage
+            'intitule'=>$request->intitule,
+            'nbr_heure'=>$request->nbr_heure
 
         ]);
 
-        return redirect(route('abattements.index'))->with('success', 'La modification a été effetué avec succés');
+        return redirect(route('volumes_horaires.index'))->with('success', 'La modification a été effetué avec succés');
     }
 
     /**
@@ -111,8 +101,6 @@ class AbattementsController extends Controller
      */
     public function destroy($id)
     {
-        Abattement::destroy($id);
-        return redirect(route('abattements.index'))->with('success', 'La suppression a été effetué avec succés');
-
+        //
     }
 }

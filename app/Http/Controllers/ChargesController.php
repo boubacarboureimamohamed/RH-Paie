@@ -40,8 +40,22 @@ class ChargesController extends Controller
      */
     public function store(Request $request)
     {
+
         for($varr=0; $varr < count($request->nomc); $varr++)
         {
+
+            $this->validate($request, [
+
+                'agent_id'=>'required',
+                'nomc'=>'required|alpha',
+                'prenomc'=>'required|alpha',
+                'date_naissc'=>'required',
+                'lieu_naissc'=>'required|alpha',
+                'nationalitec'=>'required|alpha',
+                'sexec'=>'required|alpha',
+                'type_charge_id'=>'required'
+
+            ]);
 
            $charge = Charge::create([
             'nomc'=>$request->nomc[$varr],
@@ -95,6 +109,20 @@ class ChargesController extends Controller
      */
     public function update(Request $request, Charge $charge)
     {
+
+        $this->validate($request, [
+
+            'agent_id'=>'required',
+            'nomc'=>'required|alpha',
+            'prenomc'=>'required|alpha',
+            'date_naissc'=>'required',
+            'lieu_naissc'=>'required|alpha',
+            'nationalitec'=>'required|alpha',
+            'sexec'=>'required|alpha',
+            'type_charge_id'=>'required'
+
+        ]);
+        
         $agent = $request->agent_id;
         $charge->update([
 

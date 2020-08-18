@@ -1,6 +1,7 @@
 <fieldset>
     <hr>
-         <h2 style="text-align: center; "><strong><b>BULLETIN DE PAIE</b></strong></h2>
+         <img src="../public/img/logo.png" alt="logo" width="100px" height="50px" style="position: absolute; ">
+         <h3 style="text-align: center; padding: 10px;"><strong><b>BULLETIN DE PAIE</b></strong></h3>
     <hr>
         <!-- Content Row -->
 
@@ -121,11 +122,6 @@
         <tbody>
             <tr>
                 <th style="border: 1px solid; padding: 5px;">Mensuel</th>
-                <th style="border: 1px solid; padding: 5px;">{{ $contrat->salaire_base }}</th>
-                <th style="border: 1px solid; padding: 5px;">{{ $payroll->net_a_payer }}</th>
-            </tr>
-            <tr>
-                <th style="border: 1px solid; padding: 5px;">Annuel</th>
                 <th style="border: 1px solid; padding: 5px;">{{ $contrat->salaire_base }}</th>
                 <th style="border: 1px solid; padding: 5px;">{{ $payroll->net_a_payer }}</th>
             </tr>

@@ -28,34 +28,52 @@
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="">Numéro Ordre Mission : </label>
-                          <input id="" type="text" class="form-control" name="numero_ordre_mission" value="{{ $mission->numero_ordre_mission }}" autofocus placeholder="Veillez entrer le numéro d'ordre de la mission">
+                            <input id="" type="text" class="form-control @error('numero_ordre_mission') is-invalid @enderror" name="numero_ordre_mission" value="{{ $mission->numero_ordre_mission }}" autofocus placeholder="Veillez entrer le numéro d'ordre de la mission">
+                            @error('numero_ordre_mission')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="">Objet Mission :</label>
-                            <textarea id="name" type="text" class="form-control" name="objet_mission" cols="10" rows="1" placeholder="Veillez saisir l'objet de la mission">
+                            <textarea id="name" type="text" class="form-control @error('objet_mission') is-invalid @enderror" name="objet_mission" cols="10" rows="1" placeholder="Veillez saisir l'objet de la mission">
                                 {{ $mission->objet_mission }}
                             </textarea>
+                            @error('objet_mission')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="">Ville De Départ :</label>
-                            <input id="" type="text" class="form-control" name="depart" value="{{ $mission->depart }}" autofocus placeholder="Veillez entrer la ville de départ">
+                            <input id="" type="text" class="form-control @error('depart') is-invalid @enderror" name="depart" value="{{ $mission->depart }}" autofocus placeholder="Veillez entrer la ville de départ">
+                            @error('depart')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="">Ville De Destination :</label>
-                            <input id="" type="text" class="form-control" name="destination" value="{{ $mission->destination }}" autofocus placeholder="Veillez entrer la ville de destination">
+                            <input id="" type="text" class="form-control @error('destination') is-invalid @enderror" name="destination" value="{{ $mission->destination }}" autofocus placeholder="Veillez entrer la ville de destination">
+                            @error('destination')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                       </div>
                       <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="">Date Début :</label>
-                          <input id="" type="date" class="form-control" name="date_debut_mission" value="{{ $mission->date_debut_mission }}" autofocus placeholder="Veillez entrer le nom de l'agent">
+                            <input id="" type="date" class="form-control @error('date_debut_mission') is-invalid @enderror" name="date_debut_mission" value="{{ $mission->date_debut_mission }}" autofocus placeholder="Veillez entrer le nom de l'agent">
+                            @error('date_debut_mission')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="">Date Fin :</label>
-                            <input id="" type="date" class="form-control" name="date_fin_mission" value="{{ $mission->date_fin_mission }}" autofocus placeholder="Veillez entrer le prénom de l'agent">
-                          </div>
+                            <input id="" type="date" class="form-control @error('date_fin_mission') is-invalid @enderror" name="date_fin_mission" value="{{ $mission->date_fin_mission }}" autofocus placeholder="Veillez entrer le prénom de l'agent">
+                            @error('date_fin_mission')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
                       </div>
                       <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">

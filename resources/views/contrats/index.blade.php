@@ -9,7 +9,7 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800"><strong>{{ ('Liste des Contrats') }}</strong></h1>
+    <h1 class="h3 mb-0 text-gray-800"><strong>Liste des contrats</strong></h1>
 </div>
 
 <!-- Content Row -->
@@ -33,6 +33,7 @@
                     <th>Contrat</th>
                     <th>Matricule</th>
                     <th>Nom et Prénom</th>
+                    <th>Détail</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
@@ -49,7 +50,12 @@
                     <td>{{ $contrat->agent->matricule }}</td>
                     <td>{{ $contrat->agent->nom.' '.$contrat->agent->prenom }}</td>
                     <td>
-                        <a href="{{ route('contrats.edit', $contrat) }}" class="btn btn-warning">
+                        <a href="{{ route('show_contrat', $contrat->id) }}" class="btn btn-warning">
+                            <span class="fas fa-fw fa-eye"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ route('contrats.edit', $contrat) }}" class="btn btn-primary">
                             <span class="fas fa-fw fa-edit"></span>
                         </a>
                    </td>

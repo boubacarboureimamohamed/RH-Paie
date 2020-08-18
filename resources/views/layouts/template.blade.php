@@ -101,7 +101,7 @@
       <div id="collapseAbsence" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{ route('absences.index') }}">Les absences</a>
-          <a class="collapse-item" href="{{ route('conges.index') }}">Les congés</a>
+            <a class="collapse-item" href="{{ route('conges.index') }}">Les congés</a>
           </div>
       </div>
       </li>
@@ -143,6 +143,7 @@
                 <a class="collapse-item" href="{{ route('services.index') }}">Les services</a>
                 <a class="collapse-item" href="{{ route('directions.index') }}">Les directions</a>
                 <a class="collapse-item" href="{{ route('departements.index') }}">Les départements</a>
+                <a class="collapse-item" href="{{ route('volumes_horaires.index') }}">Les volumes horaires</a>
             </div>
         </div>
         </li>
