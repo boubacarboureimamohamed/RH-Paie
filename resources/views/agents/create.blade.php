@@ -256,7 +256,7 @@
                                             <div class="form-group form-primary">
                                                 <div class="input-group">
                                                     <select class="multisteps-form__select form-control" name="type_charge_id[]">
-                                                        <option selected="selected">***Sélectionnez***</option>
+                                                        <option value="">***Sélectionnez***</option>
                                                             @foreach ($typecharges as $typecharge)
                                                         <option value="{{ $typecharge->id }}">{{ $typecharge->type_charge }}</option>
                                                             @endforeach

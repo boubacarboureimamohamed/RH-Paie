@@ -15,7 +15,7 @@ class CreateChargesTable extends Migration
     {
         Schema::create('charges', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nomc')->nullable();
+            $table->string('nomc');
             $table->string('prenomc');
             $table->date('date_naissc');
             $table->string('lieu_naissc');

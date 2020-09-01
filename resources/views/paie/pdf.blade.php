@@ -1,6 +1,6 @@
 <fieldset>
     <hr>
-         <img src="../public/img/logo.png" alt="logo" width="100px" height="50px" style="position: absolute; ">
+         <img src="../public/img/logo1.png" alt="logo" width="100px" height="50px" style="position: absolute; ">
          <h3 style="text-align: center; padding: 10px;"><strong><b>BULLETIN DE PAIE</b></strong></h3>
     <hr>
         <!-- Content Row -->
@@ -47,6 +47,13 @@
                 <th style="border: 1px solid; padding: 5px;">{{ $contrat->salaire_base }}</th>
                 <th style="border: 1px solid; padding: 5px;"></th>
                 <th style="border: 1px solid; padding: 5px;">{{ $contrat->salaire_base }}</th>
+            </tr>
+            <tr>
+                <th style="border: 1px solid; padding: 5px;">Absence et/ou Congé </th>
+                <th style="border: 1px solid; padding: 5px;">{{ $nbr_absence.' '.'Jour(s)' }}</th>
+                <th style="border: 1px solid; padding: 5px;"></th>
+                <th style="border: 1px solid; padding: 5px;"></th>
+                <th style="border: 1px solid; padding: 5px;">{{ $montant_a_prelever }}</th>
             </tr>
             @foreach ($bases_imposables as $base_imposable)
                 <tr>

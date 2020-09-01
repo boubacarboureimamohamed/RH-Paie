@@ -96,12 +96,11 @@
       <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAbsence" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-clipboard"></i>
-          <span>Absences et Congés</span>
+          <span>Gestion Des Absences</span>
       </a>
       <div id="collapseAbsence" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{ route('absences.index') }}">Les absences</a>
-            <a class="collapse-item" href="{{ route('conges.index') }}">Les congés</a>
           </div>
       </div>
       </li>

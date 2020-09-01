@@ -46,7 +46,7 @@
                                             @foreach ($agents as $agent)
                                                 <option value='{{ $agent->id }}'>{{ $agent->matricule.' - '.$agent->nom.' '.$agent->prenom }}</option>
                                             @endforeach
-                                        </select> 
+                                        </select>
                                         @error('agent_id')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror

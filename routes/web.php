@@ -27,8 +27,6 @@ Route::resource('agents', 'AgentsController');
 
 Route::resource('cursus', 'CursusController');
 
-Route::resource('conges', 'CongesController');
-
 Route::resource('charges', 'ChargesController');
 
 Route::resource('absences', 'AbsencesController');

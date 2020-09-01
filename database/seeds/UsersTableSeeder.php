@@ -16,10 +16,10 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'firstname' => "BOUBACAR BOUREIMA",
-            'secondname' => "Mohamed",
-            'email' => "mohamed@gmail.com",
-            'password' => Hash::make('1409970055')
+            'firstname' => "ADMIN",
+            'secondname' => "Admin",
+            'email' => "admin@gmail.com",
+            'password' => Hash::make('123456')
         ]);
 
         $role = Role::firstOrcreate(['name'=>'Admin']);

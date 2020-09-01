@@ -31,7 +31,7 @@
                 <tr>
                     <th>Matricule</th>
                     <th>Nom et Prénom</th>
-                    <th>Nombre de jour</th>
+                    <th>Type d'absence</th>
                     <th>Détail</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
@@ -40,9 +40,9 @@
             <tbody>
                 @foreach ($absences as $absence)
                 <tr>
-                   <td><span> {{ $absence->agent->matricule }} </span></td>
-                   <td><span> {{ $absence->agent->nom.' '.$absence->agent->prenom }} </span></td>
-                   <td><span> {{ $absence->nombre_jour }} </span></td>
+                   <td> {{ $absence->agent->matricule }} </td>
+                   <td> {{ $absence->agent->nom.' '.$absence->agent->prenom }} </td>
+                   <td> {{ $absence->type_absence->type_absence }}</td>
                    <td>
                        <a href="{{ route('show_absence', $absence->id) }}" class="btn btn-warning">
                            <span class="fas fa-fw fa-eye"></span>

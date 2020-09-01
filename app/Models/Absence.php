@@ -9,15 +9,15 @@ class Absence extends Model
     protected $fillable = [
 
         'agent_id',
-        'nombre_jour',
+        'date_debut',
+        'date_fin',
+        'nbr_jour',
+        'paiement_absence',
         'motif_absence',
-        'mois_absence',
         'montant_a_prelever',
         'type_absence_id'
 
         ];
-
-    protected $dates = ['mois_absence'];
 
     public function type_absence()
         {

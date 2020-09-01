@@ -36,7 +36,7 @@ class PayrollsController extends Controller
      */
     public function create()
     {
-        $agents = Agent::has('contrats')->get(); 
+        $agents = Agent::has('contrats')->get();
         return view('paie.create', compact('agents'));
     }
 
@@ -61,6 +61,8 @@ class PayrollsController extends Controller
         $tableau_nb_charges = [];
         $pourcentage_a_fam = [];
         $salaires_bases = [];
+        $nbr_absence = [];
+        $montant_a_prelever = [];
         $total_bases_imposables = [];
         $salaire_ni_cnss = [];
         $somme_ni_iuts = [];
@@ -92,6 +94,8 @@ class PayrollsController extends Controller
                 $r = 0;
                 $oo = 0;
                 $rr = 0;
+                $nbr_ab = 0;
+                $montant_ap = 0;
                 $somme_bi = 0;
                 $somme_cnss = 0;
                 $somme_iuts = 0;
@@ -101,11 +105,26 @@ class PayrollsController extends Controller
                 $contrat = Contrat::where('agent_id', '=', $request->agent_id[$var])->with('poste')->orderByDesc('date_debut_contrat')->first();
                 $nb_charges = Charge::where('agent_id', '=', $request->agent_id[$var])->count();
                 $bases_imposables = AffectationAvantage::where('agent_id', '=', $request->agent_id[$var])->with('avantage')->get();
+                $absences = Absence::where('agent_id', '=', $request->agent_id[$var])->get();
 
                 $tableau_contrats[] = $contrat;
                 $tableau_bases_imposables[] = $bases_imposables;
                 $tableau_nb_charges[] = $nb_charges;
                 $salaires_bases[] = $contrat->salaire_base;
+
+                $debut_mois = $request->mois.'-01';
+                $fin_mois = date("Y-m-t", strtotime($debut_mois));
+
+                foreach ($absences as $absence)
+                    {
+                    if($absence->date_debut >= $debut_mois && $absence->date_debut <= $fin_mois)
+                        {
+                            $nbr_ab = $nbr_ab + $absence->nbr_jour;
+                            $montant_ap = $montant_ap + $absence->montant_a_prelever;
+                        }
+                    }
+                $nbr_absence[] = $nbr_ab;
+                $montant_a_prelever[] = $montant_ap;
 
                 foreach($bases_imposables as $bases_imposable)
                     {
@@ -226,8 +245,6 @@ class PayrollsController extends Controller
 
                 $bulletin_paie = Payroll::create([
                     $m = $request->mois.'-01',
-                    //$dm = date("Y-m-01", strtotime($m)),
-                    //$fm = date("Y-m-t", strtotime($m)),
                     'mois'=>$request->mois.'-01',
                     'debut_mois'=>date("Y-m-01", strtotime($m)),
                     'fin_mois'=>date("Y-m-t", strtotime($m)),
@@ -236,7 +253,7 @@ class PayrollsController extends Controller
                 ]);
 
             }
-            // dd($m, $dm, $fm);
+            //dd($debut_mois, $fin_mois, $nbr_absence, $montant_a_prelever);
             /* dd($abattements, $taux_iuts, $avantages, $cotisations_cnss_anpe, $tableau_contrats, $tableau_bases_imposables,
                  $tableau_nb_charges, $pourcentage_a_fam, $salaires_bases,
                  $total_bases_imposables, $salaire_brut, $somme_ni_cnss, $somme_ni_iuts, $somme_sb_tbi, $somme_sb_tbi_cnss,
@@ -315,6 +332,8 @@ class PayrollsController extends Controller
         $somme_ni_cnss = 0;
         $salaire_ni_cnss = 0;
         $somme_ni_iuts = 0;
+        $nbr_absence = 0;
+        $montant_a_prelever = 0;
         $salaire_brut = 0;
         $somme_sb_tbi = 0;
         $somme_sb_tbi_cnss = 0;
@@ -354,13 +373,31 @@ class PayrollsController extends Controller
         $t_anpe_employeur = 0;
         $p_anpe_employeur = 0;
         $plafond_anpe = 0;
+        $nbr_ab = 0;
+        $montant_ap = 0;
+
 
         $contrat = Contrat::where('agent_id', '=', $payroll->agent->id)->with('poste')->orderByDesc('date_debut_contrat')->first();
         $nb_charges = Charge::where('agent_id', '=', $payroll->agent->id)->count();
         $bases_imposables = AffectationAvantage::where('agent_id', '=', $payroll->agent->id)->with('avantage')->get();
+        $absences = Absence::where('agent_id', '=', $payroll->agent->id)->get();
 
         $tableau_bases_imposables[] = $bases_imposables;
         $salaires_bases = $contrat->salaire_base;
+
+        $debut_mois = $payroll->mois.'-01';
+        $fin_mois = date("Y-m-t", strtotime($debut_mois));
+
+        foreach ($absences as $absence)
+            {
+            if($absence->date_debut >= $debut_mois && $absence->date_debut <= $fin_mois)
+                {
+                    $nbr_ab = $nbr_ab + $absence->nbr_jour;
+                    $montant_ap = $montant_ap + $absence->montant_a_prelever;
+                }
+            }
+        $nbr_absence = $nbr_ab;
+        $montant_a_prelever = $montant_ap;
 
         foreach($bases_imposables as $bases_imposable)
             {
@@ -491,7 +528,7 @@ class PayrollsController extends Controller
         $pdf = PDF::loadView('paie.pdf', compact('payroll', 'contrat', 'nb_charges', 'bases_imposables', 'plafond_anpe',
          'total_bases_imposables', 'somme_sb_tbi', 'somme_sb_tbi_cnss', 'somme_sb_tbi_cnss_aprof', 'somme_cnss', 'plafond_cnss',
          'somme_a_prof', 'somme_a_fam', 'somme_sb_tbi_cnss_aprof_afam', 'pourcentage_iuts', 'cnss', 'cotisation_cnss', 'cotisation_anpe',
-         'somme_iuts', 'somme_sb_tbi_cnss_aprof_afam_iuts', 't_cnss_employeur', 't_anpe_employeur'))->setPaper('a4', $oriantation = 'portrait');
+         'somme_iuts', 'somme_sb_tbi_cnss_aprof_afam_iuts', 't_cnss_employeur', 't_anpe_employeur', 'nbr_absence', 'montant_a_prelever'))->setPaper('a4', $oriantation = 'portrait');
 
          $filename = 'Bulletin_Paie_'.$payroll->agent->matricule;
         return $pdf->stream($filename.'.pdf');
