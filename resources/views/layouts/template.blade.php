@@ -134,6 +134,7 @@
         <div id="configuration" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('abattements.index') }}">Les abattements</a>
+                <a class="collapse-item" href="{{ route('anciennetes.index') }}">Les anciennetées</a>
                 <a class="collapse-item" href="{{ route('avantages.index') }}">Les bases imposables </a>
                 <a class="collapse-item" href="{{ route('cotisations_cnss_anpe.index') }}">Les taux ANPE/CNSS</a>
                 <a class="collapse-item" href="{{ route('impots.index') }}">Les taux IUTS</a>

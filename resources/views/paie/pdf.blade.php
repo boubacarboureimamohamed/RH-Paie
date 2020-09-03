@@ -4,6 +4,11 @@
          <h3 style="text-align: center; padding: 10px;"><strong><b>BULLETIN DE PAIE</b></strong></h3>
     <hr>
         <!-- Content Row -->
+    <style>
+        table, th, td {
+            border-collapse: collapse;
+        }
+    </style>
 
     <table style="width: 100%;">
         <tbody>
@@ -67,7 +72,7 @@
             <tr>
                 <th style="border: 1px solid; padding: 5px;">Salaire brut</th>
                 <th style="border: 1px solid; padding: 5px;"></th>
-                <th style="border: 1px solid; padding: 5px;">{{ $somme_sb_tbi }}</th>
+                <th style="border: 1px solid; padding: 5px;">{{ $salaire_brut }}</th>
                 <th style="border: 1px solid; padding: 5px;"></th>
                 <th style="border: 1px solid; padding: 5px;"></th>
             </tr>
@@ -91,13 +96,6 @@
                 <th style="border: 1px solid; padding: 5px;">{{ $somme_sb_tbi_cnss_aprof }}</th>
                 <th style="border: 1px solid; padding: 5px;"></th>
                 <th style="border: 1px solid; padding: 5px;">{{ $somme_a_fam }}</th>
-            </tr>
-            <tr>
-                <th style="border: 1px solid; padding: 5px;">Salaire net imposable</th>
-                <th style="border: 1px solid; padding: 5px;"></th>
-                <th style="border: 1px solid; padding: 5px;">{{ $somme_sb_tbi_cnss_aprof_afam }}</th>
-                <th style="border: 1px solid; padding: 5px;"></th>
-                <th style="border: 1px solid; padding: 5px;"></th>
             </tr>
             <tr>
                 <th style="border: 1px solid; padding: 5px;">Impôt sur le salaire</th>
@@ -179,3 +177,4 @@
 
 
 </fieldset>
+

@@ -6,6 +6,7 @@ use App\Models\Abattement;
 use App\Models\Absence;
 use App\Models\AffectationAvantage;
 use App\Models\Agent;
+use App\Models\Anciennete;
 use App\Models\Avantage;
 use App\Models\Charge;
 use App\Models\Contrat;
@@ -13,7 +14,7 @@ use App\Models\Cotisation;
 use App\Models\Impot;
 use App\Models\Payroll;
 use Barryvdh\DomPDF\Facade as PDF;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PayrollsController extends Controller
@@ -56,6 +57,7 @@ class PayrollsController extends Controller
 
         ]);
 
+        $primes_anciennetes = [];
         $tableau_contrats = [];
         $tableau_bases_imposables = [];
         $tableau_nb_charges = [];
@@ -74,11 +76,14 @@ class PayrollsController extends Controller
         $somme_sb_tbi_cnss_aprof_afam = [];
         $pourcentage_iuts = [];
         $somme_sb_tbi_cnss_aprof_afam_iuts = [];
+        $salaire_net_a_payer = [];
+        $salaire_net_a_payer1 = [];
 
         $taux_iuts = Impot::all();
         $avantages = Avantage::all();
         $abattements = Abattement::all();
         $cotisations_cnss_anpe = Cotisation::all();
+        $anciennetes = Anciennete::all();
 
         for($var=0; $var < count($request->agent_id); $var++)
             {
@@ -94,6 +99,8 @@ class PayrollsController extends Controller
                 $r = 0;
                 $oo = 0;
                 $rr = 0;
+                $snp = 0;
+                $snp1 = 0;
                 $nbr_ab = 0;
                 $montant_ap = 0;
                 $somme_bi = 0;
@@ -101,6 +108,8 @@ class PayrollsController extends Controller
                 $somme_iuts = 0;
                 $somme_a_fam = 0;
                 $somme_a_prof = 0;
+                $pourcentage_anciennete = 0;
+                $prime_anciennete = 0;
 
                 $contrat = Contrat::where('agent_id', '=', $request->agent_id[$var])->with('poste')->orderByDesc('date_debut_contrat')->first();
                 $nb_charges = Charge::where('agent_id', '=', $request->agent_id[$var])->count();
@@ -126,6 +135,31 @@ class PayrollsController extends Controller
                 $nbr_absence[] = $nbr_ab;
                 $montant_a_prelever[] = $montant_ap;
 
+                $date_jour = Carbon::now()->toDateTimeString();
+                $date_prise_service = $contrat->date_debut_contrat;
+                $diff = abs(strtotime($date_prise_service) - strtotime($date_jour));
+                $nbr_annee_service = floor($diff / (365*60*60*24));
+
+                foreach ($anciennetes as $anciennete)
+                    {
+                    if($anciennete->annee < 3 && $nbr_annee_service < 3)
+                        {
+                            $pourcentage_anciennete = 0 / 100;
+                            $prime_anciennete = $contrat->salaire_base * $pourcentage_anciennete;
+                        }
+                    if($anciennete->annee >= 3 && $anciennete->annee < 4 && $nbr_annee_service >= 3 && $nbr_annee_service < 4)
+                        {
+                            $pourcentage_anciennete = $anciennete->pourcentage / 100;
+                            $prime_anciennete = $contrat->salaire_base * $pourcentage_anciennete;
+                        }
+                    if($anciennete->annee >= 4 && $nbr_annee_service >= 4)
+                        {
+                            $pourcentage_anciennete = $anciennete->pourcentage / 100;
+                            $prime_anciennete = $contrat->salaire_base * $pourcentage_anciennete;
+                        }
+                    }
+                $primes_anciennetes[] = $prime_anciennete;
+
                 foreach($bases_imposables as $bases_imposable)
                     {
                         $somme_bi = $somme_bi + $bases_imposable->montant;
@@ -134,7 +168,10 @@ class PayrollsController extends Controller
 
                 foreach($salaires_bases as $salaire_base)
                     {
-                        $x = $somme_bi + $salaire_base;
+                        foreach ($total_bases_imposables as $total_basesimposables)
+                        {
+                            $x = $salaire_base + $total_basesimposables;
+                        }
                     }
                 $salaire_brut[] = $x;
 
@@ -243,17 +280,36 @@ class PayrollsController extends Controller
                     }
                 $somme_sb_tbi_cnss_aprof_afam_iuts[] = $somme_iuts;
 
+                foreach ($somme_sb_tbi_cnss_aprof_afam_iuts as $somme_sb_tbi_cnss_aprof_afam_iuts_end)
+                    {
+                        foreach ($montant_a_prelever as $montantaprelever)
+                            {
+                                $snp1 = $somme_sb_tbi_cnss_aprof_afam_iuts_end - $montantaprelever;
+                            }
+                    }
+                $salaire_net_a_payer1[] = $snp1;
+
+                foreach ($salaire_net_a_payer1 as $salaire_net_a_payer_1)
+                    {
+                        foreach ($primes_anciennetes as $primes_anciennetes_fin)
+                            {
+                                $snp = $salaire_net_a_payer_1 + $primes_anciennetes_fin;
+                            }
+                    }
+                $salaire_net_a_payer[] = $snp;
+
                 $bulletin_paie = Payroll::create([
                     $m = $request->mois.'-01',
                     'mois'=>$request->mois.'-01',
                     'debut_mois'=>date("Y-m-01", strtotime($m)),
                     'fin_mois'=>date("Y-m-t", strtotime($m)),
-                    'net_a_payer'=>$somme_sb_tbi_cnss_aprof_afam_iuts[$var],
+                    'net_a_payer'=>$salaire_net_a_payer[$var],
                     'agent_id'=>$request->agent_id[$var]
                 ]);
 
             }
             //dd($debut_mois, $fin_mois, $nbr_absence, $montant_a_prelever);
+            //dd($date_jour, $date_prise_service, $nbr_annee_service, $contrat->salaire_base, $pourcentage_anciennete, $prime_anciennete);
             /* dd($abattements, $taux_iuts, $avantages, $cotisations_cnss_anpe, $tableau_contrats, $tableau_bases_imposables,
                  $tableau_nb_charges, $pourcentage_a_fam, $salaires_bases,
                  $total_bases_imposables, $salaire_brut, $somme_ni_cnss, $somme_ni_iuts, $somme_sb_tbi, $somme_sb_tbi_cnss,
@@ -513,9 +569,7 @@ class PayrollsController extends Controller
             }
         $pourcentage_iuts = $c;
 
-
-                        $somme_iuts = (($somme_sb_tbi_cnss_aprof_afam * $pourcentage_iuts) / 100);
-
+        $somme_iuts = (($somme_sb_tbi_cnss_aprof_afam * $pourcentage_iuts) / 100);
 
         $somme_sb_tbi_cnss_aprof_afam_iuts = ($somme_sb_tbi_cnss_aprof_afam) - ($somme_iuts);
 
@@ -526,7 +580,7 @@ class PayrollsController extends Controller
                 $pourcentage_iuts, $somme_sb_tbi_cnss_aprof_afam_iuts); */
 
         $pdf = PDF::loadView('paie.pdf', compact('payroll', 'contrat', 'nb_charges', 'bases_imposables', 'plafond_anpe',
-         'total_bases_imposables', 'somme_sb_tbi', 'somme_sb_tbi_cnss', 'somme_sb_tbi_cnss_aprof', 'somme_cnss', 'plafond_cnss',
+         'total_bases_imposables', 'somme_sb_tbi', 'somme_sb_tbi_cnss', 'somme_sb_tbi_cnss_aprof', 'somme_cnss', 'plafond_cnss', 'salaire_brut',
          'somme_a_prof', 'somme_a_fam', 'somme_sb_tbi_cnss_aprof_afam', 'pourcentage_iuts', 'cnss', 'cotisation_cnss', 'cotisation_anpe',
          'somme_iuts', 'somme_sb_tbi_cnss_aprof_afam_iuts', 't_cnss_employeur', 't_anpe_employeur', 'nbr_absence', 'montant_a_prelever'))->setPaper('a4', $oriantation = 'portrait');
 

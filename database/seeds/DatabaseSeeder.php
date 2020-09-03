@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
          $this->call(TypecongeTableSeeder::class);
          $this->call(ModepaiementTableSeeder::class);
          $this->call(VolumeHorairesTableSeeder::class);
+         $this->call(AnciennetesTableSeeder::class);
     }
 }
