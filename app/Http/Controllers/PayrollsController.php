@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Abattement;
+use App\Models\AbattementsProf;
 use App\Models\Absence;
 use App\Models\AffectationAvantage;
 use App\Models\Agent;
@@ -11,7 +12,9 @@ use App\Models\Avantage;
 use App\Models\Charge;
 use App\Models\Contrat;
 use App\Models\Cotisation;
+use App\Models\HeuresSupplementaire;
 use App\Models\Impot;
+use App\Models\Nationalite;
 use App\Models\Payroll;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
@@ -68,7 +71,27 @@ class PayrollsController extends Controller
         $total_bases_imposables = [];
         $salaire_ni_cnss = [];
         $somme_ni_iuts = [];
+        $salaire_brut1 = [];
         $salaire_brut = [];
+        $sb1 = [];
+        $sb2 = [];
+        $sb3 = [];
+        $nb_heures = [];
+        $montant_horaires = [];
+        $majorations = [];
+        $montant_totaux = [];
+        $nb_heures1 = [];
+        $montant_horaires1 = [];
+        $majorations1 = [];
+        $montant_totaux1 = [];
+        $nb_heures2 = [];
+        $montant_horaires2 = [];
+        $majorations2 = [];
+        $montant_totaux2 = [];
+        $nb_heures3 = [];
+        $montant_horaires3 = [];
+        $majorations3 = [];
+        $montant_totaux3 = [];
         $somme_sb_tbi = [];
         $somme_ni_cnss = [];
         $somme_sb_tbi_cnss = [];
@@ -78,12 +101,15 @@ class PayrollsController extends Controller
         $somme_sb_tbi_cnss_aprof_afam_iuts = [];
         $salaire_net_a_payer = [];
         $salaire_net_a_payer1 = [];
+        $tableau_nationalite = [];
 
         $taux_iuts = Impot::all();
         $avantages = Avantage::all();
         $abattements = Abattement::all();
+        $abattements_profs = AbattementsProf::all();
         $cotisations_cnss_anpe = Cotisation::all();
         $anciennetes = Anciennete::all();
+        $nationalites = Nationalite::all();
 
         for($var=0; $var < count($request->agent_id); $var++)
             {
@@ -101,13 +127,35 @@ class PayrollsController extends Controller
                 $rr = 0;
                 $snp = 0;
                 $snp1 = 0;
+                $brut1 = 0;
+                $brut2 = 0;
+                $brut3 = 0;
+                $brut4 = 0;
+                $n_agent = 0;
                 $nbr_ab = 0;
+                $nb_heure = 0;
+                $montant_horaire = 0;
+                $majoration = 0;
+                $montant_total = 0;
+                $nb_heure1 = 0;
+                $montant_horaire1 = 0;
+                $majoration1 = 0;
+                $montant_total1 = 0;
+                $nb_heure2 = 0;
+                $montant_horaire2 = 0;
+                $majoration2 = 0;
+                $montant_total2 = 0;
+                $nb_heure3 = 0;
+                $montant_horaire3 = 0;
+                $majoration3 = 0;
+                $montant_total3 = 0;
                 $montant_ap = 0;
                 $somme_bi = 0;
                 $somme_cnss = 0;
                 $somme_iuts = 0;
                 $somme_a_fam = 0;
                 $somme_a_prof = 0;
+                $pourcentage_abat_prof = 0;
                 $pourcentage_anciennete = 0;
                 $prime_anciennete = 0;
 
@@ -115,6 +163,13 @@ class PayrollsController extends Controller
                 $nb_charges = Charge::where('agent_id', '=', $request->agent_id[$var])->count();
                 $bases_imposables = AffectationAvantage::where('agent_id', '=', $request->agent_id[$var])->with('avantage')->get();
                 $absences = Absence::where('agent_id', '=', $request->agent_id[$var])->get();
+                $heures_supplementaires = HeuresSupplementaire::where('agent_id', '=', $request->agent_id[$var])->get();
+                /* $nationalities_agents = Agent::whereIn('id', [$request->agent_id[$var]])->get();
+
+                foreach ($nationalities_agents as $nationalitie_agent) {
+                    $n_agent = $nationalitie_agent->nationalite->nationalite;
+                }
+                dd($n_agent); */
 
                 $tableau_contrats[] = $contrat;
                 $tableau_bases_imposables[] = $bases_imposables;
@@ -126,14 +181,91 @@ class PayrollsController extends Controller
 
                 foreach ($absences as $absence)
                     {
-                    if($absence->date_debut >= $debut_mois && $absence->date_debut <= $fin_mois)
-                        {
-                            $nbr_ab = $nbr_ab + $absence->nbr_jour;
-                            $montant_ap = $montant_ap + $absence->montant_a_prelever;
-                        }
+                        if($absence->date_debut >= $debut_mois && $absence->date_debut <= $fin_mois)
+                            {
+                                $nbr_ab = $nbr_ab + $absence->nbr_jour;
+                                $montant_ap = $montant_ap + $absence->montant_a_prelever;
+                            }
                     }
                 $nbr_absence[] = $nbr_ab;
                 $montant_a_prelever[] = $montant_ap;
+
+                foreach ($heures_supplementaires as $heure_supplementaire)
+                    {
+                        if($heure_supplementaire->mois_heure_supp >= $debut_mois && $heure_supplementaire->mois_heure_supp <= $fin_mois)
+                            {
+                                if($heure_supplementaire->majoration == 10)
+                                    {
+                                        $nb_heure = $nb_heure + $heure_supplementaire->nbr_heure;
+                                        $montant_horaire = $heure_supplementaire->montant_horaire;
+                                        $majoration = $heure_supplementaire->majoration;
+                                        $montant_total = $montant_total + $heure_supplementaire->montant_heure_supp;
+                                    }
+                            }
+                    }
+                $nb_heures[] = $nb_heure;
+                $montant_horaires[] = $montant_horaire;
+                $majorations[] = $majoration;
+                $montant_totaux[] = $montant_total;
+
+                foreach ($heures_supplementaires as $heure_supplementaire1)
+                    {
+                        if($heure_supplementaire1->mois_heure_supp >= $debut_mois && $heure_supplementaire1->mois_heure_supp <= $fin_mois)
+                            {
+                                if($heure_supplementaire1->majoration == 35)
+                                    {
+                                        $nb_heure1 = $nb_heure1 + $heure_supplementaire1->nbr_heure;
+                                        $montant_horaire1 = $heure_supplementaire1->montant_horaire;
+                                        $majoration1 = $heure_supplementaire1->majoration;
+                                        $montant_total1 = $montant_total1 + $heure_supplementaire1->montant_heure_supp;
+                                    }
+                            }
+                    }
+                $nb_heures1[] = $nb_heure1;
+                $montant_horaires1[] = $montant_horaire1;
+                $majorations1[] = $majoration1;
+                $montant_totaux1[] = $montant_total1;
+
+                foreach ($heures_supplementaires as $heure_supplementaire2)
+                    {
+                        if($heure_supplementaire2->mois_heure_supp >= $debut_mois && $heure_supplementaire2->mois_heure_supp <= $fin_mois)
+                            {
+                                if($heure_supplementaire2->majoration == 50)
+                                    {
+                                        $nb_heure2 = $nb_heure2 + $heure_supplementaire2->nbr_heure;
+                                        $montant_horaire2 = $heure_supplementaire2->montant_horaire;
+                                        $majoration2 = $heure_supplementaire2->majoration;
+                                        $montant_total2 = $montant_total2 + $heure_supplementaire2->montant_heure_supp;
+                                    }
+                            }
+                    }
+                $nb_heures2[] = $nb_heure2;
+                $montant_horaires2[] = $montant_horaire2;
+                $majorations2[] = $majoration2;
+                $montant_totaux2[] = $montant_total2;
+
+                foreach ($heures_supplementaires as $heure_supplementaire3)
+                    {
+                        if($heure_supplementaire3->mois_heure_supp >= $debut_mois && $heure_supplementaire3->mois_heure_supp <= $fin_mois)
+                            {
+                                if($heure_supplementaire3->majoration == 100)
+                                    {
+                                        $nb_heure3 = $nb_heure3 + $heure_supplementaire3->nbr_heure;
+                                        $montant_horaire3 = $heure_supplementaire3->montant_horaire;
+                                        $majoration3 = $heure_supplementaire3->majoration;
+                                        $montant_total3 = $montant_total3 + $heure_supplementaire3->montant_heure_supp;
+                                    }
+                            }
+                    }
+                $nb_heures3[] = $nb_heure3;
+                $montant_horaires3[] = $montant_horaire3;
+                $majorations3[] = $majoration3;
+                $montant_totaux3[] = $montant_total3;
+
+                /* dd($nb_heures, $montant_horaires, $majorations, $montant_totaux,
+                   $nb_heures1, $montant_horaires1, $majorations1, $montant_totaux1,
+                   $nb_heures2, $montant_horaires2, $majorations2, $montant_totaux2,
+                   $nb_heures3, $montant_horaires3, $majorations3, $montant_totaux3); */
 
                 $date_jour = Carbon::now()->toDateTimeString();
                 $date_prise_service = $contrat->date_debut_contrat;
@@ -173,7 +305,43 @@ class PayrollsController extends Controller
                             $x = $salaire_base + $total_basesimposables;
                         }
                     }
-                $salaire_brut[] = $x;
+                $salaire_brut1[] = $x;
+
+                foreach($montant_totaux as $mt)
+                    {
+                        foreach($montant_totaux1 as $mt1)
+                            {
+                                $brut1 = $mt + $mt1;
+                            }
+                    }
+                $sb1[] = $brut1;
+
+                foreach ($sb1 as $sb11)
+                    {
+                        foreach($montant_totaux2 as $mt2)
+                            {
+                                $brut2 = $sb11 + $mt2;
+                            }
+                    }
+                $sb2[] = $brut2;
+
+                foreach($sb2 as $sb22)
+                    {
+                        foreach($montant_totaux3 as $mt3)
+                            {
+                                $brut3 = $sb22 + $mt3;
+                            }
+                    }
+                $sb3[] = $brut3;
+
+                foreach($salaire_brut1 as $salaire_b1)
+                    {
+                        foreach($sb3 as $sb33)
+                            {
+                                $brut4 = $salaire_b1 + $sb33;
+                            }
+                    }
+                $salaire_brut[] = $brut4;
 
                 foreach ($bases_imposables as $bases_ni)
                     {
@@ -197,8 +365,8 @@ class PayrollsController extends Controller
                     {
                         foreach($cotisations_cnss_anpe as $cotisationscnss_anpe)
                             {
-                                $m = $cotisationscnss_anpe->plafond_cnss_employe;
-                                $n = $cotisationscnss_anpe->taux_cnss_employe;
+                                $m = $cotisationscnss_anpe->plafond_cnss_employe_national;
+                                $n = $cotisationscnss_anpe->taux_cnss_employe_national;
                             }
                             if($somme_sbtbi <= $m && $somme_sbtbi > 0)
                                 {
@@ -231,7 +399,11 @@ class PayrollsController extends Controller
 
                 foreach($somme_sb_tbi_cnss as $somme_sbtbicnss)
                     {
-                        $somme_a_prof = ($somme_sbtbicnss) - (($somme_sbtbicnss * 15) / 100);
+                        foreach ($abattements_profs as $abattement_prof)
+                            {
+                                $pourcentage_abat_prof = $abattement_prof->pourcentage;
+                            }
+                        $somme_a_prof = ($somme_sbtbicnss) - (($somme_sbtbicnss * $pourcentage_abat_prof) / 100);
                     }
                 $somme_sb_tbi_cnss_aprof[] = $somme_a_prof;
 
@@ -372,7 +544,8 @@ class PayrollsController extends Controller
         $contrat = Contrat::where('agent_id', '=', $payroll->agent->id)->with('poste')->orderByDesc('date_debut_contrat')->first();
         $nb_charges = Charge::where('agent_id', '=', $payroll->agent->id)->count();
         $bases_imposables = AffectationAvantage::where('agent_id', '=', $payroll->agent->id)->with('avantage')->get();
-        return view('paie.show', compact('payroll', 'contrat', 'nb_charges', 'bases_imposables'));
+        $heures_supplementaires = HeuresSupplementaire::where('agent_id', '=', $payroll->agent_id)->get();
+        return view('paie.show', compact('payroll', 'contrat', 'nb_charges', 'bases_imposables', 'heures_supplementaires'));
 
     }
 
@@ -389,6 +562,25 @@ class PayrollsController extends Controller
         $salaire_ni_cnss = 0;
         $somme_ni_iuts = 0;
         $nbr_absence = 0;
+        $sb1 = 0;
+        $sb2 = 0;
+        $sb3 = 0;
+        $nb_heures = 0;
+        $montant_horaires = 0;
+        $majorations = 0;
+        $montant_totaux = 0;
+        $nb_heures1 = 0;
+        $montant_horaires1 = 0;
+        $majorations1 = 0;
+        $montant_totaux1 = 0;
+        $nb_heures2 = 0;
+        $montant_horaires2 = 0;
+        $majorations2 = 0;
+        $montant_totaux2 = 0;
+        $nb_heures3 = 0;
+        $montant_horaires3 = 0;
+        $majorations3 = 0;
+        $montant_totaux3 = 0;
         $montant_a_prelever = 0;
         $salaire_brut = 0;
         $somme_sb_tbi = 0;
@@ -401,6 +593,7 @@ class PayrollsController extends Controller
         $taux_iuts = Impot::all();
         $avantages = Avantage::all();
         $abattements = Abattement::all();
+        $abattements_profs = AbattementsProf::all();
         $cotisations_cnss_anpe = Cotisation::all();
 
         $a = 0;
@@ -415,6 +608,27 @@ class PayrollsController extends Controller
         $r = 0;
         $oo = 0;
         $rr = 0;
+        $brut1 = 0;
+        $brut2 = 0;
+        $brut3 = 0;
+        $brut4 = 0;
+        $somme_hs = 0;
+        $nb_heure = 0;
+        $montant_horaire = 0;
+        $majoration = 0;
+        $montant_total = 0;
+        $nb_heure1 = 0;
+        $montant_horaire1 = 0;
+        $majoration1 = 0;
+        $montant_total1 = 0;
+        $nb_heure2 = 0;
+        $montant_horaire2 = 0;
+        $majoration2 = 0;
+        $montant_total2 = 0;
+        $nb_heure3 = 0;
+        $montant_horaire3 = 0;
+        $majoration3 = 0;
+        $montant_total3 = 0;
         $cnss = 0;
         $somme_bi = 0;
         $somme_cnss = 0;
@@ -431,14 +645,18 @@ class PayrollsController extends Controller
         $plafond_anpe = 0;
         $nbr_ab = 0;
         $montant_ap = 0;
+        $pourcentage_abat_prof = 0;
 
 
         $contrat = Contrat::where('agent_id', '=', $payroll->agent->id)->with('poste')->orderByDesc('date_debut_contrat')->first();
         $nb_charges = Charge::where('agent_id', '=', $payroll->agent->id)->count();
         $bases_imposables = AffectationAvantage::where('agent_id', '=', $payroll->agent->id)->with('avantage')->get();
         $absences = Absence::where('agent_id', '=', $payroll->agent->id)->get();
+        $heures_supplementaires = HeuresSupplementaire::where('agent_id', '=', $payroll->agent_id)->get();
 
-        $tableau_bases_imposables[] = $bases_imposables;
+        //dd($heures_supplementaires);
+
+        $tableau_bases_imposables0 = $bases_imposables;
         $salaires_bases = $contrat->salaire_base;
 
         $debut_mois = $payroll->mois.'-01';
@@ -454,6 +672,83 @@ class PayrollsController extends Controller
             }
         $nbr_absence = $nbr_ab;
         $montant_a_prelever = $montant_ap;
+
+        foreach ($heures_supplementaires as $heure_supplementaire)
+            {
+                if($heure_supplementaire->mois_heure_supp >= $debut_mois && $heure_supplementaire->mois_heure_supp <= $fin_mois)
+                    {
+                        if($heure_supplementaire->majoration == 10)
+                            {
+                                $nb_heure = $nb_heure + $heure_supplementaire->nbr_heure;
+                                $montant_horaire = $heure_supplementaire->montant_horaire;
+                                $majoration = $heure_supplementaire->majoration;
+                                $montant_total = $montant_total + $heure_supplementaire->montant_heure_supp;
+                            }
+                    }
+            }
+        $nb_heures = $nb_heure;
+        $montant_horaires = $montant_horaire;
+        $majorations = $majoration;
+        $montant_totaux = $montant_total;
+
+        foreach ($heures_supplementaires as $heure_supplementaire1)
+            {
+                if($heure_supplementaire1->mois_heure_supp >= $debut_mois && $heure_supplementaire1->mois_heure_supp <= $fin_mois)
+                    {
+                        if($heure_supplementaire1->majoration == 35)
+                            {
+                                $nb_heure1 = $nb_heure1 + $heure_supplementaire1->nbr_heure;
+                                $montant_horaire1 = $heure_supplementaire1->montant_horaire;
+                                $majoration1 = $heure_supplementaire1->majoration;
+                                $montant_total1 = $montant_total1 + $heure_supplementaire1->montant_heure_supp;
+                            }
+                    }
+            }
+        $nb_heures1 = $nb_heure1;
+        $montant_horaires1 = $montant_horaire1;
+        $majorations1 = $majoration1;
+        $montant_totaux1 = $montant_total1;
+
+        foreach ($heures_supplementaires as $heure_supplementaire2)
+            {
+                if($heure_supplementaire2->mois_heure_supp >= $debut_mois && $heure_supplementaire2->mois_heure_supp <= $fin_mois)
+                    {
+                        if($heure_supplementaire2->majoration == 50)
+                            {
+                                $nb_heure2 = $nb_heure2 + $heure_supplementaire2->nbr_heure;
+                                $montant_horaire2 = $heure_supplementaire2->montant_horaire;
+                                $majoration2 = $heure_supplementaire2->majoration;
+                                $montant_total2 = $montant_total2 + $heure_supplementaire2->montant_heure_supp;
+                            }
+                    }
+            }
+        $nb_heures2 = $nb_heure2;
+        $montant_horaires2 = $montant_horaire2;
+        $majorations2 = $majoration2;
+        $montant_totaux2 = $montant_total2;
+
+        foreach ($heures_supplementaires as $heure_supplementaire3)
+            {
+                if($heure_supplementaire3->mois_heure_supp >= $debut_mois && $heure_supplementaire3->mois_heure_supp <= $fin_mois)
+                    {
+                        if($heure_supplementaire3->majoration == 100)
+                            {
+                                $nb_heure3 = $nb_heure3 + $heure_supplementaire3->nbr_heure;
+                                $montant_horaire3 = $heure_supplementaire3->montant_horaire;
+                                $majoration3 = $heure_supplementaire3->majoration;
+                                $montant_total3 = $montant_total3 + $heure_supplementaire3->montant_heure_supp;
+                            }
+                    }
+            }
+        $nb_heures3 = $nb_heure3;
+        $montant_horaires3 = $montant_horaire3;
+        $majorations3 = $majoration3;
+        $montant_totaux3 = $montant_total3;
+
+        dd($nb_heures, $montant_horaires, $majorations, $montant_totaux,
+                   $nb_heures1, $montant_horaires1, $majorations1, $montant_totaux1,
+                   $nb_heures2, $montant_horaires2, $majorations2, $montant_totaux2,
+                   $nb_heures3, $montant_horaires3, $majorations3, $montant_totaux3);
 
         foreach($bases_imposables as $bases_imposable)
             {
@@ -480,8 +775,8 @@ class PayrollsController extends Controller
 
         foreach($cotisations_cnss_anpe as $cotisationscnss_anpe)
         {
-            $m = $cotisationscnss_anpe->plafond_cnss_employe;
-            $n = $cotisationscnss_anpe->taux_cnss_employe;
+            $m = $cotisationscnss_anpe->plafond_cnss_employe_national;
+            $n = $cotisationscnss_anpe->taux_cnss_employe_national;
             $t_cnss_employeur = $cotisationscnss_anpe->taux_cnss_employeur;
             $p_cnss_employeur = $cotisationscnss_anpe->plafond_cnss_employeur;
             $t_anpe_employeur = $cotisationscnss_anpe->taux_anpe;
@@ -535,13 +830,17 @@ class PayrollsController extends Controller
 
         $somme_sb_tbi_cnss = $rr;
 
-                $somme_a_prof = (($somme_sb_tbi_cnss * 15) / 100);
+        foreach ($abattements_profs as $abattement_prof)
+            {
+                $pourcentage_abat_prof = $abattement_prof->pourcentage;
+            }
+        $somme_a_prof = (($somme_sb_tbi_cnss * $pourcentage_abat_prof) / 100);
 
         $somme_sb_tbi_cnss_aprof = ($somme_sb_tbi_cnss) - ($somme_a_prof);
 
         foreach($abattements as $abattement)
             {
-                        $y = $nb_charges;
+                $y = $nb_charges;
 
                 if($abattement->nombre_charge == $y)
                     {
@@ -550,17 +849,15 @@ class PayrollsController extends Controller
             }
         $pourcentage_a_fam = $z;
 
+        $a = $pourcentage_a_fam;
 
-                        $a = $pourcentage_a_fam;
-
-                $somme_a_fam = (($somme_sb_tbi_cnss_aprof * $a) / 100);
+        $somme_a_fam = (($somme_sb_tbi_cnss_aprof * $a) / 100);
 
         $somme_sb_tbi_cnss_aprof_afam = ($somme_sb_tbi_cnss_aprof) - ($somme_a_fam);
 
         foreach($taux_iuts as $tranche)
             {
-
-                        $b = $somme_sb_tbi_cnss_aprof_afam;
+                $b = $somme_sb_tbi_cnss_aprof_afam;
 
                 if($b >= $tranche->minimum && $b <= $tranche->maximum)
                     {
@@ -579,7 +876,7 @@ class PayrollsController extends Controller
                  $somme_sb_tbi_cnss_aprof, $somme_sb_tbi_cnss_aprof_afam,
                 $pourcentage_iuts, $somme_sb_tbi_cnss_aprof_afam_iuts); */
 
-        $pdf = PDF::loadView('paie.pdf', compact('payroll', 'contrat', 'nb_charges', 'bases_imposables', 'plafond_anpe',
+        $pdf = PDF::loadView('paie.pdf', compact('payroll', 'contrat', 'nb_charges', 'bases_imposables', 'plafond_anpe', 'pourcentage_abat_prof',
          'total_bases_imposables', 'somme_sb_tbi', 'somme_sb_tbi_cnss', 'somme_sb_tbi_cnss_aprof', 'somme_cnss', 'plafond_cnss', 'salaire_brut',
          'somme_a_prof', 'somme_a_fam', 'somme_sb_tbi_cnss_aprof_afam', 'pourcentage_iuts', 'cnss', 'cotisation_cnss', 'cotisation_anpe',
          'somme_iuts', 'somme_sb_tbi_cnss_aprof_afam_iuts', 't_cnss_employeur', 't_anpe_employeur', 'nbr_absence', 'montant_a_prelever'))->setPaper('a4', $oriantation = 'portrait');

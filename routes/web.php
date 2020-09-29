@@ -97,3 +97,20 @@ Route::get('absence/{id}', 'AbsencesController@showAbsence')->name('show_absence
 
 Route::get('contrat/{id}', 'ContratsController@showContrat')->name('show_contrat');
 
+Route::get('agent/{id}', 'AgentsController@showAgent')->name('show_agent');
+
+Route::get('stagiaire/{id}', 'StagiairesController@showStagiaire')->name('show_stagiaire');
+
+Route::resource('nationalites', 'NationalitesController');
+
+Route::put('edit/{nationalite}', 'NationalitesController@updatenationalite')->name('modifnationalite');
+
+Route::resource('abattementsProfs', 'AbattementsProfsController');
+
+Route::put('edit/{abattementsProfs}', 'AbattementsProfsController@updateabattementProf')->name('modifabattementProf');
+
+Route::resource('heures_supplementaires', 'HeuresSupplementairesController');
+
+Route::get('heures_supplementaires_agent/{id}', 'HeuresSupplementairesController@heuresSuppAgent')->name('heures_supplementaires');
+
+

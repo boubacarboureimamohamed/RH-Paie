@@ -20,6 +20,6 @@ class Mission extends Model
 
     public function agents()
     {
-        return $this->belongsToMany('App\Models\Agent', 'agent_mission')->withPivot('est_chef');
+        return $this->belongsToMany('App\Models\Agent', 'agent_mission')->withPivot('est_chef', 'frais_mission');
     }
 }

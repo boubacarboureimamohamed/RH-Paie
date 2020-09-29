@@ -22,11 +22,12 @@ class CreateAgentsTable extends Migration
             $table->string('lieu_naiss');
             $table->string('sexe');
             $table->string('adresse');
-            $table->string('nationalite');
             $table->string('fonction');
             $table->string('telephone')->unique();
             $table->string('email')->unique()->nullable();
             $table->string('situation_matrimoniale');
+            $table->bigInteger('nationalite_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('nationalite_id')->references('id')->on('nationalites');
             $table->timestamps();
         });
 
@@ -37,6 +38,7 @@ class CreateAgentsTable extends Migration
             $table->bigInteger('mission_id')->unsigned()->index()->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('mission_id')->references('id')->on('missions');
             $table->boolean('est_chef');
+            $table->double('frais_mission');
             $table->timestamps();
         });
 

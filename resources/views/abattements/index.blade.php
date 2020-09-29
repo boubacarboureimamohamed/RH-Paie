@@ -81,7 +81,7 @@
         <form method="POST" action="{{ route('abattements.store') }}">
             @csrf
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style="align:center;">Ajout d'une nouvelle indemnité</h5>
+          <h5 class="modal-title" id="exampleModalLabel" style="align:center;">Ajout d'un abattement</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -119,7 +119,7 @@
             {{ csrf_field() }}
             {{ method_field('PUT') }}
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel1" style="align:center;">Modification d'une indemnité</h5>
+          <h5 class="modal-title" id="exampleModalLabel1" style="align:center;">Modification d'un abattement</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

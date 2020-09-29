@@ -27,6 +27,7 @@
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="">Taux ANPE :</label>
+                            <input id="" type="text" class="form-control" name="cotisation_id" hidden value="{{ $cotisation->id }}">
                             <input id="" type="text" class="form-control @error('taux_anpe') is-invalid @enderror" name="taux_anpe" value="{{ $cotisation->taux_anpe }}" placeholder="Veillez entrer le taux de l'ANPE">
                             @error('taux_anpe')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -34,24 +35,8 @@
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="inputEmail4">Plafond ANPE : </label>
-                            <input id="" type="number" class="form-control @error('plafond_anpe') is-invalid @enderror" name="plafond_anpe" value="{{ $cotisation->plafond_anpe }}" autofocus placeholder="Veillez entrer le plafond de l'ANPE">
+                            <input id="" type="text" class="form-control @error('plafond_anpe') is-invalid @enderror" name="plafond_anpe" value="{{ $cotisation->plafond_anpe }}" autofocus placeholder="Veillez entrer le plafond de l'ANPE">
                             @error('plafond_anpe')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <label for="">Taux CNSS employé :</label>
-                            <input id="" type="text" class="form-control @error('taux_cnss_employe') is-invalid @enderror" name="taux_cnss_employe" value="{{ $cotisation->taux_cnss_employe }}" placeholder="Veillez entrer le taux CNSS de l'employé">
-                            @error('taux_cnss_employe')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <label for="inputEmail4">Plafond CNSS employé : </label>
-                            <input id="" type="number" class="form-control @error('plafond_cnss_employe') is-invalid @enderror" name="plafond_cnss_employe" value="{{ $cotisation->plafond_cnss_employe }}" autofocus placeholder="Veillez entrer le plafond CNSS de l'employé">
-                            @error('plafond_cnss_employe')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
@@ -66,8 +51,40 @@
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="inputEmail4">Plafond CNSS employeur : </label>
-                            <input id="" type="number" class="form-control @error('plafond_cnss_employeur') is-invalid @enderror" name="plafond_cnss_employeur" value="{{ $cotisation->plafond_cnss_employeur }}" autofocus placeholder="Veillez entrer le plafond CNSS de l'employeur">
+                            <input id="" type="text" class="form-control @error('plafond_cnss_employeur') is-invalid @enderror" name="plafond_cnss_employeur" value="{{ $cotisation->plafond_cnss_employeur }}" autofocus placeholder="Veillez entrer le plafond CNSS de l'employeur">
                             @error('plafond_cnss_employeur')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label for="">Taux CNSS employé national :</label>
+                            <input id="" type="text" class="form-control @error('taux_cnss_employe_national') is-invalid @enderror" name="taux_cnss_employe_national" value="{{ $cotisation->taux_cnss_employe_national }}" placeholder="Veillez entrer le taux CNSS de l'employé national">
+                            @error('taux_cnss_employe_national')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label for="inputEmail4">Plafond CNSS employé national : </label>
+                            <input id="" type="text" class="form-control @error('plafond_cnss_employe_national') is-invalid @enderror" name="plafond_cnss_employe_national" value="{{ $cotisation->plafond_cnss_employe_national }}" autofocus placeholder="Veillez entrer le plafond CNSS de l'employé national">
+                            @error('plafond_cnss_employe_national')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label for="">Taux CNSS employé expatrié :</label>
+                            <input id="" type="text" class="form-control @error('taux_cnss_employe_expatrie') is-invalid @enderror" name="taux_cnss_employe_expatrie" value="{{ $cotisation->taux_cnss_employe_expatrie }}" placeholder="Veillez entrer le taux CNSS de l'employé expatrié">
+                            @error('taux_cnss_employe_expatrie')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label for="inputEmail4">Plafond CNSS employé expatrié : </label>
+                            <input id="" type="text" class="form-control @error('plafond_cnss_employe_expatrie') is-invalid @enderror" name="plafond_cnss_employe_expatrie" value="{{ $cotisation->plafond_cnss_employe_expatrie }}" autofocus placeholder="Veillez entrer le plafond CNSS de l'employé expatrié">
+                            @error('plafond_cnss_employe_expatrie')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>

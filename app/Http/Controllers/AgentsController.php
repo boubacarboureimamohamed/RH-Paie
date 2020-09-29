@@ -6,6 +6,7 @@ use App\Models\Agent;
 use App\Models\Charge;
 use App\Models\Contrat;
 use App\Models\Cursu;
+use App\Models\Nationalite;
 use App\Models\Poste;
 use App\Models\TypeCharge;
 use Illuminate\Http\Request;
@@ -34,7 +35,8 @@ class AgentsController extends Controller
         $postes = Poste::all();
         $contrats = Contrat::all();
         $typecharges = TypeCharge::all();
-        return view('agents.create', compact('postes', 'contrats', 'typecharges'));
+        $nationalites = Nationalite::all();
+        return view('agents.create', compact('postes', 'contrats', 'typecharges', 'nationalites'));
     }
 
     /**
@@ -54,7 +56,7 @@ class AgentsController extends Controller
             'lieu_naiss'=>'required',
             'telephone'=>'required|numeric',
             'email'=>'required',
-            'nationalite'=>'required',
+            'nationalite_id'=>'required',
             'adresse'=>'required',
             'sexe'=>'required',
             'fonction'=>'required',
@@ -70,7 +72,7 @@ class AgentsController extends Controller
             'lieu_naiss'=>$request->lieu_naiss,
             'telephone'=>$request->telephone,
             'email'=>$request->email,
-            'nationalite'=>$request->nationalite,
+            'nationalite_id'=>$request->nationalite_id,
             'adresse'=>$request->adresse,
             'sexe'=>$request->sexe,
             'fonction'=>$request->fonction,
@@ -120,9 +122,11 @@ class AgentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showAgent($id)
     {
-        //
+        $agent = Agent::find($id);
+        $contrat = Contrat::where('agent_id', '=', $agent->id)->orderByDesc('date_debut_contrat')->first();
+        return view('agents.show', compact('agent', 'contrat'));
     }
 
     /**
@@ -134,7 +138,8 @@ class AgentsController extends Controller
     public function edit($id)
     {
         $agent = Agent::find($id);
-        return view('agents.edit', compact('agent'));
+        $nationalites = Nationalite::all();
+        return view('agents.edit', compact('agent', 'nationalites'));
     }
 
     /**
@@ -155,7 +160,7 @@ class AgentsController extends Controller
             'lieu_naiss'=>'required',
             'telephone'=>'required|numeric',
             'email'=>'required',
-            'nationalite'=>'required',
+            'nationalite_id'=>'required',
             'adresse'=>'required',
             'sexe'=>'required',
             'fonction'=>'required',
@@ -172,7 +177,7 @@ class AgentsController extends Controller
             'lieu_naiss'=>$request->lieu_naiss,
             'telephone'=>$request->telephone,
             'email'=>$request->email,
-            'nationalite'=>$request->nationalite,
+            'nationalite_id'=>$request->nationalite_id,
             'adresse'=>$request->adresse,
             'sexe'=>$request->sexe,
             'fonction'=>$request->fonction,

@@ -21,7 +21,6 @@
       <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-              <div class="p-5">
                 <form class="user" method="POST" action="{{ route('missions.update', $mission) }}">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
@@ -87,21 +86,22 @@
                         <thead>
                             <tr>
                                 <th>Matricule</th>
-                                <th>Nom et Prénom</th>
+                                <th>Frais de mission</th>
+                                <th>Chef De Mission</th>
                                 <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne"><i class="fas fa-fw fa-plus"></i></a></th>
                             </tr>
                         </thead>
                         <tbody id="ligne">
                             <tr>
                                 <td>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-12">
                                         <div class="form-group form-primary">
                                             <div class="input-group">
                                                 <select  name="agent_id[]" onchange="change(1)" id="select1" title="sélectionner le matricule" value="" data-toggle="tooltip" class="form-control">
                                                         <option value="">********Matricule********</option>
                                                     @foreach($agents as $agent)
                                                         <option data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{  $agent->id   }}">
-                                                            {{ $agent->matricule }}
+                                                            {{ $agent->matricule.' '.'-'.' '.$agent->nom.' '.$agent->prenom }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -110,13 +110,24 @@
                                     </div>
                                 </td>
                                 <td>
-                                <div class="col-sm-12">
-                                    <div class="form-group form-primary">
-                                        <div class="input-group">
-                                            <input type="text" name="" title="" disabled data-toggle="tooltip" value="" id="agent1" class="form-control" placeholder=" ">
+                                    <div class="col-sm-12">
+                                        <div class="form-group form-primary">
+                                            <div class="input-group">
+                                                <input type="text" name="frais_mission[]" title="" value="" class="form-control" placeholder="Frais de mission">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </td>
+                                <td>
+                                    <div class="col-sm-10">
+                                        <div class="form-group form-primary">
+                                            <div class="input-group">
+                                                <div class="form-check form-check-inline">
+                                                    <input style="width: 30px;height: 30px;" id="chef1" class="form-check-input" type="radio" name="est_chef[]" value="1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td style="text-align: center"><a href="#" class="btn btn-danger remove"><i class="fas fa-fw fa-minus"></i></i></a></td>
                             </tr>
@@ -142,8 +153,7 @@
                         </div>
                        </div>
                       <hr>
-                    </form>
-              </div>
+                </form>
             </div>
           </div>
       </div>
@@ -169,14 +179,14 @@
         count++;
         var tr = '<tr>'+
             '<td>'+
-                '<div class="col-sm-10">'+
+                '<div class="col-sm-12">'+
                     '<div class="form-group form-primary">'+
                         '<div class="input-group">'+
                             '<select id="select'+count+'" onchange="change('+count+')" name="agent_id[]" class="form-control">'+
                                     '<option value="">********Matricule********</option>'+
                                 '@foreach($agents as $agent)'+
                                     '<option data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{ $agent->id }}">'+
-                                    '   {{ $agent->matricule }}'+
+                                    '   {{ $agent->matricule.' '.'-'.' '.$agent->nom.' '.$agent->prenom }}'+
                                     '</option>'+
                                 '@endforeach'+
                             '</select>'+
@@ -188,7 +198,18 @@
                 '<div class="col-sm-12">'+
                     '<div class="form-group form-primary">'+
                         '<div class="input-group">'+
-                            '<input type="text" name="" id="agent'+count+'" disabled class="form-control" placeholder=""value="">'+
+                            '<input type="text" name="frais_mission[]" class="form-control" placeholder="Frais de mission">'+
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</td>' +
+            '<td>' +
+                '<div class="col-sm-10">'+
+                    '<div class="form-group form-primary">'+
+                        '<div class="input-group">'+
+                            '<div class="form-check form-check-inline">'+
+                                '<input style="width: 30px;height: 30px;" id="chef'+count+'" class="form-check-input" type="radio" name="est_chef[]" value="1">'+
+                            '</div>'+
                         '</div>' +
                     '</div>' +
                 '</div>' +
@@ -201,10 +222,6 @@
         $(this).parent().parent().remove();
     })
 
-    function change(ligne_id) {
-       let agent = $('#select'+ligne_id+' option:selected').attr('data-agent')
-       $('#agent'+ligne_id).val(agent)
-    }
 </script>
 
 @endsection

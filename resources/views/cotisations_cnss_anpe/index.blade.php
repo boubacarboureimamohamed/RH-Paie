@@ -31,10 +31,12 @@
                 <tr>
                     <th>Taux ANPE</th>
                     <th>Plafond ANPE</th>
-                    <th>Taux CNSS employé</th>
-                    <th>Plafond CNSS employé</th>
                     <th>Taux CNSS employeur</th>
                     <th>Plafond CNSS employeur</th>
+                    <th>Taux CNSS employé national</th>
+                    <th>Plafond CNSS employé national</th>
+                    <th>Taux CNSS employé expatrié</th>
+                    <th>Plafond CNSS employé expatrié</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
@@ -44,10 +46,12 @@
                  <tr>
                     <td>{{ $cotisation->taux_anpe.' '.'%' }}</td>
                     <td>{{ $cotisation->plafond_anpe.' '.'Franc CFA' }}</td>
-                    <td>{{ $cotisation->taux_cnss_employe.' '.'%' }}</td>
-                    <td>{{ $cotisation->plafond_cnss_employe.' '.'Franc CFA' }}</td>
                     <td>{{ $cotisation->taux_cnss_employeur.' '.'%' }}</td>
                     <td>{{ $cotisation->plafond_cnss_employeur.' '.'Franc CFA' }}</td>
+                    <td>{{ $cotisation->taux_cnss_employe_national.' '.'%' }}</td>
+                    <td>{{ $cotisation->plafond_cnss_employe_national.' '.'Franc CFA' }}</td>
+                    <td>{{ $cotisation->taux_cnss_employe_expatrie.' '.'%' }}</td>
+                    <td>{{ $cotisation->plafond_cnss_employe_expatrie.' '.'Franc CFA' }}</td>
                     <td>
                         <a href="{{ route('cotisations_cnss_anpe.edit', $cotisation) }}" class="btn btn-primary">
                             <span class="fas fa-fw fa-edit"></span>

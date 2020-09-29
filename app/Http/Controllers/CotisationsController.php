@@ -38,8 +38,10 @@ class CotisationsController extends Controller
     {
         $this->validate($request, [
 
-            'taux_cnss_employe'=>'required|numeric',
-            'plafond_cnss_employe'=>'required|numeric',
+            'taux_cnss_employe_national'=>'required|numeric',
+            'plafond_cnss_employe_national'=>'required|numeric',
+            'taux_cnss_employe_expatrie'=>'required|numeric',
+            'plafond_cnss_employe_expatrie'=>'required|numeric',
             'taux_cnss_employeur'=>'required|numeric',
             'plafond_cnss_employeur'=>'required|numeric',
             'taux_anpe'=>'required|numeric',
@@ -49,8 +51,10 @@ class CotisationsController extends Controller
 
         Cotisation::create([
 
-            'taux_cnss_employe'=>$request->taux_cnss_employe,
-            'plafond_cnss_employe'=>$request->plafond_cnss_employe,
+            'taux_cnss_employe_national'=>$request->taux_cnss_employe_national,
+            'plafond_cnss_employe_national'=>$request->plafond_cnss_employe_national,
+            'taux_cnss_employe_expatrie'=>$request->taux_cnss_employe_expatrie,
+            'plafond_cnss_employe_expatrie'=>$request->plafond_cnss_employe_expatrie,
             'taux_cnss_employeur'=>$request->taux_cnss_employeur,
             'plafond_cnss_employeur'=>$request->plafond_cnss_employeur,
             'taux_anpe'=>$request->taux_anpe,
@@ -91,12 +95,16 @@ class CotisationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cotisation $cotisation)
+    public function update(Request $request)
     {
+        $cotisation = Cotisation::where('id', '=', $request->cotisation_id)->first();
+
         $this->validate($request, [
 
-            'taux_cnss_employe'=>'required|numeric',
-            'plafond_cnss_employe'=>'required|numeric',
+            'taux_cnss_employe_national'=>'required|numeric',
+            'plafond_cnss_employe_national'=>'required|numeric',
+            'taux_cnss_employe_expatrie'=>'required|numeric',
+            'plafond_cnss_employe_expatrie'=>'required|numeric',
             'taux_cnss_employeur'=>'required|numeric',
             'plafond_cnss_employeur'=>'required|numeric',
             'taux_anpe'=>'required|numeric',
@@ -107,8 +115,10 @@ class CotisationsController extends Controller
         //dd($request->all());
         $cotisation->update([
 
-            'taux_cnss_employe'=>$request->taux_cnss_employe,
-            'plafond_cnss_employe'=>$request->plafond_cnss_employe,
+            'taux_cnss_employe_national'=>$request->taux_cnss_employe_national,
+            'plafond_cnss_employe_national'=>$request->plafond_cnss_employe_national,
+            'taux_cnss_employe_expatrie'=>$request->taux_cnss_employe_expatrie,
+            'plafond_cnss_employe_expatrie'=>$request->plafond_cnss_employe_expatrie,
             'taux_cnss_employeur'=>$request->taux_cnss_employeur,
             'plafond_cnss_employeur'=>$request->plafond_cnss_employeur,
             'taux_anpe'=>$request->taux_anpe,

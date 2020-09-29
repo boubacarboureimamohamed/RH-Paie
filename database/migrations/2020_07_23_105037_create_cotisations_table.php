@@ -15,8 +15,10 @@ class CreateCotisationsTable extends Migration
     {
         Schema::create('cotisations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->double('taux_cnss_employe');
-            $table->double('plafond_cnss_employe');
+            $table->double('taux_cnss_employe_national');
+            $table->double('plafond_cnss_employe_national');
+            $table->double('taux_cnss_employe_expatrie');
+            $table->double('plafond_cnss_employe_expatrie');
             $table->double('taux_cnss_employeur');
             $table->double('plafond_cnss_employeur');
             $table->double('taux_anpe');

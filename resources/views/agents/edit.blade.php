@@ -67,8 +67,12 @@
                     </div>
                     <div class="form-group col-12 col-sm-6">
                         <label for="inputEmail4">Nationalité : </label>
-                        <input class="multisteps-form__input form-control @error('nationalite') is-invalid @enderror" type="text" name="nationalite" value="{{ $agent->nationalite }}" placeholder="Veillez entrer la nationnalité de lagent"/>
-                        @error('nationalite')
+                        <select class="form-control @error('nationalite_id') is-invalid @enderror" name="nationalite_id">
+                            @foreach ($nationalites as $nationalite)
+                                <option @if($nationalite->id == $agent->nationalite_id) {{ 'selected' }} @endif value="{{ $nationalite->id }}">{{ $nationalite->nationalite }}</option>
+                            @endforeach
+                        </select>
+                        @error('nationalite_id')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>

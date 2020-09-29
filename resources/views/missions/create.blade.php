@@ -21,7 +21,6 @@
       <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-              <div class="p-5">
                 <form class="user" method="POST" action="{{ route('missions.store') }}">
                     @csrf
                   <div class="form-group row">
@@ -84,7 +83,7 @@
                     <thead>
                         <tr>
                             <th>Matricule</th>
-                            <th>Nom et Prénom</th>
+                            <th>Frais de mission</th>
                             <th>Chef De Mission</th>
                             <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne"><i class="fas fa-fw fa-plus"></i></a></th>
                         </tr>
@@ -92,14 +91,14 @@
                     <tbody id="ligne">
                         <tr>
                             <td>
-                                <div class="col-sm-10">
+                                <div class="col-sm-12">
                                     <div class="form-group form-primary">
                                         <div class="input-group">
                                             <select  name="agent_id[]" onchange="change(1)" id="select1" title="sélectionner le matricule" value="" data-toggle="tooltip" class="form-control">
                                                     <option value="">********Matricule********</option>
                                                 @foreach($agents as $agent)
                                                     <option data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{  $agent->id   }}">
-                                                        {{ $agent->matricule }}
+                                                        {{ $agent->matricule.' '.'-'.' '.$agent->nom.' '.$agent->prenom  }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -111,7 +110,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group form-primary">
                                         <div class="input-group">
-                                            <input type="text" name="" title="" disabled data-toggle="tooltip" value="" id="agent1" class="form-control" placeholder=" ">
+                                            <input type="text" name="frais_mission[]" title="" value="" class="form-control" placeholder="Frais de mission">
                                         </div>
                                     </div>
                                 </div>
@@ -148,7 +147,6 @@
                    </div>
                   <hr>
                 </form>
-              </div>
             </div>
           </div>
       </div>
@@ -171,14 +169,14 @@
         count++;
         var tr = '<tr>'+
             '<td>'+
-                '<div class="col-sm-10">'+
+                '<div class="col-sm-12">'+
                     '<div class="form-group form-primary">'+
                         '<div class="input-group">'+
                             '<select id="select'+count+'" onchange="change('+count+')" name="agent_id[]" class="form-control">'+
                                     '<option value="">********Matricule********</option>'+
                                 '@foreach($agents as $agent)'+
                                     '<option  data-agent="{{ $agent->nom.' '.$agent->prenom }}" value="{{ $agent->id }}">'+
-                                    '   {{ $agent->matricule }}'+
+                                    '   {{ $agent->matricule.' '.'-'.' '.$agent->nom.' '.$agent->prenom }}'+
                                     '</option>'+
                                 '@endforeach'+
                             '</select>'+
@@ -190,7 +188,7 @@
                 '<div class="col-sm-12">'+
                     '<div class="form-group form-primary">'+
                         '<div class="input-group">'+
-                            '<input type="text" name="" id="agent'+count+'" disabled class="form-control" placeholder=""value="">'+
+                            '<input type="text" name="frais_mission[]" class="form-control" placeholder="Frais de mission">'+
                         '</div>' +
                     '</div>' +
                 '</div>' +

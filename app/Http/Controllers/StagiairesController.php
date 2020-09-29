@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Recrutement;
+use App\Models\Nationalite;
 use App\Models\Service;
 use App\Models\Stagiaire;
 use App\Models\Theme;
@@ -30,8 +30,8 @@ class StagiairesController extends Controller
     {
         $themes = Theme::all();
         $services = Service::all();
-        $recrutements = Recrutement::all();
-        return view('stagiaires.create', compact('themes', 'recrutements', 'services'));
+        $nationalites = Nationalite::all();
+        return view('stagiaires.create', compact('themes', 'nationalites', 'services'));
     }
 
     /**
@@ -46,7 +46,7 @@ class StagiairesController extends Controller
 
             'theme_id'=>$request->theme_id,
             'service_id'=>$request->service_id,
-            'recrutement_id'=>$request->recrutement_id,
+            'nationalite_id'=>$request->nationalite_id,
             'nom'=>$request->nom,
             'prenom'=>$request->prenom,
             'date_naiss'=>$request->date_naiss,
@@ -55,6 +55,7 @@ class StagiairesController extends Controller
             'email'=>$request->email,
             'nationalite'=>$request->nationalite,
             'adresse'=>$request->adresse,
+            'forfait_mensuel'=>$request->forfait_mensuel,
             'sexe'=>$request->sexe,
             'date_debut_stage'=>$request->date_debut_stage,
             'date_fin_stage'=>$request->date_fin_stage
@@ -70,9 +71,10 @@ class StagiairesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showStagiaire($id)
     {
-        //
+        $stagiaire = Stagiaire::find($id);
+        return view('stagiaires.show', compact('stagiaire'));
     }
 
     /**
@@ -83,11 +85,11 @@ class StagiairesController extends Controller
      */
     public function edit($id)
     {
-        $recrutements = Recrutement::all();
+        $nationalites = Nationalite::all();
         $services = Service::all();
         $themes = Theme::all();
         $stagiaire = Stagiaire::find($id);
-        return view('stagiaires.edit', compact('recrutements', 'services', 'themes', 'stagiaire'));
+        return view('stagiaires.edit', compact('nationalites', 'services', 'themes', 'stagiaire'));
     }
 
     /**
@@ -103,7 +105,7 @@ class StagiairesController extends Controller
 
             'theme_id'=>$request->theme_id,
             'service_id'=>$request->service_id,
-            'recrutement_id'=>$request->recrutement_id,
+            'nationalite_id'=>$request->nationalite_id,
             'nom'=>$request->nom,
             'prenom'=>$request->prenom,
             'date_naiss'=>$request->date_naiss,
@@ -112,6 +114,7 @@ class StagiairesController extends Controller
             'email'=>$request->email,
             'nationalite'=>$request->nationalite,
             'adresse'=>$request->adresse,
+            'forfait_mensuel'=>$request->forfait_mensuel,
             'sexe'=>$request->sexe,
             'date_debut_stage'=>$request->date_debut_stage,
             'date_fin_stage'=>$request->date_fin_stage

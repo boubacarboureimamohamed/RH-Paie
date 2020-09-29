@@ -149,7 +149,7 @@ class AbsencesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Absence $absence)
+    public function update(Request $request, $id)
     {
 
         $this->validate($request, [
@@ -162,6 +162,8 @@ class AbsencesController extends Controller
             'type_absence_id'=>'required'
 
         ]);
+
+        $absence = Absence::find($id);
 
         $fdate = $request->date_debut;
         $tdate = $request->date_fin;

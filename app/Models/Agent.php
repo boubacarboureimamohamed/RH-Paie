@@ -16,7 +16,7 @@ class Agent extends Model
         'email',
         'sexe',
         'fonction',
-        'nationalite',
+        'nationalite_id',
         'adresse',
         'situation_matrimoniale'
     ];
@@ -74,5 +74,15 @@ class Agent extends Model
     public function payrolls()
     {
         return $this->hasMany('App\Models\Payroll');
+    }
+
+    public function nationalite()
+    {
+        return $this->belongsTo('App\Models\Nationalite');
+    }
+
+    public function heuresSupplementaires()
+    {
+        return $this->hasMany('App\Models\HeuresSupplementaire');
     }
 }

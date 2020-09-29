@@ -60,6 +60,13 @@
                 <th style="border: 1px solid; padding: 5px;"></th>
                 <th style="border: 1px solid; padding: 5px;">{{ $montant_a_prelever }}</th>
             </tr>
+            <tr>
+                <th style="border: 1px solid; padding: 5px;">Heures Supplémentaires </th>
+                <th style="border: 1px solid; padding: 5px;"></th>
+                <th style="border: 1px solid; padding: 5px;"></th>
+                <th style="border: 1px solid; padding: 5px;"></th>
+                <th style="border: 1px solid; padding: 5px;"></th>
+            </tr>
             @foreach ($bases_imposables as $base_imposable)
                 <tr>
                     <th style="border: 1px solid; padding: 5px;">{{ $base_imposable->avantage->libelle }}</th>
@@ -85,7 +92,7 @@
             </tr>
             <tr>
                 <th style="border: 1px solid; padding: 5px;">Abat.Professionnel</th>
-                <th style="border: 1px solid; padding: 5px;">15%</th>
+                <th style="border: 1px solid; padding: 5px;">{{ $pourcentage_abat_prof.' '.'%' }}</th>
                 <th style="border: 1px solid; padding: 5px;">{{ $somme_sb_tbi_cnss }}</th>
                 <th style="border: 1px solid; padding: 5px;"></th>
                 <th style="border: 1px solid; padding: 5px;">{{ $somme_a_prof }}</th>

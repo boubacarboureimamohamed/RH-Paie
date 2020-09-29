@@ -39,7 +39,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">{{ config('app.name', 'GRH') }} <sup>2.0</sup></div>
+        <div class="sidebar-brand-text mx-3">{{ config('app.name', 'RH-Biya') }}</div>
       </a>
 
       <!-- Divider -->
@@ -64,6 +64,7 @@
         <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{ route('agents.index') }}">Liste des employés</a>
+            <a class="collapse-item" href="{{ route('stagiaires.index') }}">Liste des stagiaires</a>
             <a class="collapse-item" href="{{ route('charges.index') }}">Les charges</a>
             <a class="collapse-item" href="{{ route('cursus.index') }}">Les cursus</a>
           </div>
@@ -117,6 +118,7 @@
         <div id="collapsePaie" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('affectationAvantages.index') }}">Affectation des rubriques </a>
+                <a class="collapse-item" href="{{ route('heures_supplementaires.index') }}">Heures supplémentaires</a>
                 <a class="collapse-item" href="{{ route('paie.index') }}">Edition des bulletins </a>
                 <a class="collapse-item" href="{{ route('clotures_mensuelles.index') }}">Clôture mensuelle</a>
             </div>
@@ -134,6 +136,7 @@
         <div id="configuration" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('abattements.index') }}">Les abattements</a>
+                <a class="collapse-item" href="{{ route('abattementsProfs.index') }}">Les abattements prof</a>
                 <a class="collapse-item" href="{{ route('anciennetes.index') }}">Les anciennetées</a>
                 <a class="collapse-item" href="{{ route('avantages.index') }}">Les bases imposables </a>
                 <a class="collapse-item" href="{{ route('cotisations_cnss_anpe.index') }}">Les taux ANPE/CNSS</a>
@@ -143,6 +146,7 @@
                 <a class="collapse-item" href="{{ route('services.index') }}">Les services</a>
                 <a class="collapse-item" href="{{ route('directions.index') }}">Les directions</a>
                 <a class="collapse-item" href="{{ route('departements.index') }}">Les départements</a>
+                <a class="collapse-item" href="{{ route('nationalites.index') }}">Les nationalités</a>
                 <a class="collapse-item" href="{{ route('volumes_horaires.index') }}">Les volumes horaires</a>
             </div>
         </div>
@@ -200,7 +204,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->firstname.' '.Auth::user()->secondname }}</span>
-                <img class="img-profile rounded-circle" src="{{ asset('img/img.jpg') }}">
+                <img class="img-profile rounded-circle" src="{{ asset('img/img.png') }}">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

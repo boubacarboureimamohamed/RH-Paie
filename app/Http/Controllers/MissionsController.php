@@ -26,7 +26,7 @@ class MissionsController extends Controller
      */
     public function create()
     {
-        $agents = Agent::all();
+        $agents = Agent::has('contrats')->get();
         return view('missions.create', compact('agents'));
     }
 
@@ -67,7 +67,8 @@ class MissionsController extends Controller
             $mission->agents()->attach(
                 $request->agent_id[$var],
                     [
-                        'est_chef'=> $request->agent_id[$var] == $request->est_chef[0]
+                        'frais_mission'=>$request->frais_mission[$var],
+                        'est_chef'=>$request->agent_id[$var] == $request->est_chef[0]
                     ]);
 
          }
@@ -95,7 +96,7 @@ class MissionsController extends Controller
      */
     public function edit($id)
     {
-        $agents = Agent::all();
+        $agents = Agent::has('contrats')->get();
         $mission = Mission::find($id);
         return view('missions.edit', compact('agents', 'mission'));
     }
@@ -137,7 +138,8 @@ class MissionsController extends Controller
             $mission->agents()->attach(
                 $request->agent_id[$var],
                     [
-                        'est_chef'=> $request->agent_id[$var] == $request->est_chef[0]
+                        'frais_mission'=>$request->frais_mission[$var],
+                        'est_chef'=>$request->agent_id[$var] == $request->est_chef[0]
                     ]);
 
 

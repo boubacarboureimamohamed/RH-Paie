@@ -33,6 +33,7 @@
                     <th>Prénom</th>
                     <th>Thème</th>
                     <th>Service</th>
+                    <th>Détail</th>
                     <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
@@ -45,7 +46,12 @@
                     <td><span> {{ $stagiaire->theme->intitule }} </span></td>
                     <td><span> {{ $stagiaire->service->libelle }} </span></td>
                     <td>
-                        <a href="{{ route('stagiaires.edit', $stagiaire) }}" class="btn btn-warning">
+                        <a href="{{ route('show_stagiaire', $stagiaire->id) }}" class="btn btn-warning">
+                            <span class="fas fa-fw fa-eye"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ route('stagiaires.edit', $stagiaire) }}" class="btn btn-primary">
                             <span class="fas fa-fw fa-edit"></span>
                         </a>
                    </td>

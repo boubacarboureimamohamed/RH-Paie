@@ -20,37 +20,10 @@
     <div class="card mb-4 py-3 border-left-primary">
       <div class="card-body">
         <div class="row">
-            <div class="col-lg-1">
-
-            </div>
-            <div class="col-lg-10">
+            <div class="col-lg-12">
                 <form class="user" method="POST" action="{{ route('stagiaires.update', $stagiaire) }}">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
-                  <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="inputEmail4">Théme : </label>
-                        <select class="multisteps-form__input form-control" value="" placeholder="Veillez entrer la référence du recrutement" name="theme_id" id="">
-                               <option value="">******Selectionner********</option>
-                            @foreach ($themes as $theme)
-                               <option @if($theme->id == $stagiaire->theme_id)
-                                {{ 'selected' }}
-                                @endif value="{{$theme->id}}">{{$theme->intitule}}</option>
-                            @endforeach
-                       </select>
-                    </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="inputEmail4">Ref_Recrutement : </label>
-                        <select class="multisteps-form__input form-control" value="" placeholder="Veillez entrer la référence du recrutement" name="recrutement_id" id="">
-                                <option value="">******Selectionner********</option>
-                            @foreach ($recrutements as $recrutement)
-                                <option @if($recrutement->id == $stagiaire->recrutement_id)
-                                    {{ 'selected' }}
-                                    @endif value="{{$recrutement->id}}">{{$recrutement->description}}</option>
-                             @endforeach
-                        </select>
-                    </div>
-                  </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="inputEmail4">Nom : </label>
@@ -73,8 +46,14 @@
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <label for="inputEmail4">Nationalité : </label>
-                      <input id="" type="text" class="multisteps-form__input form-control" name="nationalite" value="{{ $stagiaire->nationalite }}" autofocus placeholder="Veillez entrer la nationnalité du stagiaire">
+                        <label for="inputEmail4">Nationalite : </label>
+                        <select class="form-control" value="" placeholder="" name="nationalite_id" id="">
+                            @foreach ($nationalites as $nationalite)
+                                <option  @if($nationalite->id == $stagiaire->nationalite_id)
+                                    {{ 'selected' }}
+                                    @endif value="{{$nationalite->id}}">{{$nationalite->nationalite}}</option>
+                             @endforeach
+                        </select>
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="inputEmail4">Sexe : </label>
@@ -100,6 +79,23 @@
                         <input id="" type="text" class="multisteps-form__input form-control" name="adresse" value="{{ $stagiaire->adresse }}" autofocus placeholder="Veillez entrer l'adresse du stagiaire">
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label for="inputEmail4">Forfait Mensuel : </label>
+                        <input id="" type="text" class="form-control" name="forfait_mensuel" value="{{ $stagiaire->forfait_mensuel }}" autofocus placeholder="Veillez entrer le forfait mensuel du stagiaire">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label for="inputEmail4">Théme : </label>
+                        <select class="multisteps-form__input form-control" value="" placeholder="Veillez entrer la référence du recrutement" name="theme_id" id="">
+                               <option value="">******Selectionner********</option>
+                            @foreach ($themes as $theme)
+                               <option @if($theme->id == $stagiaire->theme_id)
+                                {{ 'selected' }}
+                                @endif value="{{$theme->id}}">{{$theme->intitule}}</option>
+                            @endforeach
+                       </select>
+                    </div>
+                    <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="inputEmail4">Service : </label>
                         <select class="multisteps-form__input form-control" value="" placeholder="Veillez choisir le service" name="service_id" id="">
                                 <option value="">******Selectionner********</option>
@@ -109,7 +105,7 @@
                                     @endif value="{{$service->id}}">{{$service->libelle}}</option>
                             @endforeach
                          </select>
-                      </div>
+                    </div>
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -142,9 +138,6 @@
                    </div>
                   <hr>
                 </form>
-            </div>
-            <div class="col-lg-1">
-
             </div>
           </div>
       </div>

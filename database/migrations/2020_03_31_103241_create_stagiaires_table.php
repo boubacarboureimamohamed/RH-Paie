@@ -21,7 +21,7 @@ class CreateStagiairesTable extends Migration
             $table->string('lieu_naiss');
             $table->string('sexe');
             $table->string('adresse');
-            $table->string('nationalite');
+            $table->double('forfait_mensuel');
             $table->string('telephone')->unique();
             $table->string('email')->unique()->nullable();
             $table->date('date_debut_stage');
@@ -30,8 +30,8 @@ class CreateStagiairesTable extends Migration
             $table->foreign('theme_id')->references('id')->on('themes');
             $table->bigInteger('service_id')->unsigned()->index();
             $table->foreign('service_id')->references('id')->on('services');
-            $table->bigInteger('recrutement_id')->unsigned()->index()->nullable();
-            $table->foreign('recrutement_id')->references('id')->on('recrutements');
+            $table->bigInteger('nationalite_id')->unsigned()->index()->nullable();
+            $table->foreign('nationalite_id')->references('id')->on('nationalites');
             $table->timestamps();
         });
     }

@@ -12,8 +12,10 @@ class CotisationTableSeeder extends Seeder
     public function run()
     {
         \Illuminate\Support\Facades\DB::table('cotisations')->insert([
-            'taux_cnss_employe' => "5.25",
-            'plafond_cnss_employe' => "500000",
+            'taux_cnss_employe_national' => "5.25",
+            'plafond_cnss_employe_national' => "500000",
+            'taux_cnss_employe_expatrie' => "6",
+            'plafond_cnss_employe_expatrie' => "500000",
             'taux_cnss_employeur' => "16.5",
             'plafond_cnss_employeur' => "500000",
             'taux_anpe' => "0.5",

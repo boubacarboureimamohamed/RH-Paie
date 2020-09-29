@@ -32,7 +32,7 @@
                     <th>Matricule</th>
                     <th>Nom et Prénom</th>
                     <th>Mois</th>
-                    <th>Salaire Net</th>
+                    <th>Net à payer</th>
                     <th>Détail</th>
                     <th>Imprimer</th>
                     <th>Supprimer</th>

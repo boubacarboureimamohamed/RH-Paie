@@ -55,7 +55,7 @@
                         @endif
                     {{-- <td>{{ $agent->contrats->last()->description ?? ' ' }}</td> --}}
                     <td>
-                        <a href="" class="btn btn-warning">
+                        <a  href="{{ route('show_agent', $agent->id) }}" class="btn btn-warning">
                             <span class="fas fa-fw fa-eye"></span>
                         </a>
                    </td>

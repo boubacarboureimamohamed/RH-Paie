@@ -14,13 +14,13 @@ class Stagiaire extends Model
         'lieu_naiss',
         'sexe',
         'adresse',
-        'nationalite',
         'telephone',
         'email',
         'date_debut_stage',
         'date_fin_stage',
         'theme_id',
-        'recrutement_id',
+        'forfait_mensuel',
+        'nationalite_id',
         'service_id'
 
     ];
@@ -30,9 +30,9 @@ class Stagiaire extends Model
         return $this->belongsTo('App\Models\Theme');
     }
 
-    public function recrutement()
+    public function nationalite()
     {
-        return $this->belongsTo('App\Models\Recrutement');
+        return $this->belongsTo('App\Models\Nationalite');
     }
 
     public function service()
